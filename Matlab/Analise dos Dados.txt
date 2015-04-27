@@ -1,0 +1,2 @@
+retirar a coluna education, pois existe uma coluna education number que tem a mesma informação
+retirar as linhas onde tem  ? em alguma informação
