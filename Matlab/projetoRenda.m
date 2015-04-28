@@ -24,16 +24,9 @@ dadosOriginaisTeste = readtable('adult_test');
 
 fprintf('Pré-processando iniciado...\n\n');
 
-dados = preProcessar(dadosOriginais, dadosOriginaisTeste);
+[atributos, rotulos] = preProcessar(dadosOriginais, dadosOriginaisTeste);
 
 
-% indices = find(cellfun(@(x) strcmpi(x,'>50k'), table2cell(Y)));
-% 
-% T = zeros(size(Y,1),1);
-% T(indices) = 1;
-% Y = T;
-
-%TODO (victor): Feito até aqui
 
 
 %% Finalizacao
