@@ -24,7 +24,7 @@ dadosOriginaisTeste = readtable('adult_test');
 
 fprintf('Pré-processando iniciado...\n\n');
 
-dados = preProcessar(dadosOriginais, dadosOriginaisTeste);
+preProcessar(
 
 
 % indices = find(cellfun(@(x) strcmpi(x,'>50k'), table2cell(Y)));
@@ -37,5 +37,4 @@ dados = preProcessar(dadosOriginais, dadosOriginaisTeste);
 
 
 %% Finalizacao
-%clear; %Descomentar na versao final
-close all;
+clear; close all;
