@@ -22,11 +22,17 @@ fprintf('Carregamento dos dados iniciados...\n\n');
 dadosOriginais = readtable('adult_data');
 dadosOriginaisTeste = readtable('adult_test');
 
+%% Pré-processamento
 fprintf('Pré-processando iniciado...\n\n');
 
-[atributos, rotulos] = preProcessar(dadosOriginais, dadosOriginaisTeste);
+[atributos, rotulos, indicesAusentes] = preProcessar(dadosOriginais, dadosOriginaisTeste);
 
+%% Normalização
+fprintf('Normalização iniciada...\n\n');
 
+[atributosNormalizados] = normalizar(atributos);
+
+%% KNN
 
 
 %% Finalizacao
