@@ -1,5 +1,5 @@
 function [ matrizBinaria, categorias, indiceAusente ] = pivotMatrizBinaria( atributo )
-tic;
+% tic;
 %   Categoriza os valores do atributo fornecido
 atributoCategorizado = categorical(atributo);
 
@@ -15,11 +15,11 @@ indiceAusente = find(nominal(categorias) == '?');
 matrizBinaria = zeros(size(atributo, 1), size(categorias, 1));
 
 % Para cada uma das categorias verifica checa se o atributo
-%Verificando uma maneira melhor, por enquanto fica assim mesmo
+% %Verificando uma maneira melhor, por enquanto fica assim mesmo
 for i = 1: size(categorias,1)
     matrizBinaria(:,i) = ismember(atributoCategorizado, categorias(i));
 end
 
-toc;
+% toc;
 end
 

@@ -3,12 +3,15 @@ function [ dadosPreprocessados, rotulos, indicesAusentes, tamanhoCaracteristica 
 %Concatena os dados da base original com a base de teste
 dadosOriginaisAgrupados = vertcat(dadosOriginais, dadosOriginaisTeste);
 
+% dadosOriginaisAgrupados.native_country = categorical(dadosOriginaisAgrupados.native_country);
+% summary(dadosOriginaisAgrupados)
+
 %age, workclass, fnlwgt, education, education-num, marital-status, occupation, 
 %relationship, race, sex, capital-gain, capital-loss, hours-per-week, native-country, target
 
 %Vetor para representar quantas colunas cada atributo original
 %(característica) ocupara na matriz final
-tamanhoCaracteristica = ones(1, size(dadosOriginaisAgrupados, 2)); % 15
+tamanhoCaracteristica = ones(size(dadosOriginaisAgrupados, 2) - 1, 1); % 15
 
 %Indice para determinar qual atributo original (caracteristica) está sendo
 %processado agora

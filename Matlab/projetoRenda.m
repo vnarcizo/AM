@@ -15,7 +15,10 @@
 %% Inicializacao
 clear ; close all; clc
 
-%% Carrega os dados
+%Numero de particoes;
+numeroParticoes = 10;
+
+%% Carregamento dos dados
 fprintf('Carregamento dos dados iniciados...\n\n');
 %load('projetoDados.mat');
 
@@ -25,14 +28,34 @@ dadosOriginaisTeste = readtable('adult_test');
 %% Pré-processamento
 fprintf('Pré-processando iniciado...\n\n');
 
-[atributos, rotulos, indicesAusentes] = preProcessar(dadosOriginais, dadosOriginaisTeste);
+[dadosPreprocessados, rotulos, indicesAusentes, tamanhoCaracteristica] = preProcessar(dadosOriginais, dadosOriginaisTeste);
+
+%% Partição 
+fprintf('Partição iniciada...\n\n');
+
+[dadosParticionados] = particionar(dadosPreprocessados, numeroParticoes);
 
 %% Normalização
 fprintf('Normalização iniciada...\n\n');
 
-[atributosNormalizados] = normalizar(atributos);
+[dadosNormalizados] = normalizar(dadosPreprocessados);
 
-%% KNN
+pause;
+
+%% Classificação
+for i = 1:numeroParticoes
+    indicesTreinamento = 1:numeroParticoes;
+    indicesTreinamento = indicesTreinamento(~i);
+    
+    dadosTreinamento = dadosParticionados(indicesTreinamento);
+    dadosTeste = dadosParticionados(i);
+    pause;
+    
+    % KNN
+    [acuraciaKnn] = knn(dadosTreinamento, dadosTeste);
+    
+    % Regressão Logística
+end
 
 
 %% Finalizacao
