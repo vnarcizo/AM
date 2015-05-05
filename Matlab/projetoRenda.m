@@ -45,14 +45,16 @@ pause;
 %% Classificação
 for i = 1:numeroParticoes
     indicesTreinamento = 1:numeroParticoes;
-    indicesTreinamento = indicesTreinamento(~i);
+    indicesTreinamento = indicesTreinamento(indicesTreinamento~=i);
     
-    dadosTreinamento = dadosParticionados(indicesTreinamento);
-    dadosTeste = dadosParticionados(i);
-    pause;
+    dadosTreinamento = dadosParticionados(indicesTreinamento,:,:);
+    dadosTreinamento = reshape(dadosTreinamento, size(dadosTreinamento, 1)*size(dadosTreinamento, 2), size(dadosTreinamento, 3));
+    dadosTeste = dadosParticionados(i,:,:);
+    dadosTeste = squeeze(dadosTeste);
+    % pause;
     
     % KNN
-    [acuraciaKnn] = knn(dadosTreinamento, dadosTeste);
+    % [acuraciaKnn] = knn(dadosTreinamento, dadosTeste);
     
     % Regressão Logística
 end
