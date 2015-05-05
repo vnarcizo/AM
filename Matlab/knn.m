@@ -1,4 +1,4 @@
-ofunction [y, ind_viz] = knn(x, X, Y, K)
+function [y, ind_viz] = knn(x, X, Y, K)
 %KNN método do K-vizinhos mais proximos para predizer a classe de um novo
 %   dado.
 %   [y, ind_viz] = KNN (x, X, Y, K) retorna o rotulo de x em y e os indices
@@ -35,7 +35,7 @@ ind_viz = ones(K,1);  % Inicializa indices (linhas) em X das K amostras mais
 
 %  Calcula a distancia entre a amostra de teste x e cada amostra de X. Voce
 %  devera completar essa funcao.
-D = distancia(x, X);
+D = distancia(x, X) ;
 
 %Obtem o numero de amostras
 m = size(X,1); 

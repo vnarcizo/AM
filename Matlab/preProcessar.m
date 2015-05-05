@@ -81,7 +81,7 @@ dadosPreprocessados = [];
     agregarAtributoNumerico(indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.hours_per_week);
 
 %% Rotulos
-rotulos = zeros(size(dadosOriginaisAgrupados,1));
+rotulos = zeros(size(dadosOriginaisAgrupados, 1), 1);
 
 indices = cellfun(@(x) strcmpi(x, '>50k') | strcmpi(x, '>50k.'), dadosOriginaisAgrupados.target);
 
