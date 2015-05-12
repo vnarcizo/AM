@@ -1,4 +1,4 @@
-function [ dadosPreprocessados, rotulos, indicesAusentes, tamanhoCaracteristica ] = preProcessar(dadosOriginais, dadosOriginaisTeste)
+function [ dadosPreprocessados, rotulos, colunasAusentes, tamanhoCaracteristica ] = preProcessar(dadosOriginais, dadosOriginaisTeste)
 
 %Concatena os dados da base original com a base de teste
 dadosOriginaisAgrupados = vertcat(dadosOriginais, dadosOriginaisTeste);
@@ -19,7 +19,7 @@ indiceAtributoAtual = 1;
 
 %Vetor com os indices das colunas que representam a ausência de informacao para
 % um atributo original (caracterisitica)
-indicesAusentes = [];
+colunasAusentes = [];
 
 %Matriz final apos o pré-processamento
 dadosPreprocessados = [];
@@ -29,40 +29,40 @@ dadosPreprocessados = [];
     agregarAtributoNumerico(indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.age);
 
 %% Workclass
-[indiceAtributoAtual, indicesAusentes, dadosPreprocessados, tamanhoCaracteristica, ~] = ...
-    agregarAtributosBinarios(indiceAtributoAtual, indicesAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.workclass);
+[indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, ~] = ...
+    agregarAtributosBinarios(indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.workclass);
 
 %% Fnlwgt
 [indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica] = ...
     agregarAtributoNumerico(indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.fnlwgt);
 
 %% Education
-[indiceAtributoAtual, indicesAusentes, dadosPreprocessados, tamanhoCaracteristica, ~] = ...
-    agregarAtributosBinarios(indiceAtributoAtual, indicesAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.education);
+[indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, ~] = ...
+    agregarAtributosBinarios(indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.education);
 
 %% Education_num
 [indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica] = ...
     agregarAtributoNumerico(indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.education_num);
 
 %% Marital Status
-[indiceAtributoAtual, indicesAusentes, dadosPreprocessados, tamanhoCaracteristica, ~] = ...
-    agregarAtributosBinarios(indiceAtributoAtual, indicesAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.marital_status);
+[indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, ~] = ...
+    agregarAtributosBinarios(indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.marital_status);
 
 %% Ocupation
-[indiceAtributoAtual, indicesAusentes, dadosPreprocessados, tamanhoCaracteristica, ~] = ...
-    agregarAtributosBinarios(indiceAtributoAtual, indicesAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.occupation);
+[indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, ~] = ...
+    agregarAtributosBinarios(indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.occupation);
 
 %% Relationship
-[indiceAtributoAtual, indicesAusentes, dadosPreprocessados, tamanhoCaracteristica, ~] = ...
-    agregarAtributosBinarios(indiceAtributoAtual, indicesAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.relationship);
+[indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, ~] = ...
+    agregarAtributosBinarios(indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.relationship);
 
 %% Race
-[indiceAtributoAtual, indicesAusentes, dadosPreprocessados, tamanhoCaracteristica, ~] = ...
-    agregarAtributosBinarios(indiceAtributoAtual, indicesAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.race);
+[indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, ~] = ...
+    agregarAtributosBinarios(indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.race);
 
 %% Sex
-[indiceAtributoAtual, indicesAusentes, dadosPreprocessados, tamanhoCaracteristica, ~] = ...
-    agregarAtributosBinarios(indiceAtributoAtual, indicesAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.sex);
+[indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, ~] = ...
+    agregarAtributosBinarios(indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.sex);
 
 %% Capital_gain
 [indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica] = ...
@@ -73,8 +73,8 @@ dadosPreprocessados = [];
     agregarAtributoNumerico(indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.capital_loss);
 
 %% Native_country
-[indiceAtributoAtual, indicesAusentes, dadosPreprocessados, tamanhoCaracteristica, ~] = ...
-    agregarAtributosBinarios(indiceAtributoAtual, indicesAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.native_country);
+[indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, ~] = ...
+    agregarAtributosBinarios(indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.native_country);
 
 %% Hours_per_week
 [~, dadosPreprocessados, tamanhoCaracteristica] = ...

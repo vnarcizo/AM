@@ -28,19 +28,41 @@ dadosOriginaisTeste = readtable('adult_test');
 %% Pré-processamento
 fprintf('Pré-processando iniciado...\n\n');
 
-[dadosPreprocessados, rotulos, indicesAusentes, tamanhoCaracteristica] = preProcessar(dadosOriginais, dadosOriginaisTeste);
+[dadosPreprocessados, rotulos, colunasAusentes, tamanhoCaracteristica] = preProcessar(dadosOriginais, dadosOriginaisTeste);
+
+
+%% Normalização
+tipoNormalizacao = input('Deseja normalizar por Escala ou Padronização? (E/P) \n', 's');
+
+if(strcmpi(tipoNormalizacao, 'E'))
+    fprintf('Normalização por escala iniciada...\n\n');
+    [dadosNormalizados] = normalizarEscala(dadosPreprocessados);
+    [rotulosNormalizados] = normalizarEscala(rotulos);
+else
+    fprintf('Normalização por padronização iniciada...\n\n');
+    [dadosNormalizados] = normalizarPadronizacao(dadosPreprocessados);
+    [rotulosNormalizados] = normalizarPadronizacao(rotulos);
+end
+   
+%% Tratamento dos ausentes
+manterAusentes = input('Deseja remover ou completar os dados ausentes? (R/C) \n', 's');
+
+if (strcmpi(manterAusentes,'R'))
+    fprintf('Removendo dados ausentes...\n\n') %Remove 3620 linhas
+    linhasAusentes = any(dadosPreprocessados(:, colunasAusentes), 2);
+    dadosNormalizados(linhasAusentes, :) = [];
+    rotulosNormalizados(linhasAusentes, :) = [];
+else
+    fprintf('Completando dados ausentes... \n\n')
+    %TODO: Bag Usar os dados normalizados
+end
 
 %% Partição 
 fprintf('Partição iniciada...\n\n');
 
 [dadosParticionados] = particionar(dadosPreprocessados, numeroParticoes);
 
-%% Normalização
-fprintf('Normalização iniciada...\n\n');
 
-[dadosNormalizados] = normalizar(dadosPreprocessados);
-
-pause;
 
 %% Classificação
 for i = 1:numeroParticoes
