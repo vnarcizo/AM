@@ -3,6 +3,21 @@ function [ dadosPreprocessados, rotulos, colunasAusentes, tamanhoCaracteristica 
 %Concatena os dados da base original com a base de teste
 dadosOriginaisAgrupados = vertcat(dadosOriginais, dadosOriginaisTeste);
 
+fprintf('Total de amostras iniciais: %d \n\n', size(dadosOriginaisAgrupados, 1))
+
+%Remove possíveis amostras duplicadas
+dadosOriginaisAgrupados = unique(dadosOriginaisAgrupados);
+
+fprintf('Total de amostras únicas: %d \n\n', size(dadosOriginaisAgrupados, 1))
+
+%Remove amostras que tenham os mesmos atributos, com atributos alvos
+%distintos
+[~, ia] = unique(dadosOriginaisAgrupados(:, 1:end-1));
+
+dadosOriginaisAgrupados = dadosOriginaisAgrupados(ia, :);
+
+fprintf('Total de amostras a serem alvos distintos: %d \n\n', size(dadosOriginaisAgrupados, 1))
+
 % dadosOriginaisAgrupados.native_country = categorical(dadosOriginaisAgrupados.native_country);
 % summary(dadosOriginaisAgrupados)
 

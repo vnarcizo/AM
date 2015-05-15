@@ -62,7 +62,28 @@ fprintf('Partição iniciada...\n\n');
 
 [dadosParticionados] = particionar(dadosPreprocessados, numeroParticoes);
 
+%% Seleção do métodos
 
+fprintf('0 - Todos\n')
+fprintf('1 - KNN\n')
+fprintf('2 - Regressão logística\n')
+fprintf('3 - Redes Neurais Artificiais\n')
+fprintf('4 - SVM\n')
+
+metodoClassificacao = input('Selecione o método que deseja executar\n');
+
+acuraciaRegressao = zeros(numeroParticoes);
+fMedidaMediaRegressao = zeros(numeroParticoes);
+precisaoMediaRegressao = zeros(numeroParticoes);
+revocacaoMediaRegressao = zeros(numeroParticoes);
+
+%% Selecoes de parametros adicionais
+if metodoClassificacao == 0 || metodoClassificacao == 2
+    fprintf('1 - Hipotese 1\n')
+    fprintf('2 - Hipotese 2\n')
+    fprintf('3 - Hipotese 3\n')
+    hipoteseRegressao = input('Selecione a hipostese desejada\n');
+end
 
 %% Classificação
 for i = 1:numeroParticoes
@@ -75,10 +96,25 @@ for i = 1:numeroParticoes
     dadosTeste = squeeze(dadosTeste);
     % pause;
     
-    % KNN
-    % [acuraciaKnn] = knn(dadosTreinamento, dadosTeste);
-    
+    if metodoClassificacao == 0 || metodoClassificacao == 1
+            % TODO:BAG
+            % KNN
+            % [acuraciaKnn] = knn(dadosTreinamento, dadosTeste);
+    end
     % Regressão Logística
+    if metodoClassificacao == 0 || metodoClassificacao == 2
+            %TODO Leandro
+       [ acuraciaRegressao(i), fMedidaMediaRegressao(i), precisaoMediaRegressao(i), revocacaoMediaRegressao(i) ] = regressaoLogistica(dadosTreinamento, dadosTeste, hipoteseRegressao );      
+    end
+    if metodoClassificacao == 0 || metodoClassificacao == 3
+           %TODO Victor
+            % Regressão Logística
+    end
+    if metodoClassificacao == 0 || metodoClassificacao == 4
+            %TODO estagiario
+            % Regressão Logística
+    end
+   
 end
 
 
