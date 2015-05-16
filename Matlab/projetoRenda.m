@@ -79,10 +79,10 @@ revocacaoMediaRegressao = zeros(numeroParticoes);
 
 %% Selecoes de parametros adicionais
 if metodoClassificacao == 0 || metodoClassificacao == 2
-    fprintf('1 - Hipotese 1\n')
-    fprintf('2 - Hipotese 2\n')
-    fprintf('3 - Hipotese 3\n')
-    hipoteseRegressao = input('Selecione a hipostese desejada\n');
+    fprintf('1 - Hipótese 1\n')
+    fprintf('2 - Hipótese 2\n')
+    fprintf('3 - Hipótese 3\n')
+    hipoteseRegressao = input('Selecione a hipótese desejada\n');
 end
 
 %% Classificação
@@ -108,11 +108,11 @@ for i = 1:numeroParticoes
     end
     if metodoClassificacao == 0 || metodoClassificacao == 3
            %TODO Victor
-            % Regressão Logística
+            % Redes Neurais
     end
     if metodoClassificacao == 0 || metodoClassificacao == 4
             %TODO estagiario
-            % Regressão Logística
+            % SVM
     end
    
 end
@@ -120,4 +120,4 @@ end
 
 %% Finalizacao
 %clear; %Descomentar na versao final
-close all;
+%close all;
