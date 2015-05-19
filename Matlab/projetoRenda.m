@@ -77,11 +77,11 @@ fMedidaMediaRegressao = zeros(numeroParticoes);
 precisaoMediaRegressao = zeros(numeroParticoes);
 revocacaoMediaRegressao = zeros(numeroParticoes);
 
-%% Selecoes de parametros adicionais
+%% Selecoes de parametros adicionais para Regressao Logistica
 if metodoClassificacao == 0 || metodoClassificacao == 2
-    fprintf('1 - Hipótese 1\n')
-    fprintf('2 - Hipótese 2\n')
-    fprintf('3 - Hipótese 3\n')
+    fprintf('1 - Hipótese A\n')
+    fprintf('2 - Hipótese B\n')
+    fprintf('3 - Hipótese C\n')
     hipoteseRegressao = input('Selecione a hipótese desejada\n');
 end
 
