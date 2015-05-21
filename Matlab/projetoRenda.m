@@ -13,7 +13,7 @@
 %
 
 %% Inicializacao
-clear ; close all; clc
+clear ; close all; format shortG; clc
 
 %Numero de particoes;
 numeroParticoes = 10;
@@ -37,12 +37,15 @@ tipoNormalizacao = input('Deseja normalizar por Escala ou Padronização? (E/P) \n
 if(strcmpi(tipoNormalizacao, 'E'))
     fprintf('Normalização por escala iniciada...\n\n');
     [dadosNormalizados] = normalizarEscala(dadosPreprocessados);
-    [rotulosNormalizados] = normalizarEscala(rotulos);
+    %[rotulosNormalizados] = normalizarEscala(rotulos);
 else
     fprintf('Normalização por padronização iniciada...\n\n');
     [dadosNormalizados] = normalizarPadronizacao(dadosPreprocessados);
-    [rotulosNormalizados] = normalizarPadronizacao(rotulos);
+    %[rotulosNormalizados] = normalizarPadronizacao(rotulos);
 end
+
+%TODO: melhorar isso
+rotulosNormalizados = rotulos;
    
 %% Tratamento dos ausentes
 manterAusentes = input('Deseja remover ou completar os dados ausentes? (R/C) \n', 's');
@@ -60,7 +63,9 @@ end
 %% Partição 
 fprintf('Partição iniciada...\n\n');
 
-[dadosParticionados] = particionar(dadosPreprocessados, numeroParticoes);
+dadosAparticionar = horzcat(dadosNormalizados, rotulosNormalizados);
+
+[dadosParticionados] = particionar(dadosAparticionar, numeroParticoes);
 
 %% Seleção do métodos
 
@@ -79,10 +84,24 @@ revocacaoMediaRegressao = zeros(numeroParticoes);
 
 %% Selecoes de parametros adicionais para Regressao Logistica
 if metodoClassificacao == 0 || metodoClassificacao == 2
-    fprintf('1 - Hipótese A\n')
-    fprintf('2 - Hipótese B\n')
-    fprintf('3 - Hipótese C\n')
+    fprintf('1 - Hipótese linear\n')
+    fprintf('2 - Hipótese polinomial\n')
+    fprintf('3 - Hipótese polinomial com logarítmo e exponencial\n')
     hipoteseRegressao = input('Selecione a hipótese desejada\n');
+    
+    if hipoteseRegressao == 2 || hipoteseRegressao == 3
+        grauPolinomio = input('Qual o grau do polinomio desejado?\n');
+    else
+        grauPolinomio = 0;
+    end
+    
+    utilizarRegularizacao = input('Utilizar regularização? (S/N)\n', 's');
+    
+    if (strcmpi(utilizarRegularizacao,'S'))
+        lambda = input('Qual o valor do parâmetro de regularização?\n');
+    else
+        lambda = 0;
+    end
 end
 
 %% Classificação
@@ -103,8 +122,8 @@ for i = 1:numeroParticoes
     end
     % Regressão Logística
     if metodoClassificacao == 0 || metodoClassificacao == 2
-            %TODO Leandro
-       [ acuraciaRegressao(i), fMedidaMediaRegressao(i), precisaoMediaRegressao(i), revocacaoMediaRegressao(i) ] = regressaoLogistica(dadosTreinamento, dadosTeste, hipoteseRegressao );      
+       [ acuraciaRegressao(i), fMedidaMediaRegressao(i), precisaoMediaRegressao(i), revocacaoMediaRegressao(i) ] = ...
+           regressaoLogistica(dadosTreinamento, dadosTeste, hipoteseRegressao, utilizarRegularizacao, lambda );      
     end
     if metodoClassificacao == 0 || metodoClassificacao == 3
            %TODO Victor
