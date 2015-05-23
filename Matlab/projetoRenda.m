@@ -77,11 +77,15 @@ fprintf('4 - SVM\n')
 
 metodoClassificacao = input('Selecione o método que deseja executar\n');
 
-acuraciaRegressao = zeros(numeroParticoes);
-fMedidaMediaRegressao = zeros(numeroParticoes);
-precisaoMediaRegressao = zeros(numeroParticoes);
-revocacaoMediaRegressao = zeros(numeroParticoes);
+% acuraciaRegressao = zeros(numeroParticoes);
+% fMedidaMediaRegressao = zeros(numeroParticoes);
+% precisaoMediaRegressao = zeros(numeroParticoes);
+% revocacaoMediaRegressao = zeros(numeroParticoes);
 hipotesesRegressao = cell(numeroParticoes);
+avaliacoesRegressao = [];
+
+modelosSVM = cell(numeroParticoes);
+avaliacoesSVM = [];
 
 %% Selecoes de parametros adicionais para Regressao Logistica
 if metodoClassificacao == 0 || metodoClassificacao == 2
@@ -108,8 +112,13 @@ for i = 1:numeroParticoes
     dadosTreinamento = reshape(dadosTreinamento, size(dadosTreinamento, 1)*size(dadosTreinamento, 2), size(dadosTreinamento, 3));
     dadosTeste = dadosParticionados(i,:,:);
     dadosTeste = squeeze(dadosTeste);
-    % pause;
     
+    rotulosTreinamento = dadosTreinamento(:,end);
+    atributosTreinamento = dadosTreinamento(:,1:end-1);
+
+    rotulosTeste = dadosTeste(:, end);
+    atributosTeste = dadosTeste(:, 1:end-1);
+
     if metodoClassificacao == 0 || metodoClassificacao == 1
             % TODO:BAG
             % KNN
@@ -117,18 +126,43 @@ for i = 1:numeroParticoes
     end
     % Regressão Logística
     if metodoClassificacao == 0 || metodoClassificacao == 2
-       [ acuraciaRegressao(i), fMedidaMediaRegressao(i), precisaoMediaRegressao(i), revocacaoMediaRegressao(i), hipotesesRegressao{i}] = ...
-           regressaoLogistica(dadosTreinamento, dadosTeste, hipoteseRegressao, utilizarRegularizacao, lambda, i );      
+       [ avaliacao, hipotesesRegressao{i}] = ...
+           regressaoLogistica(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste,...
+                              hipoteseRegressao, utilizarRegularizacao, lambda, i );     
+                          
+           avaliacoesRegressao = vertcat(avaliacoesRegressao, avaliacao);     
     end
     if metodoClassificacao == 0 || metodoClassificacao == 3
            %TODO Victor
             % Redes Neurais
     end
     if metodoClassificacao == 0 || metodoClassificacao == 4
-            %TODO Leandro
-            % SVM
+        [avaliacao, modelosSVM{i}] = svm(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, i);
     end
    
+end
+
+if metodoClassificacao == 0 || metodoClassificacao == 2
+    fprintf('Resultados regressão logística\n');
+    indiceMelhorHipotese = avaliarFinal(avaliacoesRegressao);
+    
+    exportarRegresao = input('Deseja exportar a melhor hipotese? (S/N)\n', 's');
+    if (strcmpi(exportarRegresao,'S'))
+        melhorHipoteseRegressao = hipotesesRegressao{indiceMelhorHipotese};
+        save('HipoteseRegressao.mat', 'melhorHipoteseRegressao');
+    end   
+end
+
+if metodoClassificacao == 0 || metodoClassificacao == 4
+    fprintf('Resultados SVM \n');
+    indiceMelhorModelo = avaliarFinal(avaliacoesSVM);
+    
+    exportarSVM = input('Deseja exportar o modelo do SVM? (S/N)\n', 's');
+    
+    if (strcmpi(exportarSVM,'S'))
+        melhorModeloSVM = modelosSVM{indiceMelhorHipotese};
+        save('ModeloSVM.mat', 'melhorModeloSVM');
+    end   
 end
 
 
