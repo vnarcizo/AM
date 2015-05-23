@@ -1,6 +1,5 @@
-function [ out ] = RL_expandeAtributosPolinomial( input )
+function [ out ] = RL_expandeAtributosPolinomial( input, grau )
 
-grau = 2;
 larguraAtributos = size(input, 2);
 out = ones(size(input ,1), (grau * larguraAtributos) + 1);
 

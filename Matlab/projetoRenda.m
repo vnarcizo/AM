@@ -81,19 +81,14 @@ acuraciaRegressao = zeros(numeroParticoes);
 fMedidaMediaRegressao = zeros(numeroParticoes);
 precisaoMediaRegressao = zeros(numeroParticoes);
 revocacaoMediaRegressao = zeros(numeroParticoes);
+hipotesesRegressao = cell(numeroParticoes);
 
 %% Selecoes de parametros adicionais para Regressao Logistica
 if metodoClassificacao == 0 || metodoClassificacao == 2
     fprintf('1 - Hipótese linear\n')
-    fprintf('2 - Hipótese polinomial\n')
-    fprintf('3 - Hipótese polinomial com logarítmo e exponencial\n')
+    fprintf('2 - Hipótese quadrática\n')
+    fprintf('3 - Hipótese cúbica\n')
     hipoteseRegressao = input('Selecione a hipótese desejada\n');
-    
-    if hipoteseRegressao == 2 || hipoteseRegressao == 3
-        grauPolinomio = input('Qual o grau do polinomio desejado?\n');
-    else
-        grauPolinomio = 0;
-    end
     
     utilizarRegularizacao = input('Utilizar regularização? (S/N)\n', 's');
     
@@ -122,15 +117,15 @@ for i = 1:numeroParticoes
     end
     % Regressão Logística
     if metodoClassificacao == 0 || metodoClassificacao == 2
-       [ acuraciaRegressao(i), fMedidaMediaRegressao(i), precisaoMediaRegressao(i), revocacaoMediaRegressao(i) ] = ...
-           regressaoLogistica(dadosTreinamento, dadosTeste, hipoteseRegressao, utilizarRegularizacao, lambda );      
+       [ acuraciaRegressao(i), fMedidaMediaRegressao(i), precisaoMediaRegressao(i), revocacaoMediaRegressao(i), hipotesesRegressao{i}] = ...
+           regressaoLogistica(dadosTreinamento, dadosTeste, hipoteseRegressao, utilizarRegularizacao, lambda, i );      
     end
     if metodoClassificacao == 0 || metodoClassificacao == 3
            %TODO Victor
             % Redes Neurais
     end
     if metodoClassificacao == 0 || metodoClassificacao == 4
-            %TODO estagiario
+            %TODO Leandro
             % SVM
     end
    
