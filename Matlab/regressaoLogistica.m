@@ -1,6 +1,6 @@
 function [ avaliacao,  theta ] = ...
     regressaoLogistica( atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, ...
-                        hipoteseRegressao, utilizarRegularizacao, lambda, numeroParticao ) 
+                        hipoteseRegressao, utilizarRegularizacao, lambda, numeroParticao, melhorHipoteseRegressao ) 
 
 fprintf('\nInício Partição #%d\n', numeroParticao);
 

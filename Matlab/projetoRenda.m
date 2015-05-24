@@ -46,7 +46,7 @@ end
 
 %TODO: melhorar isso
 rotulosNormalizados = rotulos;
-   
+
 %% Tratamento dos ausentes
 manterAusentes = input('Deseja remover ou completar os dados ausentes? (R/C) \n', 's');
 
@@ -58,6 +58,15 @@ if (strcmpi(manterAusentes,'R'))
 else
     fprintf('Completando dados ausentes... \n\n')
     %TODO: Bag Usar os dados normalizados
+end
+
+%% Correlacao
+removerAtributos = input('Deseja remover atributos com alta correlação linear? (S/N) \n', 's');
+if(strcmpi(removerAtributos, 'S'))
+    [r,p] = corrcoef(dadosNormalizados);
+    [i, ~] = find(r>0.7 & r ~= 1);
+    dadosNormalizados(:,i) = [];
+    size(dadosNormalizados)
 end
 
 %% Partição 
@@ -77,12 +86,9 @@ fprintf('4 - SVM\n')
 
 metodoClassificacao = input('Selecione o método que deseja executar\n');
 
-% acuraciaRegressao = zeros(numeroParticoes);
-% fMedidaMediaRegressao = zeros(numeroParticoes);
-% precisaoMediaRegressao = zeros(numeroParticoes);
-% revocacaoMediaRegressao = zeros(numeroParticoes);
 hipotesesRegressao = cell(numeroParticoes);
 avaliacoesRegressao = [];
+hipoteseCarregada = [];
 
 modelosSVM = cell(numeroParticoes);
 avaliacoesSVM = [];
@@ -94,13 +100,21 @@ if metodoClassificacao == 0 || metodoClassificacao == 2
     fprintf('3 - Hipótese cúbica\n')
     hipoteseRegressao = input('Selecione a hipótese desejada\n');
     
-    utilizarRegularizacao = input('Utilizar regularização? (S/N)\n', 's');
+    carregarHipotese = input('Carregar hipotese previamente calculada? (S/N)\n', 's');
     
-    if (strcmpi(utilizarRegularizacao,'S'))
-        lambda = input('Qual o valor do parâmetro de regularização?\n');
+    lambda = 0;
+    
+    if strcmpi(carregarHipotese, 'S')
+        load(strcat('HipoteseRegressao_',hipoteseRegressao,'.mat'));
     else
-        lambda = 0;
+        utilizarRegularizacao = input('Utilizar regularização? (S/N)\n', 's');
+
+        if (strcmpi(utilizarRegularizacao,'S'))
+            lambda = input('Qual o valor do parâmetro de regularização?\n');
+        end
     end
+    
+   
 end
 
 %% Classificação
@@ -128,7 +142,7 @@ for i = 1:numeroParticoes
     if metodoClassificacao == 0 || metodoClassificacao == 2
        [ avaliacao, hipotesesRegressao{i}] = ...
            regressaoLogistica(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste,...
-                              hipoteseRegressao, utilizarRegularizacao, lambda, i );     
+                              hipoteseRegressao, utilizarRegularizacao, lambda, i, melhorHipoteseRegressao );     
                           
            avaliacoesRegressao = vertcat(avaliacoesRegressao, avaliacao);     
     end
@@ -149,7 +163,7 @@ if metodoClassificacao == 0 || metodoClassificacao == 2
     exportarRegresao = input('Deseja exportar a melhor hipotese? (S/N)\n', 's');
     if (strcmpi(exportarRegresao,'S'))
         melhorHipoteseRegressao = hipotesesRegressao{indiceMelhorHipotese};
-        save('HipoteseRegressao.mat', 'melhorHipoteseRegressao');
+        save(strcat('HipoteseRegressao_', hipoteseRegressao, ' .mat'), 'melhorHipoteseRegressao');
     end   
 end
 
