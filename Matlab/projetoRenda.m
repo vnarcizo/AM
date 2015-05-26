@@ -83,6 +83,7 @@ fprintf('1 - KNN\n')
 fprintf('2 - Regressão logística\n')
 fprintf('3 - Redes Neurais Artificiais\n')
 fprintf('4 - SVM\n')
+fprintf('5 - Naive Bayes\n')
 
 metodoClassificacao = input('Selecione o método que deseja executar\n');
 
@@ -92,6 +93,9 @@ hipoteseCarregada = [];
 
 modelosSVM = cell(numeroParticoes);
 avaliacoesSVM = [];
+
+modelosNB = cell(numeroParticoes);
+avaliacoesNaiveBayes = [];
 
 %% Selecoes de parametros adicionais para Regressao Logistica
 if metodoClassificacao == 0 || metodoClassificacao == 2
@@ -152,6 +156,9 @@ for i = 1:numeroParticoes
     end
     if metodoClassificacao == 0 || metodoClassificacao == 4
         [avaliacao, modelosSVM{i}] = svm(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, i);
+    end
+    if metodoClassificacao == 0 || metodoClassificacao == 5
+        [avaliacao, modelosNB{i}] = naiveBayes(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, i);
     end
    
 end
