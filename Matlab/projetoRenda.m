@@ -13,7 +13,7 @@
 %
 
 %% Inicializacao
-clear ; close all; format shortG; clc
+clear ; close all; format shortG; format loose; clc
 
 %Numero de particoes;
 numeroParticoes = 10;
@@ -149,7 +149,7 @@ for i = 1:numeroParticoes
     if metodoClassificacao == 0 || metodoClassificacao == 2
        [ avaliacao, hipotesesRegressao{i}] = ...
            regressaoLogistica(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste,...
-                              hipoteseRegressao, utilizarRegularizacao, lambda, i, melhorHipoteseRegressao );     
+                              hipoteseRegressao, utilizarRegularizacao, lambda, i, 0 );     
                           
            avaliacoesRegressao = vertcat(avaliacoesRegressao, avaliacao);
     end

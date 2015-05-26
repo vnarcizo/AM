@@ -27,7 +27,7 @@ tic;
 % Otimiza o gradiente
 [theta, J, exit_flag] = ...
 	fminunc(@(t)(RL_funcaoCustoReg(t, atributosExpandidos, rotulosTreinamento, lambda, utilizarRegularizacao)), thetaInicial, opcoes);
-fprintf('Tempo minimização: %d\n', toc);
+fprintf('Tempo minimização: %f\n', toc);
 
 fprintf('Custo mínimo encontrado: %f\n', J);
 
