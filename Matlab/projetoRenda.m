@@ -97,6 +97,10 @@ avaliacoesSVM = [];
 modelosNB = cell(numeroParticoes);
 avaliacoesNaiveBayes = [];
 
+if metodoClassificacao == 0 || metodoClassificacao == 1
+    k = input('Valor de K: \n');
+end
+
 %% Selecoes de parametros adicionais para Regressao Logistica
 if metodoClassificacao == 0 || metodoClassificacao == 2
     fprintf('1 - Hipótese linear\n')
@@ -138,9 +142,8 @@ for i = 1:numeroParticoes
     atributosTeste = dadosTeste(:, 1:end-1);
 
     if metodoClassificacao == 0 || metodoClassificacao == 1
-            % TODO:BAG
-            % KNN
-            % [acuraciaKnn] = knn(dadosTreinamento, dadosTeste);
+        avaliacaoKnn = knn(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, k);
+        avaliacoesKnn = vertcat(avaliacoesKnn, avaliacaoKnn);
     end
     % Regressão Logística
     if metodoClassificacao == 0 || metodoClassificacao == 2
@@ -148,7 +151,7 @@ for i = 1:numeroParticoes
            regressaoLogistica(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste,...
                               hipoteseRegressao, utilizarRegularizacao, lambda, i, melhorHipoteseRegressao );     
                           
-           avaliacoesRegressao = vertcat(avaliacoesRegressao, avaliacao);     
+           avaliacoesRegressao = vertcat(avaliacoesRegressao, avaliacao);
     end
     if metodoClassificacao == 0 || metodoClassificacao == 3
            %TODO Victor
@@ -161,6 +164,11 @@ for i = 1:numeroParticoes
         [avaliacao, modelosNB{i}] = naiveBayes(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, i);
     end
    
+end
+
+if metodoClassificacao == 0 || metodoClassificacao == 1
+    fprintf('Resultados KNN\n');
+    avaliarFinal(avaliacoesKnn);
 end
 
 if metodoClassificacao == 0 || metodoClassificacao == 2
