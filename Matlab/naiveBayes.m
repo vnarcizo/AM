@@ -6,8 +6,6 @@ pMenor = mean(rotulosTreinamento == 0);
 
 [valorPrevisto, ~, ~] = NB_classificacao(atributosTreinamento, pMaior, pMenor, pAtrMaior, pAtrMenor);
 
-valorPrevisto
-
 fprintf('Acuracia na base de treinamento: %f\n', mean(double(valorPrevisto == rotulosTreinamento)) * 100);
 
 avaliacao = 0;

@@ -28,8 +28,9 @@ dadosOriginaisTeste = readtable('adult_test');
 %% Pré-processamento
 fprintf('Pré-processando iniciado...\n\n');
 
-[dadosPreprocessados, rotulos, colunasAusentes, tamanhoCaracteristica] = preProcessar(dadosOriginais, dadosOriginaisTeste);
+[dadosPreprocessados, rotulos, colunasAusentes, tamanhoCaracteristica, indiceNumericos] = preProcessar(dadosOriginais, dadosOriginaisTeste);
 
+[dadosNaiveBayes] = preProcessarNaiveBayes(dadosPreprocessados, colunasAusentes, tamanhoCaracteristica, indiceNumericos);
 
 %% Normalização
 tipoNormalizacao = input('Deseja normalizar por Escala ou Padronização? (E/P) \n', 's');
@@ -48,25 +49,28 @@ end
 rotulosNormalizados = rotulos;
 
 %% Tratamento dos ausentes
-manterAusentes = input('Deseja remover ou completar os dados ausentes? (R/C) \n', 's');
-
-if (strcmpi(manterAusentes,'R'))
+% manterAusentes = input('Deseja remover ou completar os dados ausentes? (R/C) \n', 's');
+% 
+% if (strcmpi(manterAusentes,'R'))
     fprintf('Removendo dados ausentes...\n\n') %Remove 3620 linhas
     linhasAusentes = any(dadosPreprocessados(:, colunasAusentes), 2);
     dadosNormalizados(linhasAusentes, :) = [];
     rotulosNormalizados(linhasAusentes, :) = [];
-else
-    fprintf('Completando dados ausentes... \n\n')
-    %TODO: Bag Usar os dados normalizados
-end
+    
+    dadosNormalizados(:, colunasAusentes) = [];
+    
 
-%% Correlacao
+% else
+%    fprintf('Completando dados ausentes... \n\n')
+%    %TODO: Bag Usar os dados normalizados
+% end
+
+%% Correlacao linear
 removerAtributos = input('Deseja remover atributos com alta correlação linear? (S/N) \n', 's');
 if(strcmpi(removerAtributos, 'S'))
     [r,p] = corrcoef(dadosNormalizados);
     [i, ~] = find(r>0.7 & r ~= 1);
     dadosNormalizados(:,i) = [];
-    size(dadosNormalizados)
 end
 
 %% Partição 
@@ -98,7 +102,7 @@ modelosNB = cell(numeroParticoes);
 avaliacoesNaiveBayes = [];
 
 if metodoClassificacao == 0 || metodoClassificacao == 1
-    k = input('Valor de K: \n');
+    k = input('Qual o valor de K? (Número de vizinhos mais próximos): \n');
 end
 
 %% Selecoes de parametros adicionais para Regressao Logistica
