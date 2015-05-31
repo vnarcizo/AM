@@ -30,7 +30,9 @@ fprintf('Pré-processando iniciado...\n\n');
 
 [dadosPreprocessados, rotulos, colunasAusentes, tamanhoCaracteristica, indiceNumericos] = preProcessar(dadosOriginais, dadosOriginaisTeste);
 
-[dadosNaiveBayes] = preProcessarNaiveBayes(dadosPreprocessados, colunasAusentes, tamanhoCaracteristica, indiceNumericos);
+[dadosNormalizadosEscala] = normalizarEscala(dadosPreprocessados);
+
+[dadosNaiveBayes] = preProcessarNaiveBayes(dadosNormalizadosEscala, indiceNumericos);
 
 %% Normalização
 tipoNormalizacao = input('Deseja normalizar por Escala ou Padronização? (E/P) \n', 's');
@@ -59,6 +61,8 @@ rotulosNormalizados = rotulos;
     
     dadosNormalizados(:, colunasAusentes) = [];
     
+    dadosNaiveBayes(linhasAusentes, :) = [];
+    dadosNaiveBayes(:, colunasAusentes) = [];
 
 % else
 %    fprintf('Completando dados ausentes... \n\n')
@@ -78,7 +82,12 @@ fprintf('Partição iniciada...\n\n');
 
 dadosAparticionar = horzcat(dadosNormalizados, rotulosNormalizados);
 
-[dadosParticionados] = particionar(dadosAparticionar, numeroParticoes);
+dadosAparticionarNaiveBayes =  horzcat(dadosNaiveBayes, rotulosNormalizados);
+
+[dadosParticionados, dadosNaiveBayesParticionados] = particionar(dadosAparticionar, dadosNaiveBayes, numeroParticoes);
+
+% size(dadosParticionados)
+% size(dadosNaiveBayesParticionados)
 
 %% Seleção do métodos
 
@@ -165,7 +174,18 @@ for i = 1:numeroParticoes
         [avaliacao, modelosSVM{i}] = svm(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, i);
     end
     if metodoClassificacao == 0 || metodoClassificacao == 5
-        [avaliacao, modelosNB{i}] = naiveBayes(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, i);
+          dadosTreinamentoNB = dadosNaiveBayesParticionados(indicesTreinamento,:,:);
+          dadosTreinamentoNB = reshape(dadosTreinamentoNB, size(dadosTreinamentoNB, 1)*size(dadosTreinamentoNB, 2), size(dadosTreinamentoNB, 3));
+    
+          dadosTesteNB = squeeze(dadosNaiveBayesParticionados(i,:,:));
+    
+          rotulosTreinamentoNB = dadosTreinamentoNB(:,end);
+          atributosTreinamentoNB = dadosTreinamentoNB(:,1:end-1);
+
+          rotulosTesteNB = dadosTesteNB(:, end);
+          atributosTesteNB = dadosTesteNB(:, 1:end-1);
+            
+        [avaliacao, modelosNB{i}] = naiveBayes(atributosTreinamentoNB, rotulosTreinamentoNB, atributosTesteNB, rotulosTesteNB, i);
     end
    
 end

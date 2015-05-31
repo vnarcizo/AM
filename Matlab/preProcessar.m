@@ -41,30 +41,30 @@ dadosPreprocessados = [];
 
 
 %% Age
+indiceNumericos = indiceAtributoAtual;
+
 [indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica] = ...
     agregarAtributoNumerico(indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.age);
-
-indiceNumericos = 1;
 
 %% Workclass
 [indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, ~] = ...
     agregarAtributosBinarios(indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.workclass);
 
 %% Fnlwgt
+indiceNumericos(end+1) = indiceAtributoAtual;
+
 [indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica] = ...
     agregarAtributoNumerico(indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.fnlwgt);
-
-indiceNumericos(end+1) = indiceAtributoAtual;
 
 %% Education
 [indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, ~] = ...
     agregarAtributosBinarios(indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.education);
 
 %% Education_num
+indiceNumericos(end+1) = indiceAtributoAtual;
+
 [indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica] = ...
     agregarAtributoNumerico(indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.education_num);
-
-indiceNumericos(end+1) = indiceAtributoAtual;
 
 %% Marital Status
 [indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, ~] = ...
@@ -87,26 +87,26 @@ indiceNumericos(end+1) = indiceAtributoAtual;
     agregarAtributosBinarios(indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.sex);
 
 %% Capital_gain
+indiceNumericos(end+1) = indiceAtributoAtual;
+
 [indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica] = ...
     agregarAtributoNumerico(indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.capital_gain);
 
+%% Capital_loss
 indiceNumericos(end+1) = indiceAtributoAtual;
 
-%% Capital_loss
 [indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica] = ...
     agregarAtributoNumerico(indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.capital_loss);
-
-indiceNumericos(end+1) = indiceAtributoAtual;
 
 %% Native_country
 [indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, ~] = ...
     agregarAtributosBinarios(indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.native_country);
 
 %% Hours_per_week
+indiceNumericos(end+1) = indiceAtributoAtual;
+
 [~, dadosPreprocessados, tamanhoCaracteristica] = ...
     agregarAtributoNumerico(indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.hours_per_week);
-
-indiceNumericos(end+1) = indiceAtributoAtual;
 
 %% Rotulos
 rotulos = zeros(size(dadosOriginaisAgrupados, 1), 1);

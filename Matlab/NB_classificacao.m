@@ -23,13 +23,13 @@ function [classe, probMaior, probMenor] = NB_classificacao(atributos,pMaior,...
 %vezes o produtorio das probabilidades de vitoria dos atributos vitoriosos 
 %vezes o produtorio das probabilidade de vitoria do complemento dos atributos nao-vitoriosos
 
-probMaior = pMaior .* prod(pAtrMaior(atributos == 1), 2)' .* prod(1 - pAtrMaior(atributos == 0), 2)'; 
+probMaior = pMaior .* prod(pAtrMaior(atributos == 1)) .* prod(1 - pAtrMaior(atributos == 0)); 
 
 
 %Calcula a proababilidade de derrota baseado na probabilidade a priori
-%vezes o produtorio das probabilidades de derrota dos atributos vitoriosos 
+%vezes o produtoqrio das probabilidades de derrota dos atributos vitoriosos 
 %vezes o produtorio das probabilidade de derrota do complemento dos atributos nao-vitoriosos
-probMenor = pMenor .* prod(pAtrMenor(atributos == 1), 2)' .* prod(1 - pAtrMenor(atributos == 0), 2)'; 
+probMenor = pMenor .* prod(pAtrMenor(atributos == 1)) .* prod(1 - pAtrMenor(atributos == 0)); 
 
 %Se a probabilida de vitoria é maior que a de derrota classe = 1 do
 %contrario classe = 0
