@@ -16,7 +16,7 @@ fprintf('Total de amostras únicas: %d \n\n', size(dadosOriginaisAgrupados, 1))
 
 dadosOriginaisAgrupados = dadosOriginaisAgrupados(ia, :);
 
-fprintf('Total de amostras a serem alvos distintos: %d \n\n', size(dadosOriginaisAgrupados, 1))
+fprintf('Total de amostras sem alvos distintos: %d \n\n', size(dadosOriginaisAgrupados, 1))
 
 % dadosOriginaisAgrupados.native_country = categorical(dadosOriginaisAgrupados.native_country);
 % summary(dadosOriginaisAgrupados)
@@ -41,8 +41,6 @@ dadosPreprocessados = [];
 
 
 %% Age
-indiceNumericos = indiceAtributoAtual;
-
 [indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica] = ...
     agregarAtributoNumerico(indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.age);
 
@@ -51,8 +49,6 @@ indiceNumericos = indiceAtributoAtual;
     agregarAtributosBinarios(indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.workclass);
 
 %% Fnlwgt
-indiceNumericos(end+1) = indiceAtributoAtual;
-
 [indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica] = ...
     agregarAtributoNumerico(indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.fnlwgt);
 
@@ -61,8 +57,6 @@ indiceNumericos(end+1) = indiceAtributoAtual;
     agregarAtributosBinarios(indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.education);
 
 %% Education_num
-indiceNumericos(end+1) = indiceAtributoAtual;
-
 [indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica] = ...
     agregarAtributoNumerico(indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.education_num);
 
@@ -87,14 +81,10 @@ indiceNumericos(end+1) = indiceAtributoAtual;
     agregarAtributosBinarios(indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.sex);
 
 %% Capital_gain
-indiceNumericos(end+1) = indiceAtributoAtual;
-
 [indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica] = ...
     agregarAtributoNumerico(indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.capital_gain);
 
 %% Capital_loss
-indiceNumericos(end+1) = indiceAtributoAtual;
-
 [indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica] = ...
     agregarAtributoNumerico(indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.capital_loss);
 
@@ -103,8 +93,6 @@ indiceNumericos(end+1) = indiceAtributoAtual;
     agregarAtributosBinarios(indiceAtributoAtual, colunasAusentes, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.native_country);
 
 %% Hours_per_week
-indiceNumericos(end+1) = indiceAtributoAtual;
-
 [~, dadosPreprocessados, tamanhoCaracteristica] = ...
     agregarAtributoNumerico(indiceAtributoAtual, dadosPreprocessados, tamanhoCaracteristica, dadosOriginaisAgrupados.hours_per_week);
 
@@ -115,5 +103,6 @@ indices = cellfun(@(x) strcmpi(x, '>50k') | strcmpi(x, '>50k.'), dadosOriginaisA
 
 rotulos(indices) = 1;
 
+indiceNumericos = [1 11 28 64 65 108]; %Constantes mágicas não alterar
 end
 

@@ -30,9 +30,7 @@ fprintf('Pré-processando iniciado...\n\n');
 
 [dadosPreprocessados, rotulos, colunasAusentes, tamanhoCaracteristica, indiceNumericos] = preProcessar(dadosOriginais, dadosOriginaisTeste);
 
-[dadosNormalizadosEscala] = normalizarEscala(dadosPreprocessados);
-
-[dadosNaiveBayes] = preProcessarNaiveBayes(dadosNormalizadosEscala, indiceNumericos);
+[dadosNaiveBayes] = preProcessarNaiveBayes(dadosPreprocessados, indiceNumericos);
 
 %% Normalização
 tipoNormalizacao = input('Deseja normalizar por Escala ou Padronização? (E/P) \n', 's');
@@ -62,7 +60,8 @@ rotulosNormalizados = rotulos;
     dadosNormalizados(:, colunasAusentes) = [];
     
     dadosNaiveBayes(linhasAusentes, :) = [];
-    dadosNaiveBayes(:, colunasAusentes) = [];
+    dadosNaiveBayes(:, union(colunasAusentes, indiceNumericos)) = [];
+   
 
 % else
 %    fprintf('Completando dados ausentes... \n\n')
@@ -70,12 +69,12 @@ rotulosNormalizados = rotulos;
 % end
 
 %% Correlacao linear
-removerAtributos = input('Deseja remover atributos com alta correlação linear? (S/N) \n', 's');
-if(strcmpi(removerAtributos, 'S'))
-    [r,p] = corrcoef(dadosNormalizados);
-    [i, ~] = find(r>0.7 & r ~= 1);
-    dadosNormalizados(:,i) = [];
-end
+% removerAtributos = input('Deseja remover atributos com alta correlação linear? (S/N) \n', 's');
+% if(strcmpi(removerAtributos, 'S'))
+%     [r,p] = corrcoef(dadosNormalizados);
+%     [i, ~] = find(r>0.7 & r ~= 1);
+%     dadosNormalizados(:,i) = [];
+% end
 
 %% Partição 
 fprintf('Partição iniciada...\n\n');
