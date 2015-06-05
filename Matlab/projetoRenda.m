@@ -16,7 +16,7 @@
 clear ; close all; format shortG; format loose; clc
 
 %Numero de particoes;
-numeroParticoes = 5;
+numeroParticoes = 10;
 
 %% Carregamento dos dados
 fprintf('Carregamento dos dados iniciados...\n\n');
