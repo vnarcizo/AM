@@ -240,7 +240,7 @@ if metodoClassificacao == 0 || metodoClassificacao == 2
     exportarRegresao = input('Deseja exportar a melhor hipotese? (S/N)\n', 's');
     if (strcmpi(exportarRegresao,'S'))
         melhorHipoteseRegressao = hipotesesRegressao{indiceMelhorHipotese};
-        save(strcat('HipoteseRegressao_', hipoteseRegressao, ' .mat'), 'melhorHipoteseRegressao','hipoteseRegressao');
+        save(strcat('HipoteseRegressao_', num2str(hipoteseRegressao), ' .mat'), 'melhorHipoteseRegressao','hipoteseRegressao');
     end   
 end
 
