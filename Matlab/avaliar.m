@@ -1,6 +1,6 @@
 function [avaliacao] = avaliar(obtidos, esperados)
     %acuracia, fMedidaMedia, precisaoMedia, revocacaoMedia
-    classePositiva = esperados(obtidos);
+    classePositiva = esperados == obtidos;
     verdadeirosPositivos = nnz(classePositiva);
     falsosPositivos = nnz(~classePositiva);
     

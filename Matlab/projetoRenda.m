@@ -16,7 +16,7 @@
 clear ; close all; format shortG; format loose; clc
 
 %Numero de particoes;
-numeroParticoes = 10;
+numeroParticoes = 5;
 
 %% Carregamento dos dados
 fprintf('Carregamento dos dados iniciados...\n\n');
@@ -106,6 +106,8 @@ hipoteseCarregada = [];
 modelosSVM = cell(numeroParticoes);
 avaliacoesSVM = [];
 
+avaliacoesKnn = [];
+
 modelosNB = cell(numeroParticoes);
 avaliacoesNaiveBayes = [];
 
@@ -154,7 +156,7 @@ for i = 1:numeroParticoes
     atributosTeste = dadosTeste(:, 1:end-1);
 
     if metodoClassificacao == 0 || metodoClassificacao == 1
-        avaliacaoKnn = knn(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, k);
+        avaliacaoKnn = knn(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, k, i);
         avaliacoesKnn = vertcat(avaliacoesKnn, avaliacaoKnn);
     end
     % Regressão Logística

@@ -1,21 +1,34 @@
-function [ avaliacao ] = knn(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, k)
+function [ avaliacao ] = knn(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, k, numeroParticao)
+    
+    fprintf('\nInício Partição #%d\n', numeroParticao);
+    
     tic;
-    fprintf('Calculando distancias\n');
+    
+    fprintf('Calculando distancias...\n');
+    
     D = pdist2(atributosTreinamento, atributosTeste);
+    
     fprintf('Distancias calculadas\n');
+    
     m = size(atributosTeste, 1);
-    valorPrevisto = zeros(m);
-    fprintf('Ordenando matriz de distancias\n');
-    [ D ind ] = sort(D, 2);
+    
+    fprintf('Ordenando matriz de distancias...\n');
+    
+    [ ~, ind ] = sort(D, 2);
+    
     fprintf('Matriz ordenada\n');
-    fprintf('Encontrando vizinhos\n');
-    valorPrevisto = arrayfun(@(i) mode(rotulosTreinamento(ind(i, 1:k))), 1:m);
-    %for i = 1:m
-    %    valorPrevisto(i) = mode(rotulosTreinamento(ind(i, 1:k)));
-    %end
+    
+    fprintf('Encontrando vizinhos...\n');
+    
+    valorPrevisto = arrayfun(@(i) mode(rotulosTreinamento(ind(i, 1:k))), 1:m)';
+    
     fprintf('Vizinhos encontrados\n');
-    toc
-    avaliacao = valorPrevisto' == rotulosTeste;
-    p = sum(avaliacao(avaliacao==1))/size(avaliacao,1)
-    %avaliacao = avaliar(valorPrevisto, rotulosTeste);
+    
+    fprintf('Tempo treinamento: %f\n', toc);
+    
+    fprintf('Acuracia na base de teste: %f\n', mean(double(valorPrevisto == rotulosTeste)) * 100);
+    
+    fprintf('Fim Partição #%d\n\n', numeroParticao);
+    
+    avaliacao = avaliar(valorPrevisto, rotulosTeste);
 end
