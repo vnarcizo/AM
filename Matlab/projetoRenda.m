@@ -101,6 +101,7 @@ metodoClassificacao = input('Selecione o método que deseja executar\n');
 
 hipotesesRegressao = cell(numeroParticoes);
 avaliacoesRegressao = [];
+avaliacoesRNA = [];
 hipoteseCarregada = [];
 
 modelosSVM = cell(numeroParticoes);
@@ -139,6 +140,15 @@ if metodoClassificacao == 0 || metodoClassificacao == 2
    
 end
 
+%rRedes Neurais
+if metodoClassificacao == 0 || metodoClassificacao == 3
+    carregarThetas = input('Carregar os Thetas previamente calculados? (S/N)\n', 's');
+    
+    if (strcmpi(carregarThetas,'S'))
+            load('thetasRedesNeurais.mat');
+    end
+end
+
 %% Classificação
 for i = 1:numeroParticoes
     indicesTreinamento = 1:numeroParticoes;
@@ -168,8 +178,21 @@ for i = 1:numeroParticoes
            avaliacoesRegressao = vertcat(avaliacoesRegressao, avaliacao);
     end
     if metodoClassificacao == 0 || metodoClassificacao == 3
-           %TODO Victor
-            % Redes Neurais
+        
+         if (strcmpi(carregarThetas,'N'))
+           [mTheta1, mTheta2, avaliacao] = RNA_treinamento(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste,i,200,100);
+         else
+             rTesteItem = zeros(size(atributosTeste,1),1);
+              for item = 1:size(atributosTeste,1)
+                  rTesteItem(item) =  RNA_forward(atributosTeste(item,:),mTheta1, mTheta2);
+              end
+              
+                acuraciaTeste = mean(double(rotulosTeste == rTesteItem)) * 100;
+                fprintf('Acuracia na base de teste: %f na partição %d\n', acuraciaTeste, i);
+                avaliacao = avaliar(rTesteItem,rotulosTeste);
+         end
+          
+         avaliacoesRNA = vertcat(avaliacoesRNA, avaliacao);
     end
     if metodoClassificacao == 0 || metodoClassificacao == 4
         [avaliacao, modelosSVM{i}] = svm(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, i);
