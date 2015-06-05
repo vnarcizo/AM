@@ -1,5 +1,7 @@
-function [mTheta1, mTheta2, avaliacao] = RNA_treinamento(aTreinamento,rTreinamento, aTeste,rTeste, nParticao,qtdNeuronio,epocas)
+function [mTheta1, mTheta2, avaliacao] = RNA_treinamento(aTreinamento,rTreinamento, aTeste,rTeste, numeroParticao,qtdNeuronio,epocas)
       
+fprintf('\nInício Partição #%d\n', numeroParticao);
+
    [m,n] = size(aTreinamento);
    
    %Inicicializando os Thetas com valores randômicos                               
@@ -10,6 +12,8 @@ function [mTheta1, mTheta2, avaliacao] = RNA_treinamento(aTreinamento,rTreinamen
    erroAux = 10;
    epocasAux = 0;
        
+   fprintf('Efetuando o treinamento da RNA...\n');
+   tic;
    while( erroAux > 0.1 && epocasAux < epocas )
        erroAux = 0;
        for i = 1:m
@@ -33,7 +37,10 @@ function [mTheta1, mTheta2, avaliacao] = RNA_treinamento(aTreinamento,rTreinamen
        
    end
    
-    %BASE 
+   fprintf('Finalizado o treinamento da RNA...\n');
+   fprintf('Tempo de Treinamento: %f\n', toc);
+    
+   %BASE 
     [mm,~] = size(aTreinamento);
     rotulosTreinamento = zeros(mm,1);
     
@@ -57,6 +64,6 @@ function [mTheta1, mTheta2, avaliacao] = RNA_treinamento(aTreinamento,rTreinamen
 
     [avaliacao] = avaliar(rotulosTeste, rTeste);
     
-    %save (strcat(num2str(nParticao),'_.mat'), 'mTheta1', 'mTheta2', 'acuraciaTreinamento', 'acuraciaTeste')
-    
+    %save (strcat(num2str(numeroParticao),'_.mat'), 'mTheta1', 'mTheta2', 'acuraciaTreinamento', 'acuraciaTeste')
+    fprintf('Fim Partição #%d\n\n', numeroParticao);
 end

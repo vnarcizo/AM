@@ -137,10 +137,9 @@ if metodoClassificacao == 0 || metodoClassificacao == 2
         end
     end
     
-   
 end
 
-%rRedes Neurais
+%Redes Neurais
 if metodoClassificacao == 0 || metodoClassificacao == 3
     carregarThetas = input('Carregar os Thetas previamente calculados? (S/N)\n', 's');
     
@@ -171,10 +170,25 @@ for i = 1:numeroParticoes
     end
     % Regressão Logística
     if metodoClassificacao == 0 || metodoClassificacao == 2
-       [ avaliacao, hipotesesRegressao{i}] = ...
-           regressaoLogistica(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste,...
-                              hipoteseRegressao, utilizarRegularizacao, lambda, i, 0 );     
-                          
+        
+         if (strcmpi(carregarHipotese,'N'))
+                    [ avaliacao, hipotesesRegressao{i}] = ...
+                    regressaoLogistica(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste,...
+                    hipoteseRegressao, utilizarRegularizacao, lambda, i, 0 );   
+         else
+             switch hipoteseRegressao
+                    case 1
+                        atributosTesteExpandidos = atributosTeste;
+                    case 2
+                        atributosTesteExpandidos = RL_expandeAtributosPolinomial(atributosTeste, 2);
+                    case 3
+                        atributosTesteExpandidos = RL_expandeAtributosPolinomial(atributosTeste, 3);
+             end
+             
+                valorPrevistoTeste = RL_predicao(melhorHipoteseRegressao, atributosTesteExpandidos);
+                avaliacao = avaliar(valorPrevistoTeste,valorPrevistoTeste);
+         end
+                      
            avaliacoesRegressao = vertcat(avaliacoesRegressao, avaliacao);
     end
     if metodoClassificacao == 0 || metodoClassificacao == 3
@@ -226,7 +240,7 @@ if metodoClassificacao == 0 || metodoClassificacao == 2
     exportarRegresao = input('Deseja exportar a melhor hipotese? (S/N)\n', 's');
     if (strcmpi(exportarRegresao,'S'))
         melhorHipoteseRegressao = hipotesesRegressao{indiceMelhorHipotese};
-        save(strcat('HipoteseRegressao_', hipoteseRegressao, ' .mat'), 'melhorHipoteseRegressao');
+        save(strcat('HipoteseRegressao_', hipoteseRegressao, ' .mat'), 'melhorHipoteseRegressao','hipoteseRegressao');
     end   
 end
 
