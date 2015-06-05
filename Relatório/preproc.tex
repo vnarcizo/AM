@@ -1,0 +1,20 @@
+\section{Pré-processamento}
+A base de dados fornecida estava inicialmente separada em 2 arquivos, adult\_test e adult\_data, aos quais adicionou-se uma linha de cabeçalho para importação no Matlab, unificou-se ambos arquivos para o pré-processamento. A base de dados é composta por 14 atributos e 1 atributo-alvo, que representa se a renda é menor que 50 mil dólares anuais ou maior ou igual a 50 mil dólares anuais, sendo eles:
+\begin{description}
+\item[Age] \hfill \\ Atributo contínuo que representa idade;
+\item[Workclass] \hfill \\ Atributo categórico que representa uma das 9 classes de trabalho;
+\item[Fnlwgt] \hfill \\ Atributo contínuo;
+\item[Education] \hfill \\ Atributo categórico que representa um dos 16 graus de escolaridade;
+\item[Education-num] \hfill \\ Atributo continuo relacionado ao grau de escolaridade;
+\item[Marital-status] \hfill \\ Atributo categórico que representa um dos 7 estados civis;
+\item[Occupation] \hfill \\ Atributo categórico que representa uma das 14 áreas de trabalho;
+\item[Relationship] \hfill \\ Atributo categórico que representa um dos 6 parentescos;
+\item[Race] \hfill \\ Atributo categórico que representa uma das 5 etnias;
+\item[Sex] \hfill \\ Atributo categórico que representa um dos 2 sexos possíveis;
+\item[Capital-gain] \hfill \\ Atributo contínuo que representa o ganho de capital;
+\item[Capital-loss] \hfill \\ Atributo contínuo que representa a perda de capital;
+\item[Hours-per-week] \hfill \\ Atributo continuo que representa as horas trabalhadas por semana;
+\item[Native-country] \hfill \\ Atributo categórico que representa um das 41 nacionalidades.
+\end{description}
+
+Após o carregamento removeu-se as amostras duplicadas, resultado em um total de 48813 amostras únicas, removeu-se também amostras com atributos idênticos porem com atributos-alvos distintos, resultando em 48785 amostras.

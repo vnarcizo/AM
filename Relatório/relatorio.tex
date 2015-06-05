@@ -1,6 +1,9 @@
 \documentclass[10pt, conference, compsocconf]{IEEEtran}
 \usepackage[utf8]{inputenc}
 \usepackage[brazil]{babel}
+%\usepackage{hyperref}
+%\hypersetup{colorlinks=false}
+
 % *** CITATION PACKAGES ***
 %
 %\usepackage{cite}
@@ -57,10 +60,11 @@ leandro.ltavares@gmail.com, luizbag@gmail.com, vnarcizo@gmail.com}
 % make the title area
 \maketitle
 
-\include{resumo}
+\input{resumo}
 
-\include{introducao}
+\input{introducao}
 
+\input{preproc}
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
@@ -144,7 +148,7 @@ leandro.ltavares@gmail.com, luizbag@gmail.com, vnarcizo@gmail.com}
 % footnotes above bottom floats. This can be corrected via the \fnbelowfloat
 % command of the stfloats package.
 
-\include{conclusao}
+\input{conclusao}
 
 
 % trigger a \newpage just before the given reference
