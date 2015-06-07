@@ -10,12 +10,8 @@ function [ dadosNaiveBayes ] = preProcessarNaiveBayes(dadosPreprocessados, indic
     for i = 1:size(dadosNumericos, 2)
         dadosNaiveBayes = horzcat(dadosNaiveBayes, expandeMatrizBinariaCestas(dadosNumericos(:, i), numeroCestas));
     end
-    
-    size(dadosNaiveBayes)
 
     %Ordem é importante
-    dadosNaiveBayes = horzcat(dadosNaoNumericos, dadosNaiveBayes);
-    
-    
+    dadosNaiveBayes = horzcat(dadosNaoNumericos, dadosNaiveBayes);   
 end
 

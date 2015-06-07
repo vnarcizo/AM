@@ -223,7 +223,7 @@ for i = 1:numeroParticoes
           rotulosTesteNB = dadosTesteNB(:, end);
           atributosTesteNB = dadosTesteNB(:, 1:end-1);
             
-        [avaliacao, modelosNB{i}] = naiveBayes(atributosTreinamentoNB, rotulosTreinamentoNB, atributosTesteNB, rotulosTesteNB, i);
+        [avaliacao, modelosNB{i}] = naiveBayes(atributosTreinamentoNB, rotulosTreinamento, atributosTesteNB, rotulosTeste, i);
     end
    
 end

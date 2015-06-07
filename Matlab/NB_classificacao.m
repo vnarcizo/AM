@@ -22,10 +22,8 @@ function [classe, probMaior, probMenor] = NB_classificacao(atributos,pMaior,...
 %Calcula a probabilidade de vitoria baseado na probabilidade a priori
 %vezes o produtorio das probabilidades de vitoria dos atributos vitoriosos 
 %vezes o produtorio das probabilidade de vitoria do complemento dos atributos nao-vitoriosos
-size(atributos)
 
 probMaior = pMaior .* prod(pAtrMaior(atributos == 1)) .* prod(1 - pAtrMaior(atributos == 0)); 
-
 
 %Calcula a proababilidade de derrota baseado na probabilidade a priori
 %vezes o produtoqrio das probabilidades de derrota dos atributos vitoriosos 

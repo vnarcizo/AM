@@ -19,11 +19,14 @@ function [pAtrVitoria, pAtrDerrota] = NB_calcularProbabilidades(X, Y)
 
 %Calcula a media (probabilidade) para cada atributo filtrado pela classe
 %>=50k
-pAtrVitoria = mean(X(Y == 1, :))';
+%pAtrVitoria = mean(X(Y == 1, :))'
 
+pAtrVitoria = ((sum(X(Y==1,:)) + 1) ./ (sum(Y==1) + size(X, 2)))';
 %Calcula a media (probabilidade) para cada atributo filtrado pela classe
 %<50k
-pAtrDerrota = mean(X(Y == 0, :))';
+%pAtrDerrota = mean(X(Y == 0, :))';
+
+pAtrDerrota = ((sum(X(Y==0,:)) + 1) ./ (sum(Y==0) + size(X, 2)))';
 
 
 % =========================================================================
