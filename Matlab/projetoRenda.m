@@ -52,7 +52,7 @@ rotulosNormalizados = rotulos;
 % manterAusentes = input('Deseja remover ou completar os dados ausentes? (R/C) \n', 's');
 % 
 % if (strcmpi(manterAusentes,'R'))
-    fprintf('Removendo dados ausentes...\n\n') %Remove 3620 linhas
+    fprintf('Removendo dados ausentes...\n\n') %Remove p linhas
     linhasAusentes = any(dadosPreprocessados(:, colunasAusentes), 2);
     dadosNormalizados(linhasAusentes, :) = [];
     rotulosNormalizados(linhasAusentes, :) = [];

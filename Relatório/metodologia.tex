@@ -1,0 +1,86 @@
+\section{Metodologia experimental}
+
+Particionou-se a base de dados utilizando-se a metodologia de validação cruzada \emph{(k-fold cross-validation)}, visto que os dados não são sensíveis ao tempo. Utilizou-se 10 partições, sendo 9 delas para o treinamento e 1 para a validação, dessa forma os conjuntos de treinamento contém 40653 amostras e os conjuntos de teste 4517 escolhidas aleatóriamente.
+
+Para avaliação do poder de classificação de cada método aplicou-se as medidas mais utilizadas, como acurácia, F-medida, precisão e revocação.
+
+Apresenta-se aqui os parâmetros selecionados, a fim de possibilitar a reprodução dos resultados obtidos em cada método:
+
+Para normalização obteve-se resultados ligeiramente superiores (cerca de 1\%) utilizando-se normalização por padronização, portanto, esta foi a opção utlizada em todos os testes.
+
+\subsection{KNN}
+
+O KNN \emph{(K-vizinhos mais próximos)} é um método baseado em distâncias que consiste em selecionar os K vizinhos do conjunto de treinamento menos distante da amostra de teste, e por distante entende-se, que apresente a menor diferença entre os atributos.
+
+O único parâmetro do KNN é o valor K, para este trabalho selecionou-se um valor 51, obtendo-se os resultados apresentados na Tabela \ref{table:resultadosKNN}:
+
+\begin{table}[h]
+\centering
+\caption{Resultados para o KNN sendo K = 51}
+\vspace{0.2cm}
+\begin{tabular}{c|c|c|c|c}
+Partição & Acurácia & F-medida & Precisão & Revocação \\
+\hline
+1  & 0.74607 & 0.74607 & 0.74607 & 0.74607 \\     
+2  & 0.75515 & 0.75515 & 0.75515 & 0.75515 \\     
+3  & 0.74925 & 0.74925 & 0.74925 & 0.74925 \\     
+4  & 0.75603 & 0.75603 & 0.75603 & 0.75603 \\     
+5  & 0.76179 & 0.76179 & 0.76179 & 0.76179 \\     
+6  & 0.74662 & 0.74662 & 0.74662 & 0.74662 \\     
+7  & 0.75293 & 0.75293 & 0.75293 & 0.75293 \\     
+8  & 0.75183 & 0.75183 & 0.75183 & 0.75183 \\     
+9  & 0.75803 & 0.75803 & 0.75803 & 0.75803 \\     
+10 & 0.74341 & 0.74341 & 0.74341 & 0.74341 \\
+\hline
+Média & 0.75211 & 0.75211 & 0.75211 & 0.75211  
+
+\end{tabular} 
+\label{table:resultadosKNN}
+\end{table}
+
+\subsection{Regressão logística}
+
+O método da regressão logística consiste em encontrar uma função \emph{(hipótese)} que classifique os atributos, minimizando o erro entre as amostras, através do ajuste dos coeficientes do polinômio %(\theta).
+
+Implementou-se 3 variações das hipóteses:
+
+\begin{description}
+\item[Hipótese Linear] \hfill \\ Atributos elevados a primeira potência;
+\item[Hipótese Quadrática] \hfill \\ Atributos elevados a primeira e segunda potência;
+\item[Hipótese Cúbica] \hfill \\ Atributos elevados a primeira, segunda e terceira potência;
+\end{description}
+
+A regressão logística ainda pode utilizar um parâmetro de regularização a fim de evitar os super ajustamento ao conjunto de treinamento, balançeando a complexidade da hipótese.
+
+Para este trabalho selecionou-se a hipótese linear com um fator de regularizaçao lambda igual a 1, obtendo-se os resultados apresentados na Tabela \ref{table:resultadosRL}
+
+\begin{table}[h]
+\centering
+\caption{Resultados para a Regressão logística sendo a hipótese linear e lambda = 1}
+\vspace{0.2cm}
+\begin{tabular}{c|c|c|c|c}
+Partição & Acurácia & F-medida & Precisão & Revocação \\
+\hline
+1  & 0.85707 & 0.85605 & 0.85852 & 0.85503 \\      
+2  & 0.8628  & 0.86187 & 0.8644  & 0.86086 \\      
+3  & 0.85621 & 0.85517 & 0.85814 & 0.85411 \\      
+4  & 0.85834 & 0.85739 & 0.8603  & 0.85639 \\      
+5  & 0.86338 & 0.86256 & 0.86481 & 0.86167 \\      
+6  & 0.8591  & 0.85808 & 0.86049 & 0.85705 \\      
+7  & 0.86925 & 0.8682  & 0.8712  & 0.867   \\    
+8  & 0.86938 & 0.86837 & 0.87098 & 0.86722 \\      
+9  & 0.86246 & 0.86157 & 0.8641  & 0.86059 \\      
+10 & 0.85825 & 0.85708 & 0.86031 & 0.85587 \\
+\hline
+Média & 0.86162 & 0.86063 & 0.86333 & 0.85958  
+
+\end{tabular} 
+\label{table:resultadosRL}
+\end{table}
+
+\subsection{Redes Neurais Artificiais}
+
+\subsection{Máquinas de vetores de suporte}
+
+\subsection{Naive Bayes}
+
