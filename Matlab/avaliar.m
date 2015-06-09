@@ -1,4 +1,4 @@
-function [avaliacao] = avaliar(obtidos, esperados)
+function [avaliacao] = avaliar(obtidos, esperados, tempo)
     %acuracia, fMedidaMedia, precisaoMedia, revocacaoMedia
     classePositiva = esperados == obtidos;
     verdadeirosPositivos = nnz(classePositiva);
@@ -29,6 +29,6 @@ function [avaliacao] = avaliar(obtidos, esperados)
     
     fMedidaMedia = (fMedidaPos + fMedidaNeg) / 2;
     
-    avaliacao = table(acuracia, fMedidaMedia, precisaoMedia, revocacaoMedia);
+    avaliacao = table(acuracia, fMedidaMedia, precisaoMedia, revocacaoMedia, tempo);
 end
 

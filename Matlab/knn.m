@@ -24,11 +24,13 @@ function [ avaliacao ] = knn(atributosTreinamento, rotulosTreinamento, atributos
     
     fprintf('Vizinhos encontrados\n');
     
-    fprintf('Tempo treinamento: %f\n', toc);
+    tempo = toc;
+    
+    fprintf('Tempo treinamento: %f\n', tempo);
     
     fprintf('Acuracia na base de teste: %f\n', mean(double(valorPrevisto == rotulosTeste)) * 100);
     
     fprintf('Fim Partição #%d\n\n', numeroParticao);
     
-    avaliacao = avaliar(valorPrevisto, rotulosTeste);
+    avaliacao = avaliar(valorPrevisto, rotulosTeste, tempo);
 end
