@@ -45,36 +45,17 @@ else
     %[rotulosNormalizados] = normalizarPadronizacao(rotulos);
 end
 
-%TODO: melhorar isso
 rotulosNormalizados = rotulos;
 
-%% Tratamento dos ausentes
-% manterAusentes = input('Deseja remover ou completar os dados ausentes? (R/C) \n', 's');
-% 
-% if (strcmpi(manterAusentes,'R'))
-    fprintf('Removendo dados ausentes...\n\n') %Remove p linhas
-    linhasAusentes = any(dadosPreprocessados(:, colunasAusentes), 2);
-    dadosNormalizados(linhasAusentes, :) = [];
-    rotulosNormalizados(linhasAusentes, :) = [];
-    
-    dadosNormalizados(:, colunasAusentes) = [];
-    
-    dadosNaiveBayes(linhasAusentes, :) = [];
-    dadosNaiveBayes(:, union(colunasAusentes, indiceNumericos)) = [];
-   
+fprintf('Removendo dados ausentes...\n\n') %Remove p linhas
+linhasAusentes = any(dadosPreprocessados(:, colunasAusentes), 2);
+dadosNormalizados(linhasAusentes, :) = [];
+rotulosNormalizados(linhasAusentes, :) = [];
 
-% else
-%    fprintf('Completando dados ausentes... \n\n')
-%    %TODO: Bag Usar os dados normalizados
-% end
+dadosNormalizados(:, colunasAusentes) = [];
 
-%% Correlacao linear
-% removerAtributos = input('Deseja remover atributos com alta correlação linear? (S/N) \n', 's');
-% if(strcmpi(removerAtributos, 'S'))
-%     [r,p] = corrcoef(dadosNormalizados);
-%     [i, ~] = find(r>0.7 & r ~= 1);
-%     dadosNormalizados(:,i) = [];
-% end
+dadosNaiveBayes(linhasAusentes, :) = [];
+dadosNaiveBayes(:, union(colunasAusentes, indiceNumericos)) = [];
 
 %% Partição 
 fprintf('Partição iniciada...\n\n');
