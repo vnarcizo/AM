@@ -2,7 +2,7 @@ function [ avaliacao, modeloSVM ] = svm( atributosTreinamento, rotulosTreinament
        fprintf('\nInício Partição #%d\n', numeroParticao);
        tic;
        
-       modeloSVM = svmtrain(rotulosTreinamento, atributosTreinamento);
+       modeloSVM = svmtrain(rotulosTreinamento, atributosTreinamento, '-c 1 -t 1');
        
        fprintf('Tempo treinamento: %d\n', toc);
        
