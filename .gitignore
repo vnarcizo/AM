@@ -15,7 +15,6 @@
 # Simulink Code Generation
 slprj/
 
-*.pdf
 *.log
 *.aux
 *.out
