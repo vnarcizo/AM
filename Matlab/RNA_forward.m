@@ -1,5 +1,11 @@
 function [y, a2, a3] = RNA_forward(x,mTheta1, mTheta2)
 
+%RNA_treinamento Obtem a predição do rótulo através dos Thetas
+%   [y, a2, a3] = RNA_forward(x,mTheta1, mTheta2)
+%   Obtem o rótulo passando como parametro a amostra que deseja obter e os
+%   Thetas para o cálculo, retornará o y como saida da rede e os valores
+%   intermediários a2 e a3
+
    a1 = x';
    
    a1 = [1 a1(1:end)']';
