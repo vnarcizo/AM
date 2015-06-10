@@ -14,13 +14,7 @@ m = size(X, 1); % Numero de examplos de treinamento
 
 p = sigmoid(X * theta) >= 0.5;
 
-
-
-
-
-
 % =========================================================================
-
 
 end
 

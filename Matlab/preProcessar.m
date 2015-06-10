@@ -1,5 +1,10 @@
 function [ dadosPreprocessados, rotulos, colunasAusentes, tamanhoCaracteristica, indiceNumericos ] = preProcessar(dadosOriginais, dadosOriginaisTeste)
 
+%% Efetua o Pre-Processamento da base de dados
+% [ dadosPreprocessados, rotulos, colunasAusentes, tamanhoCaracteristica,
+% indiceNumericos ] = preProcessar(dadosOriginais, dadosOriginaisTeste)
+
+
 %Concatena os dados da base original com a base de teste
 dadosOriginaisAgrupados = vertcat(dadosOriginais, dadosOriginaisTeste);
 
@@ -103,6 +108,7 @@ indices = cellfun(@(x) strcmpi(x, '>50k') | strcmpi(x, '>50k.'), dadosOriginaisA
 
 rotulos(indices) = 1;
 
-indiceNumericos = [1 11 28 64 65 108]; %Constantes mágicas não alterar
+%% Indices numéricos continuos
+indiceNumericos = [1 11 28 64 65 108];
 end
 
