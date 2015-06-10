@@ -115,18 +115,18 @@ while metodoClassificacao ~= 6
         break
     end
 
-    hipotesesRegressao = cell(numeroParticoes);
     avaliacoesRegressao = [];
     avaliacoesRNA = [];
-    hipoteseCarregada = [];
-
-    modelosSVM = cell(numeroParticoes);
+    avaliacoesNaiveBayes = [];
     avaliacoesSVM = [];
-
     avaliacoesKnn = [];
+       
+    modelosSVM = cell(numeroParticoes);
+    hipotesesRegressao = cell(numeroParticoes);
+    hipoteseCarregada = [];   
 
     modelosNB = cell(numeroParticoes);
-    avaliacoesNaiveBayes = [];
+
 
     %Cada método tem sua particularidade na escolha de parametros
     
@@ -163,7 +163,7 @@ while metodoClassificacao ~= 6
 
     %Para RNA devemos escolher com quantos neuronios iremos treinar a rede
     if metodoClassificacao == 0 || metodoClassificacao == 3
-        carregarThetas = input('Carregar os Thetas previamente calculados? (S/N)\n', 's');
+        carregarThetas = input('Deseja carregar os Thetas previamente calculados? (S/N)\n', 's');
 
         qtdNeuronios = 50;
         
@@ -179,6 +179,19 @@ while metodoClassificacao ~= 6
         end
         
     end
+    
+    
+    %Para o SVM devemos escolher se desejamos carregar previamente os
+    %valores
+    if metodoClassificacao == 0 || metodoClassificacao == 4
+         carregarModelo = input('Deseja carregar o modelo do SMV previamente calculado? (S/N)\n', 's');
+         melhorModeloSVM = 0;
+        if (strcmpi(carregarModelo,'S'))
+              load('ModeloSVM.mat');
+        end
+         
+    end
+    
 
     %% ================= Parte 6: Treinamento e Classificação ====================
     % Os metodos serão executados para cada partição das 10 previamente
@@ -269,7 +282,8 @@ while metodoClassificacao ~= 6
         % SVM - Executar a obtenção do Modelo e efetuar a  
         % avaliação dos dados de treinamento
         if metodoClassificacao == 0 || metodoClassificacao == 4
-            [avaliacao, modelosSVM{i}] = svm(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, i);
+            [avaliacao, modelosSVM{i}] = svm(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, i,melhorModeloSVM);
+            avaliacoesSVM = vertcat(avaliacoesSVM, avaliacao);
         end
                 
         
@@ -287,16 +301,25 @@ while metodoClassificacao ~= 6
               rotulosTesteNB = dadosTesteNB(:, end);
               atributosTesteNB = dadosTesteNB(:, 1:end-1);
 
-            [avaliacao, modelosNB{i}] = naiveBayes(atributosTreinamentoNB, rotulosTreinamento, atributosTesteNB, rotulosTeste, i);
+             [avaliacao, modelosNB{i}] = naiveBayes(atributosTreinamentoNB, rotulosTreinamento, atributosTesteNB, rotulosTeste, i);
+            
+              avaliacoesNaiveBayes = vertcat(avaliacoesNaiveBayes, avaliacao);
+            
         end
 
     end
-
+    
+ %% ================= Parte 7: Resultados ====================
+    % Aqui mostrará os resultados obtidos pelos métodos selecionados no
+    % menu
+    
+    %Resultado - KNN
     if metodoClassificacao == 0 || metodoClassificacao == 1
         fprintf('Resultados KNN\n');
         avaliarFinal(avaliacoesKnn);
     end
 
+    %Resultado - Regressão Logistica
     if metodoClassificacao == 0 || metodoClassificacao == 2
         fprintf('Resultados regressão logística\n');
         indiceMelhorHipotese = avaliarFinal(avaliacoesRegressao);
@@ -308,6 +331,13 @@ while metodoClassificacao ~= 6
         end   
     end
 
+    %Resultado - RNA
+    if metodoClassificacao == 0 || metodoClassificacao == 3
+        fprintf('Resultados RNA \n');
+        avaliarFinal(avaliacoesRNA);
+    end
+    
+    %Resultado - SVM
     if metodoClassificacao == 0 || metodoClassificacao == 4
         fprintf('Resultados SVM \n');
         indiceMelhorModelo = avaliarFinal(avaliacoesSVM);
@@ -315,8 +345,22 @@ while metodoClassificacao ~= 6
         exportarSVM = input('Deseja exportar o modelo do SVM? (S/N)\n', 's');
 
         if (strcmpi(exportarSVM,'S'))
-            melhorModeloSVM = modelosSVM{indiceMelhorHipotese};
+            melhorModeloSVM = modelosSVM{indiceMelhorModelo};
             save('ModeloSVM.mat', 'melhorModeloSVM');
+        end   
+    end
+    
+    
+     %Resultado - Naive Bayes
+    if metodoClassificacao == 0 || metodoClassificacao == 5
+        fprintf('Resultados Naive Bayes \n');
+        indiceMelhorModelo = avaliarFinal(avaliacoesNaiveBayes);
+
+        exportarNaive = input('Deseja exportar o modelo do NaiveBayes? (S/N)\n', 's');
+
+        if (strcmpi(exportarNaive,'S'))
+            melhorModeloNaive = modelosNB{indiceMelhorModelo};
+            save('ModeloNaiveBayes.mat', 'melhorModeloNaive');
         end   
     end
 end

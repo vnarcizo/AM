@@ -1,4 +1,7 @@
 function [ matrizBinaria ] = expandeMatrizBinariaCestas( dados, numeroCestas)
+
+    %% expandeMatrizBinariaCestas Divide um determinado critério continuo em Cestas
+    
     [~,~,cesta] = histcounts(dados,numeroCestas);
     
     numeroAmostras = size(dados, 1);

@@ -1,10 +1,13 @@
-function [ avaliacao, modeloSVM ] = svm( atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, numeroParticao )
+function [ avaliacao, modeloSVM ] = svm( atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, numeroParticao, modeloCarregadoSVM )
        fprintf('\nInício Partição #%d\n', numeroParticao);
-       tic;
-       
-       modeloSVM = svmtrain(rotulosTreinamento, atributosTreinamento, '-c 1 -t 1');
-       
-       fprintf('Tempo treinamento: %d\n', toc);
+              
+       if (isnumeric(modeloCarregadoSVM))
+            tic;
+            modeloSVM =  svmtrain(rotulosTreinamento, atributosTreinamento, '-c 1 -t 1 ');
+            fprintf('Tempo treinamento: %d\n', toc);
+       else
+           modeloSVM = modeloCarregadoSVM;
+       end
        
        [valorPrevisto, ~, ~] = svmpredict(rotulosTreinamento, atributosTreinamento, modeloSVM);
        

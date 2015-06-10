@@ -1,5 +1,12 @@
 function [avaliacao] = avaliar(obtidos, esperados, tempo)
-    %acuracia, fMedidaMedia, precisaoMedia, revocacaoMedia
+
+    %% avaliar Obtem a avaliação de um método através dos dados obtidos e
+    %esperados
+    %   [avaliacao] = avaliar(obtidos, esperados, tempo)
+    %   Obtem a avaliaçao passando como parametro os dados obtidos, os
+    %   esperados e o tempo gasto
+
+    %% acuracia, fMedidaMedia, precisaoMedia, revocacaoMedia
     classePositiva = esperados == obtidos;
     verdadeirosPositivos = nnz(classePositiva);
     falsosPositivos = nnz(~classePositiva);
@@ -8,7 +15,7 @@ function [avaliacao] = avaliar(obtidos, esperados, tempo)
     verdadeirosNegativos = nnz(classeNegativa);
     falsosNegativo = nnz(~classeNegativa);
    
-    
+    %% Acuracia
     acuracia = (verdadeirosPositivos + verdadeirosNegativos) / (verdadeirosPositivos + verdadeirosNegativos + falsosPositivos + falsosNegativo);
     
     %% Precisão
@@ -29,6 +36,7 @@ function [avaliacao] = avaliar(obtidos, esperados, tempo)
     
     fMedidaMedia = (fMedidaPos + fMedidaNeg) / 2;
     
-    avaliacao = table(acuracia, fMedidaMedia, precisaoMedia, revocacaoMedia, tempo);
+%    avaliacao = table(acuracia, fMedidaMedia, precisaoMedia, revocacaoMedia, tempo);
+    avaliacao = table(acuracia, fMedidaMedia, precisaoMedia, revocacaoMedia);
 end
 
