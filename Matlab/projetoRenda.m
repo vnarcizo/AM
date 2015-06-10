@@ -355,13 +355,13 @@ while metodoClassificacao ~= 6
     if metodoClassificacao == 0 || metodoClassificacao == 5
         fprintf('Resultados Naive Bayes \n');
         indiceMelhorModelo = avaliarFinal(avaliacoesNaiveBayes);
+      %TODO Obter Modelo
+      % exportarNaive = input('Deseja exportar o modelo do NaiveBayes? (S/N)\n', 's');
 
-        exportarNaive = input('Deseja exportar o modelo do NaiveBayes? (S/N)\n', 's');
-
-        if (strcmpi(exportarNaive,'S'))
-            melhorModeloNaive = modelosNB{indiceMelhorModelo};
-            save('ModeloNaiveBayes.mat', 'melhorModeloNaive');
-        end   
+      %  if (strcmpi(exportarNaive,'S'))
+      %      melhorModeloNaive = modelosNB{indiceMelhorModelo};
+      %      save('ModeloNaiveBayes.mat', 'melhorModeloNaive');
+      %  end   
     end
 end
 
