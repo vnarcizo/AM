@@ -18,36 +18,47 @@ clear ; close all; format shortG; format loose; clc
 %Numero de particoes;
 numeroParticoes = 10;
 
-%% Carregamento dos dados
+%% ================= Parte 1: Carregando a base de dados ====================
+%  
 fprintf('Carregamento dos dados iniciados...\n\n');
-%load('projetoDados.mat');
 
 dadosOriginais = readtable('adult_data');
 dadosOriginaisTeste = readtable('adult_test');
 
-%% Pré-processamento
+%% ================= Parte 2: Efetuando o Pré-Processamento dos dados =======
+% Para trabalhar com a base de dados dada, foi necessário realizar
+% algumas adequações no modelo de dados, pois existiam inconsistencias
+% tanto na sua formatação quanto atributos faltantes
+%
+% Foi realizado 2 pré-processamentos, um para os métodos (Knn,Regressão
+% Logistica, Redes Neurais Artificiais, SVM) e outro para o NaiveBayes pela
+% suas caracteristicas
 fprintf('Pré-processando iniciado...\n\n');
 
 [dadosPreprocessados, rotulos, colunasAusentes, tamanhoCaracteristica, indiceNumericos] = preProcessar(dadosOriginais, dadosOriginaisTeste);
 
 [dadosNaiveBayes] = preProcessarNaiveBayes(dadosPreprocessados, indiceNumericos);
 
-%% Normalização
+%% ================= Parte 3: Normalização dos dados ====================
+% O programa solicita qual normalização deseja efetuar, se por Escala ou
+% Padronização
+
 tipoNormalizacao = input('Deseja normalizar por Escala ou Padronização? (E/P) \n', 's');
 
 if(strcmpi(tipoNormalizacao, 'E'))
     fprintf('Normalização por escala iniciada...\n\n');
     [dadosNormalizados] = normalizarEscala(dadosPreprocessados);
-    %[rotulosNormalizados] = normalizarEscala(rotulos);
 else
     fprintf('Normalização por padronização iniciada...\n\n');
     [dadosNormalizados] = normalizarPadronizacao(dadosPreprocessados);
-    %[rotulosNormalizados] = normalizarPadronizacao(rotulos);
 end
 
 rotulosNormalizados = rotulos;
 
 fprintf('Removendo dados ausentes...\n\n') %Remove p linhas
+
+%Obtendo as amostras com todos os atributos preenchidos
+
 linhasAusentes = any(dadosPreprocessados(:, colunasAusentes), 2);
 dadosNormalizados(linhasAusentes, :) = [];
 rotulosNormalizados(linhasAusentes, :) = [];
@@ -70,9 +81,11 @@ hold off;
 dadosNaiveBayes(linhasAusentes, :) = [];
 dadosNaiveBayes(:, union(colunasAusentes, indiceNumericos)) = [];
 
-%% Partição 
+%% ================= Parte 4: Particionamento das Amostras ====================
+% Foi realizado o particionamento das amostras utilizando o método de
+% Validação cruzada com 10 partições
 fprintf('Partição iniciada...\n\n');
-
+ 
 dadosAparticionar = horzcat(dadosNormalizados, rotulosNormalizados);
 
 dadosAparticionarNaiveBayes =  horzcat(dadosNaiveBayes, rotulosNormalizados);
@@ -82,7 +95,12 @@ dadosAparticionarNaiveBayes =  horzcat(dadosNaiveBayes, rotulosNormalizados);
 % size(dadosParticionados)
 % size(dadosNaiveBayesParticionados)
 metodoClassificacao = 0;
-%% Seleção do métodos
+
+
+%% ================= Parte 5: Escolha do método a ser aplicado ====================
+% Foi criado um menu para a escolha do método que será realizado o
+% procedimento, 0 para executar todos os métodos de uma unica vez.
+
 while metodoClassificacao ~= 6
     fprintf('0 - Todos\n')
     fprintf('1 - KNN\n')
@@ -110,11 +128,17 @@ while metodoClassificacao ~= 6
     modelosNB = cell(numeroParticoes);
     avaliacoesNaiveBayes = [];
 
+    %Cada método tem sua particularidade na escolha de parametros
+    
+    %Para o Knn devemos escolher quantos visinhos serão avaliados pelo
+    %método
     if metodoClassificacao == 0 || metodoClassificacao == 1
         k = input('Qual o valor de K? (Número de vizinhos mais próximos): \n');
     end
 
-    %% Selecoes de parametros adicionais para Regressao Logistica
+    %Para a Regressão Logistica devemos escolher qual o tipo da Hipótese
+    %que deverá ser aplicado e se desejará efetuar o procedimento com
+    %Regularização
     if metodoClassificacao == 0 || metodoClassificacao == 2
         fprintf('1 - Hipótese linear\n')
         fprintf('2 - Hipótese quadrática\n')
@@ -137,17 +161,32 @@ while metodoClassificacao ~= 6
 
     end
 
-    %Redes Neurais
+    %Para RNA devemos escolher com quantos neuronios iremos treinar a rede
     if metodoClassificacao == 0 || metodoClassificacao == 3
         carregarThetas = input('Carregar os Thetas previamente calculados? (S/N)\n', 's');
 
+        qtdNeuronios = 50;
+        
         if (strcmpi(carregarThetas,'S'))
                 load('thetasRedesNeurais.mat');
+        else
+          
+           alterarQtdNeuronios = input('Deseja alterar o valor padrão de 50 neurônios para treinamento? (S/N)\n', 's');
+
+           if (strcmpi(alterarQtdNeuronios,'S'))
+              qtdNeuronios = input('Quantos neurônios deseja utilizar na RNA?\n');
+           end
         end
+        
     end
 
-    %% Classificação
+    %% ================= Parte 6: Treinamento e Classificação ====================
+    % Os metodos serão executados para cada partição das 10 previamente
+    % separadas
     for i = 1:numeroParticoes
+        
+        %efetuando a separação dos dados/rotulos de treinamento e de
+        %teste
         indicesTreinamento = 1:numeroParticoes;
         indicesTreinamento = indicesTreinamento(indicesTreinamento~=i);
 
@@ -162,13 +201,21 @@ while metodoClassificacao ~= 6
         rotulosTeste = dadosTeste(:, end);
         atributosTeste = dadosTeste(:, 1:end-1);
 
+        % KNN - Executar o método de avaliação
         if metodoClassificacao == 0 || metodoClassificacao == 1
+            
+            %Efetua a predição para os atributos de teste
             avaliacaoKnn = knn(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, k, i);
+            %Faz a concatenação das avaliações de todas as partições
             avaliacoesKnn = vertcat(avaliacoesKnn, avaliacaoKnn);
         end
-        % Regressão Logística
+       
+        
+        % Regressão Logistica - Executar a obtenção da Hipotese e a
+        % avaliação dos dados de treinamento
         if metodoClassificacao == 0 || metodoClassificacao == 2
 
+             %Verifica se deseja carregar a hipotese previamente calculada
              if (strcmpi(carregarHipotese,'N'))
                         [ avaliacao, hipotesesRegressao{i}] = ...
                         regressaoLogistica(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste,...
@@ -183,32 +230,51 @@ while metodoClassificacao ~= 6
                             atributosTesteExpandidos = RL_expandeAtributosPolinomial(atributosTeste, 3);
                  end
 
+                    %Efetua a predição para os atributos de teste
                     valorPrevistoTeste = RL_predicao(melhorHipoteseRegressao, atributosTesteExpandidos);
+                    
+                    %Chama o método Avaliar que faz todo o processo de
+                    %geração de indices para avaliação do método
                     avaliacao = avaliar(valorPrevistoTeste,valorPrevistoTeste);
              end
 
+               %Faz a concatenação das avaliações de todas as partições
                avaliacoesRegressao = vertcat(avaliacoesRegressao, avaliacao);
         end
+        
+        % RNA - Executar a obtenção dos Thetas e efetua a 
+        % avaliação dos dados de treinamento
         if metodoClassificacao == 0 || metodoClassificacao == 3
 
+            %Verifica se deseja obter os Thetas previamente calculados
              if (strcmpi(carregarThetas,'N'))
-               [mTheta1, mTheta2, avaliacao] = RNA_treinamento(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste,i,200,100);
+               %Efetua o Treinamento da RNA
+               [mTheta1, mTheta2, avaliacao] = RNA_treinamento(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste,i,qtdNeuronios,100);
              else
                  rTesteItem = zeros(size(atributosTeste,1),1);
+                 
+                  %Para cada amostra de teste é obtido a sua predição
                   for item = 1:size(atributosTeste,1)
                       rTesteItem(item) =  RNA_forward(atributosTeste(item,:),mTheta1, mTheta2);
                   end
 
-                    acuraciaTeste = mean(double(rotulosTeste == rTesteItem)) * 100;
-                    fprintf('Acuracia na base de teste: %f na partição %d\n', acuraciaTeste, i);
+                    %Chama o método Avaliar que faz todo o processo de
+                    %geração de indices para avaliação do método
                     avaliacao = avaliar(rTesteItem,rotulosTeste);
              end
-
+             %Faz a concatenação das avaliações de todas as partições
              avaliacoesRNA = vertcat(avaliacoesRNA, avaliacao);
         end
+        
+        % SVM - Executar a obtenção do Modelo e efetuar a  
+        % avaliação dos dados de treinamento
         if metodoClassificacao == 0 || metodoClassificacao == 4
             [avaliacao, modelosSVM{i}] = svm(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, i);
         end
+                
+        
+        % Naive Bayes - Executar a obtenção das probabilidades e efetuar 
+        % avaliação dos dados de treinamento
         if metodoClassificacao == 0 || metodoClassificacao == 5
               dadosTreinamentoNB = dadosNaiveBayesParticionados(indicesTreinamento,:,:);
               dadosTreinamentoNB = reshape(dadosTreinamentoNB, size(dadosTreinamentoNB, 1)*size(dadosTreinamentoNB, 2), size(dadosTreinamentoNB, 3));
