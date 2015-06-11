@@ -3,7 +3,9 @@ function [ avaliacao, modeloSVM ] = svm( atributosTreinamento, rotulosTreinament
               
        if (isnumeric(modeloCarregadoSVM))
             tic;
-            modeloSVM =  svmtrain(rotulosTreinamento, atributosTreinamento, '-c 1 -t 1 ');
+            %Melhor linear -t 0 -c 0.01
+            %Melhor radial -t 2 -c 0.01 -g 0.01
+            modeloSVM =  svmtrain(rotulosTreinamento, atributosTreinamento, '-t 2 -c 0.01 -g 0.01');
             fprintf('Tempo treinamento: %d\n', toc);
        else
            modeloSVM = modeloCarregadoSVM;
