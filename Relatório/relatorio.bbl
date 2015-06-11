@@ -28,4 +28,16 @@ P.~Chetty. (2011) Importance of prediction of income of customers to banks.
   \url{http://www.projectguru.in/publications/importance-of-prediction-of-income-of-customers-to-banks/}
 \BIBentrySTDinterwordspacing
 
+\bibitem{importance2}
+\BIBentryALTinterwordspacing
+A.~Dahir. (2014) The importance of estimating the national income of a country
+  and the difficulties economist encounter while carrying such estimation
+  especially in the developing countries. [Online]. Available:
+  \url{http://pt.slideshare.net/delmujahid/question-2-40726032}
+\BIBentrySTDinterwordspacing
+
+\bibitem{bias}
+D.~F. Gordon and M.~Desjardins, ``Evaluation and selection of biases in machine
+  learning,'' 1995.
+
 \end{thebibliography}
