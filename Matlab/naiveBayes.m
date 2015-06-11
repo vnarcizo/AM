@@ -15,12 +15,12 @@ fprintf('Acuracia na base de treinamento: %f\n', mean(double(valorPrevisto == ro
 valorPrevistoTeste = arrayfun(@(i) NB_classificacao(atributosTeste(i,:), pMaior, pMenor, pAtrMaior, pAtrMenor), 1:size(atributosTeste, 1))';
 
 fprintf('Acuracia na base de teste: %f\n', mean(double(valorPrevistoTeste == rotulosTeste)) * 100);
-
-fprintf('Tempo processamento: %f\n', toc);
+tempo = toc;
+fprintf('Tempo processamento: %f\n', tempo);
 
 fprintf('Fim Partição #%d\n\n', numeroParticao);
 
-avaliacao = 0;
+avaliacao = avaliar(valorPrevistoTeste, rotulosTeste, tempo);
 modeloNB = 0;
 
 end
