@@ -27,7 +27,8 @@ tic;
 % Otimiza o gradiente
 [theta, J, exit_flag] = ...
 	fminunc(@(t)(RL_funcaoCustoReg(t, atributosExpandidos, rotulosTreinamento, lambda, utilizarRegularizacao)), thetaInicial, opcoes);
-fprintf('Tempo minimização: %f\n', toc);
+tempo = toc;
+fprintf('Tempo minimização: %f\n', tempo);
 
 fprintf('Custo mínimo encontrado: %f\n', J);
 
@@ -39,7 +40,7 @@ valorPrevistoTeste = RL_predicao(theta, atributosTesteExpandidos);
 
 fprintf('Acuracia na base de teste: %f\n', mean(double(valorPrevistoTeste == rotulosTeste)) * 100);
 
-[avaliacao] = avaliar(valorPrevistoTeste, rotulosTeste);
+[avaliacao] = avaliar(valorPrevistoTeste, rotulosTeste, tempo);
 
 fprintf('Fim Partição #%d\n\n', numeroParticao);
 
