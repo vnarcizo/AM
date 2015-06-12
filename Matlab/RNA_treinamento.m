@@ -71,7 +71,8 @@ function [mTheta1, mTheta2, avaliacao] = RNA_treinamento(aTreinamento,rTreinamen
    end
    
    fprintf('Finalizado o treinamento da RNA...\n');
-   fprintf('Tempo de Treinamento: %f\n', toc);
+   tempo = toc;
+   fprintf('Tempo de Treinamento: %f\n', tempo);
     
     %Obtendo os rótulos da base de treinamento para comparar com os rótulos
     %reais
@@ -104,7 +105,7 @@ function [mTheta1, mTheta2, avaliacao] = RNA_treinamento(aTreinamento,rTreinamen
     fprintf('Acuracia na base de teste: %f\n', mean(double(rotulosTeste == rTeste)) * 100);
 
     %Obtendo as Avaliações do método
-    [avaliacao] = avaliar(rotulosTeste, rTeste);
+    [avaliacao] = avaliar(rotulosTeste, rTeste, tempo);
     
     %save (strcat(num2str(numeroParticao),'_.mat'), 'mTheta1', 'mTheta2', 'acuraciaTreinamento', 'acuraciaTeste')
     fprintf('Fim Partição #%d\n\n', numeroParticao);

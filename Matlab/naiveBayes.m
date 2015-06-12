@@ -30,13 +30,17 @@ valorPrevistoTeste = arrayfun(@(i) NB_classificacao(atributosTeste(i,:), pMaior,
 
 %Mostra a acuracia na base de Teste
 fprintf('Acuracia na base de teste: %f\n', mean(double(valorPrevistoTeste == rotulosTeste)) * 100);
-
-fprintf('Tempo processamento: %f\n', toc);
+tempo = toc;
+fprintf('Tempo processamento: %f\n', tempo);
 
 fprintf('Fim Partição #%d\n\n', numeroParticao);
 
+<<<<<<< HEAD
 %Efetua a avaliação
     avaliacao = avaliar(valorPrevistoTeste, rotulosTeste, toc);
+=======
+avaliacao = avaliar(valorPrevistoTeste, rotulosTeste, tempo);
+>>>>>>> 65a29ca169df03507d250d93a7dd84b2bd4c5299
 modeloNB = 0;
 
 end

@@ -36,7 +36,7 @@ function [avaliacao] = avaliar(obtidos, esperados, tempo)
     
     fMedidaMedia = (fMedidaPos + fMedidaNeg) / 2;
     
-%    avaliacao = table(acuracia, fMedidaMedia, precisaoMedia, revocacaoMedia, tempo);
-    avaliacao = table(acuracia, fMedidaMedia, precisaoMedia, revocacaoMedia);
+    avaliacao = table(acuracia, fMedidaMedia, precisaoMedia, revocacaoMedia, tempo);
+    %avaliacao = table(acuracia, fMedidaMedia, precisaoMedia, revocacaoMedia);
 end
 

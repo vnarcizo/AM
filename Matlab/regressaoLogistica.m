@@ -33,7 +33,8 @@ tic;
 % Otimiza o gradiente
 [theta, J, exit_flag] = ...
 	fminunc(@(t)(RL_funcaoCustoReg(t, atributosExpandidos, rotulosTreinamento, lambda, utilizarRegularizacao)), thetaInicial, opcoes);
-fprintf('Tempo minimização: %f\n', toc);
+tempo = toc;
+fprintf('Tempo minimização: %f\n', tempo);
 
 %Mostra o custo mínimo obtido através da fminunc
 fprintf('Custo mínimo encontrado: %f\n', J);
@@ -50,8 +51,12 @@ valorPrevistoTeste = RL_predicao(theta, atributosTesteExpandidos);
 %Mostra a acuracia do método na base de Teste
 fprintf('Acuracia na base de teste: %f\n', mean(double(valorPrevistoTeste == rotulosTeste)) * 100);
 
+<<<<<<< HEAD
 %Efetua a avaliação do método da Regressão Logistica
 [avaliacao] = avaliar(valorPrevistoTeste, rotulosTeste);
+=======
+[avaliacao] = avaliar(valorPrevistoTeste, rotulosTeste, tempo);
+>>>>>>> 65a29ca169df03507d250d93a7dd84b2bd4c5299
 
 fprintf('Fim Partição #%d\n\n', numeroParticao);
 

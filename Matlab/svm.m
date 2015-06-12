@@ -6,14 +6,19 @@ function [ avaliacao, modeloSVM ] = svm( atributosTreinamento, rotulosTreinament
 
 
        fprintf('\nInício Partição #%d\n', numeroParticao);
+<<<<<<< HEAD
               
        %Verifica se já foi calculado anteriormente o processo de
        %treinamento, caso contenha zero no modeloCarregado SVM, diz que não
        %foi previamente carregado, necessitando assim efetuar o treinamento
+=======
+       tic;
+       
+>>>>>>> 65a29ca169df03507d250d93a7dd84b2bd4c5299
        if (isnumeric(modeloCarregadoSVM))
-            tic;
-            modeloSVM =  svmtrain(rotulosTreinamento, atributosTreinamento, '-c 1 -t 1 ');
-            fprintf('Tempo treinamento: %d\n', toc);
+            %Melhor linear -t 0 -c 0.01
+            %Melhor radial -t 2 -c 0.01 -g 0.01
+            modeloSVM =  svmtrain(rotulosTreinamento, atributosTreinamento, '-t 2 -c 1 -g 0.01 -q');
        else
            modeloSVM = modeloCarregadoSVM;
        end
@@ -31,9 +36,17 @@ function [ avaliacao, modeloSVM ] = svm( atributosTreinamento, rotulosTreinament
        %Mostra a acuracia na base de teste
        fprintf('Acuracia na base de teste: %f\n', mean(double(valorPrevistoTeste == rotulosTeste)) * 100);
        
+<<<<<<< HEAD
        %Efetua a Avaliação do Método SVM
        [avaliacao] = avaliar(valorPrevistoTeste, rotulosTeste);
+=======
+       tempo = toc;
        
-       fprintf('\Fim Partição #%d\n', numeroParticao);
+       fprintf('Tempo treinamento e validação: %d\n', tempo);
+       
+       [avaliacao] = avaliar(valorPrevistoTeste, rotulosTeste, tempo);
+>>>>>>> 65a29ca169df03507d250d93a7dd84b2bd4c5299
+       
+       fprintf('\nFim Partição #%d\n', numeroParticao);
 end
 
