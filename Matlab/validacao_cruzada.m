@@ -10,7 +10,7 @@ dadosAparticionar = horzcat(dadosNormalizados, rotulosNormalizados);
 
 dadosAparticionarNaiveBayes =  horzcat(dadosNaiveBayes, rotulosNormalizados);
 
-[dadosParticionados, dadosNaiveBayesParticionados] = particionar(dadosAparticionar, dadosNaiveBayes, numeroParticoes);
+[dadosParticionados, dadosNaiveBayesParticionados] = particionar(dadosAparticionar, dadosAparticionarNaiveBayes, numeroParticoes);
 
 % size(dadosParticionados)
 % size(dadosNaiveBayesParticionados)
@@ -220,7 +220,7 @@ while metodoClassificacao ~= 6
               rotulosTesteNB = dadosTesteNB(:, end);
               atributosTesteNB = dadosTesteNB(:, 1:end-1);
 
-             [avaliacao, modelosNB{i}] = naiveBayes(atributosTreinamentoNB, rotulosTreinamento, atributosTesteNB, rotulosTeste, i);
+             [avaliacao, modelosNB{i}] = naiveBayes(atributosTreinamentoNB, rotulosTreinamentoNB, atributosTesteNB, rotulosTesteNB, i);
             
               avaliacoesNaiveBayes = vertcat(avaliacoesNaiveBayes, avaliacao);
             
