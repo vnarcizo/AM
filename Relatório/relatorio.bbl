@@ -54,11 +54,23 @@ R.~Kohavi and B.~Becker. (1996) Adult data set. [Online]. Available:
   \url{http://archive.ics.uci.edu/ml/datasets/Adult}
 \BIBentrySTDinterwordspacing
 
+\bibitem{cybenko}
+\BIBentryALTinterwordspacing
+Arrumar. [Online]. Available:
+  \url{ftp://ftp.dca.fee.unicamp.br/pub/docs/vonzuben/theses/lnunes_mest/cap2.pdf}
+\BIBentrySTDinterwordspacing
+
+\bibitem{praticalSVM}
+\BIBentryALTinterwordspacing
+C.-C. Chang and C.-J. Lin. (2010) A practical guide to support vector
+  classification. [Online]. Available:
+  \url{http://www.moodle.ufscar.br/file.php/4639/aula09/leitura/SVM_PracticalGuide.pdf}
+\BIBentrySTDinterwordspacing
+
 \bibitem{libsvm}
-C.-C. Chang and C.-J. Lin, ``{LIBSVM}: A library for support vector machines,''
-  \emph{ACM Transactions on Intelligent Systems and Technology}, vol.~2, pp.
-  27:1--27:27, 2011, software available at
-  \url{http://www.csie.ntu.edu.tw/~cjlin/libsvm}.
+------, ``{LIBSVM}: A library for support vector machines,'' \emph{ACM
+  Transactions on Intelligent Systems and Technology}, vol.~2, pp. 27:1--27:27,
+  2011, software available at \url{http://www.csie.ntu.edu.tw/~cjlin/libsvm}.
 
 \bibitem{bias}
 D.~F. Gordon and M.~Desjardins, ``Evaluation and selection of biases in machine

@@ -10,60 +10,57 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: IEEEabrv.bib
 Database file #2: biblio.bib
 Warning--entry type for "bias" isn't style-file defined
---line 47 of file biblio.bib
-Warning--entry type for "bias-variance" isn't style-file defined
---line 54 of file biblio.bib
-Warning--entry type for "classifiers" isn't style-file defined
 --line 60 of file biblio.bib
+Warning--entry type for "bias-variance" isn't style-file defined
+--line 67 of file biblio.bib
+Warning--entry type for "classifiers" isn't style-file defined
+--line 73 of file biblio.bib
 Warning--entry type for "analysis" isn't style-file defined
---line 66 of file biblio.bib
+--line 79 of file biblio.bib
 -- IEEEtran.bst version 1.13 (2008/09/30) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 
 Done.
-<<<<<<< HEAD
-=======
-You've used 10 entries,
+You've used 12 entries,
             4039 wiz_defined-function locations,
-            1254 strings with 16291 characters,
-and the built_in function-call counts, 4299 in all, are:
-= -- 332
-> -- 71
+            1263 strings with 16580 characters,
+and the built_in function-call counts, 4966 in all, are:
+= -- 379
+> -- 84
 < -- 13
-+ -- 35
-- -- 14
-* -- 161
-:= -- 749
-add.period$ -- 20
-call.type$ -- 10
-change.case$ -- 11
++ -- 41
+- -- 17
+* -- 179
+:= -- 868
+add.period$ -- 23
+call.type$ -- 12
+change.case$ -- 12
 chr.to.int$ -- 33
-cite$ -- 10
-duplicate$ -- 334
-empty$ -- 392
-format.name$ -- 18
-if$ -- 921
+cite$ -- 12
+duplicate$ -- 388
+empty$ -- 458
+format.name$ -- 22
+if$ -- 1063
 int.to.chr$ -- 0
-int.to.str$ -- 10
-missing$ -- 75
-newline$ -- 63
-num.names$ -- 10
-pop$ -- 224
+int.to.str$ -- 12
+missing$ -- 90
+newline$ -- 73
+num.names$ -- 12
+pop$ -- 276
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 335
+skip$ -- 386
 stack$ -- 0
 substring$ -- 84
-swap$ -- 217
+swap$ -- 248
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 10
+type$ -- 12
 warning$ -- 0
-while$ -- 14
-width$ -- 12
-write$ -- 111
->>>>>>> a2c1f67c9b9da1a67f1b4261c840aa77ed1fb345
+while$ -- 16
+width$ -- 14
+write$ -- 129
 (There were 4 warnings)
