@@ -70,13 +70,14 @@ Z = reduzir_atributos(dadosNormalizados, 3);
 pos = find(rotulosNormalizados == 1);
 neg = find(rotulosNormalizados == 0);
 figure; hold on;
-
-scatter3(Z(pos(1:10000), 1), Z(pos(1:10000), 2), Z(pos(1:10000), 3), 'b+');
-scatter3(Z(neg(1:10000), 1), Z(neg(1:10000), 2), Z(neg(1:10000), 3), 'ro');
+namostras = 5000;
+scatter3(Z(pos(1:namostras), 1), Z(pos(1:namostras), 2), Z(pos(1:namostras), 3), 'b+');
+scatter3(Z(neg(1:namostras), 1), Z(neg(1:namostras), 2), Z(neg(1:namostras), 3), 'ro');
+legend('>=50k','<50k');
 
 %plot(Z(neg(1:10000), 1), Z(neg(1:10000), 2), 'ko', 'MarkerFaceColor', 'r', 'MarkerSize', 7);
 %plot(Z(pos(1:10000), 1), Z(pos(1:10000), 2), 'b+','LineWidth', 2, 'MarkerSize', 7);
-title('Plot 2D da base de dados');
+title('Plot 3D da base de dados');
 hold off;
 dadosNaiveBayes(linhasAusentes, :) = [];
 dadosNaiveBayes(:, union(colunasAusentes, indiceNumericos)) = [];
