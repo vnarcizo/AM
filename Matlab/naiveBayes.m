@@ -35,12 +35,8 @@ fprintf('Tempo processamento: %f\n', tempo);
 
 fprintf('Fim Partição #%d\n\n', numeroParticao);
 
-<<<<<<< HEAD
 %Efetua a avaliação
-    avaliacao = avaliar(valorPrevistoTeste, rotulosTeste, toc);
-=======
 avaliacao = avaliar(valorPrevistoTeste, rotulosTeste, tempo);
->>>>>>> 65a29ca169df03507d250d93a7dd84b2bd4c5299
 modeloNB = 0;
 
 end

@@ -17,5 +17,12 @@
 slprj/
 
 *.log
+*.bak
 *.aux
+*.bbl
+*.blg
+*.idx
+*.toc
 *.out
+*~
+*.pdf

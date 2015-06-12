@@ -77,7 +77,6 @@ end
 dadosNaiveBayes(linhasAusentes, :) = [];
 dadosNaiveBayes(:, union(colunasAusentes, indiceNumericos)) = [];
 
-<<<<<<< HEAD
 %% ================= Parte 4: Particionamento das Amostras ====================
 % Foi realizado o particionamento das amostras utilizando o método de
 % Validação cruzada com 10 partições
