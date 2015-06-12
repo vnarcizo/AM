@@ -1,4 +1,9 @@
 function [ atributosNormalizados ] = normalizarEscala( atributos )
+
+%% Normalização por Escala 
+%   [ atributosNormalizados ] = normalizarEscala( atributos )
+
+
 %Calcula os minimos
 minimos = min(atributos);
 

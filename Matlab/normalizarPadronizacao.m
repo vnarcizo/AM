@@ -1,4 +1,8 @@
 function [ atributosNormalizados ] = normalizarPadronizacao( atributos )
+
+%% Normalização por Padronização 
+%   [ atributosNormalizados ] = normalizarPadronizacao( atributos )
+
 %Calcula a media
 mu = mean(atributos);
 

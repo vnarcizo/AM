@@ -1,9 +1,15 @@
 function [ avaliacao,  theta ] = ...
     regressaoLogistica( atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, ...
                         hipoteseRegressao, utilizarRegularizacao, lambda, numeroParticao, melhorHipoteseRegressao ) 
+                    
+%% Efetua a Regressão logistica
+%  [ avaliacao,  theta ] = ...
+%  regressaoLogistica( atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, ...
+%  hipoteseRegressao, utilizarRegularizacao, lambda, numeroParticao, melhorHipoteseRegressao )                   
 
 fprintf('\nInício Partição #%d\n', numeroParticao);
 
+%Verifica qual o tipo da hipotese para gerar atributos caracteristicos.
 switch hipoteseRegressao
     case 1
         atributosExpandidos = atributosTreinamento;
@@ -30,17 +36,27 @@ tic;
 tempo = toc;
 fprintf('Tempo minimização: %f\n', tempo);
 
+%Mostra o custo mínimo obtido através da fminunc
 fprintf('Custo mínimo encontrado: %f\n', J);
 
+%Efetua a prediçao da base de treinamento
 valorPrevisto = RL_predicao(theta, atributosExpandidos);
 
+%Mostra a acuracia do método na base de treinamento
 fprintf('Acuracia na base de treinamento: %f\n', mean(double(valorPrevisto == rotulosTreinamento)) * 100);
 
+%Efetua a prediçao da base de Teste
 valorPrevistoTeste = RL_predicao(theta, atributosTesteExpandidos);
 
+%Mostra a acuracia do método na base de Teste
 fprintf('Acuracia na base de teste: %f\n', mean(double(valorPrevistoTeste == rotulosTeste)) * 100);
 
+<<<<<<< HEAD
+%Efetua a avaliação do método da Regressão Logistica
+[avaliacao] = avaliar(valorPrevistoTeste, rotulosTeste);
+=======
 [avaliacao] = avaliar(valorPrevistoTeste, rotulosTeste, tempo);
+>>>>>>> 65a29ca169df03507d250d93a7dd84b2bd4c5299
 
 fprintf('Fim Partição #%d\n\n', numeroParticao);
 

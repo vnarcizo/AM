@@ -1,4 +1,9 @@
 function [ matrizBinaria, categorias, indiceAusente ] = pivotMatrizBinaria( atributo )
+
+%% Efetua a transformação de Atributos Categoricos em Binarios
+%  [ matrizBinaria, categorias, indiceAusente ] = pivotMatrizBinaria( atributo )
+
+
 % tic;
 %   Categoriza os valores do atributo fornecido
 atributoCategorizado = categorical(atributo);
