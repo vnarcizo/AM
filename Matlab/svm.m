@@ -5,7 +5,7 @@ function [ avaliacao, modeloSVM ] = svm( atributosTreinamento, rotulosTreinament
        if (isnumeric(modeloCarregadoSVM))
             %Melhor linear -t 0 -c 0.01
             %Melhor radial -t 2 -c 0.01 -g 0.01
-            modeloSVM =  svmtrain(rotulosTreinamento, atributosTreinamento, '-t 2 -c 0.1 -g 1');
+            modeloSVM =  svmtrain(rotulosTreinamento, atributosTreinamento, '-t 2 -c 1 -g 0.01 -q');
        else
            modeloSVM = modeloCarregadoSVM;
        end
