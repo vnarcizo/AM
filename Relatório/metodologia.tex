@@ -6,13 +6,15 @@ Para avaliação do poder de classificação de cada método aplicou-se as medid
 
 A fim de verificar a possibilidade de superajustamento ou subajustamento, gerou-se também os gráficos das curvas de aprendizando, realizando os treinamento com partições incrementais, iniciando com 1 partição e finalizando com 9.
 
-Apresenta-se aqui os parâmetros selecionados, a fim de possibilitar a reprodução dos resultados obtidos em cada método:
+Para este relatório, utilizou-se normalização por padronização para todos os testes.
+
+Apresentam-se aqui os parâmetros selecionados, a fim de possibilitar a reprodução dos resultados obtidos em cada método:
 
 \subsection{KNN}
 
 O KNN \emph{(K-vizinhos mais próximos)} é um método baseado em distâncias que consiste em selecionar os K vizinhos do conjunto de treinamento menos distante da amostra de teste, e por distante entende-se, que apresente a menor diferença entre os atributos.
 
-O único parâmetro do KNN é o valor K, para o qual testou-se com os valores: 1, 3, 5, 7, 11, 21, 51. 
+O único parâmetro do KNN é o valor K, para o qual testou-se com os valores: 1, 3, 5, 7, 11, 21, 51. Para este relatório, selecionou-se o K = 51.
 
 \subsection{Regressão logística}
 
@@ -28,7 +30,7 @@ Implementou-se 3 variações das hipóteses:
 
 A regressão logística ainda pode utilizar um parâmetro de regularização a fim de evitar os super ajustamento ao conjunto de treinamento, balançeando a complexidade da hipótese.
 
-Para seleção dos parâmetros testou-se, através de busca em grid, as 3 hipóteses, com parâmetro \(\lambda\) = 0, ou seja, sem regularização, e com a regularização variando de \(10^0\) a \(10^3\) 
+Para seleção dos parâmetros testou-se, através de busca em grid, as 3 hipóteses, com parâmetro \(\lambda\) = 0, ou seja, sem regularização, e com a regularização variando de \(10^0\) a \(10^3\) com passo 1 na potência. Para este relatório, selecionou-se a hipótese linear com \(\lambda\) = 1.
 
 \subsection{Redes Neurais Artificiais}
 
