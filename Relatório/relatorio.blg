@@ -10,18 +10,12 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: IEEEabrv.bib
 Database file #2: biblio.bib
 Warning--entry type for "bias" isn't style-file defined
-<<<<<<< HEAD
---line 15 of file biblio.bib
-=======
 --line 47 of file biblio.bib
->>>>>>> 8af3a4bdf10259642ad0088f6e6caac878065886
 -- IEEEtran.bst version 1.13 (2008/09/30) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 
 Done.
-<<<<<<< HEAD
-=======
 You've used 7 entries,
             4039 wiz_defined-function locations,
             1243 strings with 16038 characters,
@@ -63,5 +57,4 @@ warning$ -- 0
 while$ -- 11
 width$ -- 8
 write$ -- 90
->>>>>>> 8af3a4bdf10259642ad0088f6e6caac878065886
 (There was 1 warning)

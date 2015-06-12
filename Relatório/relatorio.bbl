@@ -42,8 +42,6 @@ A.~Dahir. (2014) The importance of estimating the national income of a country
   \url{http://pt.slideshare.net/delmujahid/question-2-40726032}
 \BIBentrySTDinterwordspacing
 
-<<<<<<< HEAD
-=======
 \bibitem{base}
 \BIBentryALTinterwordspacing
 M.~Lichman, ``{UCI} machine learning repository,'' 2013. [Online]. Available:
@@ -62,7 +60,6 @@ C.-C. Chang and C.-J. Lin, ``{LIBSVM}: A library for support vector machines,''
   27:1--27:27, 2011, software available at
   \url{http://www.csie.ntu.edu.tw/~cjlin/libsvm}.
 
->>>>>>> 8af3a4bdf10259642ad0088f6e6caac878065886
 \bibitem{bias}
 D.~F. Gordon and M.~Desjardins, ``Evaluation and selection of biases in machine
   learning,'' 1995.
