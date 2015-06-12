@@ -21,6 +21,12 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
+\bibitem{trabalho}
+\BIBentryALTinterwordspacing
+T.~A. Almeida. (2015) Predição de renda anual. [Online]. Available:
+  \url{http://www.moodle.ufscar.br/file.php/4639/projeto/grupos/P1/P1.pdf}
+\BIBentrySTDinterwordspacing
+
 \bibitem{importance}
 \BIBentryALTinterwordspacing
 P.~Chetty. (2011) Importance of prediction of income of customers to banks.
@@ -35,6 +41,24 @@ A.~Dahir. (2014) The importance of estimating the national income of a country
   especially in the developing countries. [Online]. Available:
   \url{http://pt.slideshare.net/delmujahid/question-2-40726032}
 \BIBentrySTDinterwordspacing
+
+\bibitem{base}
+\BIBentryALTinterwordspacing
+M.~Lichman, ``{UCI} machine learning repository,'' 2013. [Online]. Available:
+  \url{http://archive.ics.uci.edu/ml}
+\BIBentrySTDinterwordspacing
+
+\bibitem{base2}
+\BIBentryALTinterwordspacing
+R.~Kohavi and B.~Becker. (1996) Adult data set. [Online]. Available:
+  \url{http://archive.ics.uci.edu/ml/datasets/Adult}
+\BIBentrySTDinterwordspacing
+
+\bibitem{libsvm}
+C.-C. Chang and C.-J. Lin, ``{LIBSVM}: A library for support vector machines,''
+  \emph{ACM Transactions on Intelligent Systems and Technology}, vol.~2, pp.
+  27:1--27:27, 2011, software available at
+  \url{http://www.csie.ntu.edu.tw/~cjlin/libsvm}.
 
 \bibitem{bias}
 D.~F. Gordon and M.~Desjardins, ``Evaluation and selection of biases in machine

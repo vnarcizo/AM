@@ -36,11 +36,14 @@ As Redes Neurais Artificias, utilizadas foram os Perceptrons Multi-camadas, que 
 
 Entre os parâmetros a serem ajustados, existe a taxa de aprendizagem \(\alpha\), o número de camadas o número de neurônios de cada camada.
 
-\subsection{Máquinas de vetores de suporte}
+\subsection{SVM - Máquinas de vetores de suporte}
 
-O SVM foi implementado utilizando-se a biblioteca LIBSVM colocar url, 
+O SVM foi implementado utilizando-se a biblioteca LIBSVM \cite{libsvm}
 
-Os parâmetros incluem a seleção do kernel, dos coeficientes C (para os kernel linear, radial e polinomial) e \(\gamma\) (para os kernel radial e polinomial)
+Os parâmetros incluem a seleção do kernel, dos coeficientes \emph{C}, que representa o parâmetro de custo (para os kernel linear, radial e polinomial) e \(\gamma\) (para os kernel radial e polinomial).
+
+Testou-se o SVM com kernel linear, com \emph{C} com valores de \(10^{-4}\) a \(10^2\), com passo incremental 1 na potência. Para o kernel radial e polinomial, testou-se através de busca em grid, com \emph{C} variando de \(10^{-4}\) a \(10^2\), e \(\gamma\) variando de \(10^{-2}\) a \(10^2\) ambos com passo incremental 1 na potência.
+
 
 \subsection{Naive Bayes}
 
