@@ -24,6 +24,6 @@ function [ avaliacao, modeloSVM ] = svm( atributosTreinamento, rotulosTreinament
        
        [avaliacao] = avaliar(valorPrevistoTeste, rotulosTeste, tempo);
        
-       fprintf('\Fim Partição #%d\n', numeroParticao);
+       fprintf('\nFim Partição #%d\n', numeroParticao);
 end
 
