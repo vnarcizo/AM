@@ -76,7 +76,14 @@ if strcmpi(plotar, 'S')
 end
 dadosNaiveBayes(linhasAusentes, :) = [];
 dadosNaiveBayes(:, union(colunasAusentes, indiceNumericos)) = [];
-validacao_cruzada(dadosNormalizados, dadosNaiveBayes, rotulosNormalizados);
+op = input('Deseja fazer as curvas de aprendizado? (S/N)\n', 's');
+if strcmpi(op, 'S')
+    curva_aprendizado(dadosNormalizados, dadosNaiveBayes, rotulosNormalizados);
+end
+op = input('Deseja rodar a validação cruzada? (S/N)\n', 's');
+if strcmpi(op, 'S')
+    validacao_cruzada(dadosNormalizados, dadosNaiveBayes, rotulosNormalizados);
+end
 %% Finalizacao
 %clear; %Descomentar na versao final
 %close all;
