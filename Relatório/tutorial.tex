@@ -1,0 +1,17 @@
+\section{Apêndice A: Tutorial para execução e reprodução de resultados}
+
+Todos os métodos exibem informações como: número da partição, nome da tarefa executada, tempo de execução, acurácia na partição de treinamento e acurácia na partição de teste e ao final da execução exibe um agregado dos resultados obtidos, bem como medidas de desempenho adicional.
+
+Os métodos Regressão Logística, Redes Neurais Artificiais, Máquinas de vetores de suporte, permitem o carregamento dos modelos previamente computados, a fim de se eliminar o tempo de treinamento. Os modelos que podem ser carregados são os modelos em que se obteve o melhor desempenho e portanto, os que estão documentados nas seções anteriores deste relatório.
+
+Para a execução é necessário executar o arquivo principal projetoRenda.m
+
+A primeira opção solicitada é a visualização dos dados em dimensão reduzida, digite a opção S para visualizar ou N para não visualizar.
+
+Um menu solicitará qual método deverá ser executado. Digite 0 para executar todos os métodos ou 6 para sair.
+
+Caso digite 1, os parâmetros adicionais do método do KNN serão solicitados, no caso o valor K, insira o valor K desejado e o método inciará sua execução para todas as partições. O valor de K selecionado para reproduzir os resultados é K = 51.
+
+Caso digite 2, os parâmetros adicionais do método da Regressão Logística serão soliticitados, um submenu solicitará qual a hipótese a ser utilizada, para se reproduzir os dados a selecionada dever ser 1 - Hipótese Linear, o próximo passo é escolher se deve carregar uma hipótese previamente calculada, digite S para carregar a hipótese computada para geração do relatório, ou N para computar novamente. Caso deseje-se computar novamente, deve-se escolher se o fator de regularização será utilizado, digite S para utilizar ou N para não utilizar, para se reproduzir os resultados digite S, se escolhido utilizar o fator de regularização, insira o valor do fator desejado, a fim de reproduzir os resultados, escolha o valor 100. 
+
+Caso digite 3, os parâmetros adicionais do método de Redes Neurais Artificiais serão solicitados.

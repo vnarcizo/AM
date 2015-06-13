@@ -30,7 +30,7 @@ Implementou-se 3 variações das hipóteses:
 
 A regressão logística ainda pode utilizar um parâmetro de regularização a fim de evitar os super ajustamento ao conjunto de treinamento, balançeando a complexidade da hipótese.
 
-Para seleção dos parâmetros testou-se, através de busca em grid, as 3 hipóteses, com parâmetro \(\lambda\) = 0, ou seja, sem regularização, e com a regularização variando de \(10^0\) a \(10^3\) com passo 1 na potência. Para este relatório, selecionou-se a hipótese linear com \(\lambda\) = 1.
+Para seleção dos parâmetros testou-se, através de busca em grid, as 3 hipóteses, com parâmetro \(\lambda\) = 0, ou seja, sem regularização, e com a regularização variando de \(10^0\) a \(10^3\) com passo 1 na potência. Para este relatório, selecionou-se a hipótese linear com \(\lambda\) = 100.
 
 \subsection{Redes Neurais Artificiais}
 
@@ -48,7 +48,7 @@ Os parâmetros incluem a seleção do kernel, dos coeficientes \emph{C}, que rep
 
 Testou-se o SVM com kernel linear, com \emph{C} com valores de \(10^{-4}\) a \(10^2\), com passo incremental 1 na potência. Para o kernel radial e polinomial, testou-se através de busca em grid, com \emph{C} variando de \(10^{-4}\) a \(10^2\), e \(\gamma\) variando de \(10^{-2}\) a \(10^2\) ambos com passo incremental 1 na potência.
 
-Para este relatório selecionou-se, C = 0.01 para o kernel linear e C = 1 e \(\gamma\) = 0.01
+Para este relatório selecionou-se, C = 0.01 para o kernel linear e C = 1 e \(\gamma\) = 0.01 para o kernel radial.
 
 \subsection{Naive Bayes}
 
