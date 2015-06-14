@@ -41,9 +41,9 @@ As Redes Neurais Artificias utilizadas foram os Perceptrons Multi-camadas que co
 
 Entre os parâmetros a serem ajustados, existe a taxa de aprendizagem \(\alpha\), o número de camadas e o número de neurônios em cada camada.
 
-Para este relatório selecionou-se \(\alpha\) = 0,06 e uma camada intermediária com 50 neurônios. Pode-se observar na literatura que somente uma camada intermediária é sufuciente para a obtenção do classificador, pois através do teorema de Cybenko a RNA tem a caracteristica de aproximador universal.\cite{cybenko}. Dado a quantidade de atributos pela quantidade de amostras, não foi viável colocar mais uma camada intermediária, pois afetaria muito o tempo de treinamento.
+Para este relatório selecionou-se \(\alpha\) = 0,06 e uma camada intermediária com 50 neurônios. Pode-se observar na literatura que somente uma camada intermediária é sufuciente para a obtenção do classificador, pois através do teorema de Cybenko a RNA tem a característica de aproximador universal.\cite{cybenko}. Dado a quantidade de atributos pela quantidade de amostras, não foi viável colocar mais uma camada intermediária, pois afetaria consideravelmente o tempo de treinamento.
 
-Variou-se os parametros de taxa de aprendizagem de 0,01 até 0,1 com incremento de 0,01. Tendo o melhor desempenho e velocidade de treinamento com 0,06. A quantidade de neurônios na camada intermediária foram ajustadas com 30, 50, 100, 150, 200 e 250. Para este relatório selecinou-se 50 neurônios.
+Variou-se os parametros de taxa de aprendizagem de \(10^{-2}\) até \(10^{-1}\) com incremento de \(10^{-2}\). Obtendo-se o melhor desempenho e velocidade de treinamento com 0,06. A quantidade de neurônios na camada intermediária foram ajustadas com 30, 50, 100, 150, 200 e 250. Para este relatório selecinou-se 50 neurônios.
 
 \subsection{SVM - Máquinas de vetores de suporte}
 
@@ -57,5 +57,5 @@ Para este relatório selecionou-se, C = 0.01 para o kernel linear e C = 1 e \(\g
 
 \subsection{Naive Bayes}
 
-O método Naive-Bayes se baseia nas probabilidades de ocorrência de cada classe, e de cada atributo individualmente sabendo a classe em que o mesmo se encontra. O método Naive-Bayes se baseia apenas nas probabilidades, portanto não possuí parâmetros a serem ajustados. Aplicou-se a suavização de Laplace com o propósito de tratar possíveis cestas de valor zero.
+O método Naive Bayes se baseia nas probabilidades de ocorrência de cada classe, e de cada atributo individualmente sabendo a classe em que o mesmo se encontra. O método Naive Bayes se baseia apenas nas probabilidades, portanto não possuí parâmetros a serem ajustados. Aplicou-se a suavização de Laplace com o propósito de tratar possíveis cestas de valor zero.
 
