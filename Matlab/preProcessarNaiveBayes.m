@@ -2,6 +2,7 @@ function [ dadosNaiveBayes ] = preProcessarNaiveBayes(dadosPreprocessados, indic
 
 %% Pré-Processamento do Naive Bayes
 %  [ dadosNaiveBayes ] = preProcessarNaiveBayes(dadosPreprocessados, indiceNumericos )
+% Efetua e expanção dos atrubutos em 10 cestas
 
     numeroCestas = 10;
     dadosNumericos = dadosPreprocessados(:, indiceNumericos);
