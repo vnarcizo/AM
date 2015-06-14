@@ -1,10 +1,10 @@
 \section{Metodologia experimental}
 
-Particionou-se a base de dados utilizando-se a metodologia de validação cruzada \emph{(k-fold cross-validation)}, visto que os dados não são sensíveis ao tempo. Utilizou-se 10 partições, sendo 9 delas para o treinamento e 1 para a validação, dessa forma os conjuntos de treinamento contém 40653 amostras e os conjuntos de teste 4517 escolhidas aleatóriamente.
+Particionou-se a base de dados utilizando-se a metodologia de validação cruzada \emph{(k-fold cross-validation)}, visto que os dados não são sensíveis ao tempo. Utilizou-se 10 partições, sendo 9 delas para o treinamento e 1 para a validação, dessa forma os conjuntos de treinamento contém 40653 amostras e os conjuntos de teste 4517 escolhidas aleatoriamente.
 
 Para avaliação do poder de classificação de cada método aplicou-se as medidas mais utilizadas, como acurácia, F-medida, precisão e revocação, contabilizando também o tempo de treinamento e teste de cada partição.
 
-A fim de verificar a possibilidade de superajustamento ou subajustamento, gerou-se também os gráficos das curvas de aprendizando, realizando os treinamento com partições incrementais, iniciando com 1 partição e finalizando com 9.
+A fim de verificar a possibilidade de superajustamento ou subajustamento, gerou-se também os gráficos das curvas de aprendizado, realizando os treinamento com partições incrementais, iniciando com 1 partição e finalizando com 9.
 
 Para este relatório, utilizou-se normalização por padronização para todos os testes.
 
@@ -12,7 +12,7 @@ Apresentam-se aqui os parâmetros selecionados, a fim de possibilitar a reprodu�
 
 \subsection{KNN}
 
-O KNN \emph{(K-vizinhos mais próximos)} é um método baseado em distâncias que consiste em selecionar os K vizinhos do conjunto de treinamento menos distante da amostra de teste, e por distante entende-se, que apresente a menor diferença entre os atributos.
+O KNN \emph{(K-vizinhos mais próximos)} é um método baseado em distâncias que consiste em selecionar os K vizinhos do conjunto de treinamento menos distantes da amostra de teste, e por distante entende-se o que apresenta a menor diferença entre os atributos.
 
 O único parâmetro do KNN é o valor K, para o qual testou-se com os valores: 1, 3, 5, 7, 11, 21, 51. Para este relatório, selecionou-se o K = 51.
 

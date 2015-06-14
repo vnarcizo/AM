@@ -22,7 +22,6 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
     % procedimento, 0 para executar todos os métodos de uma unica vez.
 
     while metodoClassificacao ~= 6
-        fprintf('0 - Todos\n')
         fprintf('1 - KNN\n')
         fprintf('2 - Regressão logística\n')
         fprintf('3 - Redes Neurais Artificiais\n')
@@ -53,14 +52,14 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
 
         %Para o Knn devemos escolher quantos visinhos serão avaliados pelo
         %método
-        if metodoClassificacao == 0 || metodoClassificacao == 1
+        if metodoClassificacao == 1
             k = input('Qual o valor de K? (Número de vizinhos mais próximos): \n');
         end
 
         %Para a Regressão Logistica devemos escolher qual o tipo da Hipótese
         %que deverá ser aplicado e se desejará efetuar o procedimento com
         %Regularização
-        if metodoClassificacao == 0 || metodoClassificacao == 2
+        if metodoClassificacao == 2
             fprintf('1 - Hipótese linear\n')
             fprintf('2 - Hipótese quadrática\n')
             fprintf('3 - Hipótese cúbica\n')
@@ -76,7 +75,7 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
         end
 
         %Para RNA devemos escolher com quantos neuronios iremos treinar a rede
-        if metodoClassificacao == 0 || metodoClassificacao == 3 
+        if metodoClassificacao == 3 
 
            qtdNeuronios = 50;
 
@@ -121,7 +120,7 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
 
             % Regressão Logistica - Executar a obtenção da Hipotese e a
             % avaliação dos dados de treinamento
-            if metodoClassificacao == 0 || metodoClassificacao == 2
+            if metodoClassificacao == 2
 
                 [ ~, hipotesesRegressao] = ...
                 regressaoLogistica(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste,...
@@ -148,13 +147,13 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
                 erroTreinamentoRL= (sum(valorPrevistoTreinamento ~= rotulosTreinamento)/size(rotulosTreinamento,1))*100;
                 erroTesteRL = (sum(valorPrevistoTeste ~= rotulosTeste)/size(rotulosTeste,1))*100;
                     
-                 curvaRL = vertcat(curvaRL, [erroTreinamentoRL erroTesteRL]);
+                curvaRL = vertcat(curvaRL, [erroTreinamentoRL erroTesteRL]);
                
             end
 
             % RNA - Executar a obtenção dos Thetas e efetua a 
             % avaliação dos dados de treinamento
-            if metodoClassificacao == 0 || metodoClassificacao == 3
+            if metodoClassificacao == 3
 
                  [mTheta1, mTheta2, avaliacao] = RNA_treinamento(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste,i,qtdNeuronios,100);
              
@@ -178,7 +177,7 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
 
             % SVM - Executar a obtenção do Modelo e efetuar a  
             % avaliação dos dados de treinamento
-            if metodoClassificacao == 0 || metodoClassificacao == 4
+            if metodoClassificacao == 4
                  melhorModeloSVM = 0;
                 [avaliacao, modeloSVM] = svm(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, i,melhorModeloSVM);
                 
@@ -188,7 +187,7 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
                 
                  erroTreinamentoSVM = (sum(valorPrevisto ~= rotulosTreinamento)/size(rotulosTreinamento,1))*100;
                  erroTesteSVM = (sum(valorPrevistoTeste ~= rotulosTeste)/size(rotulosTeste,1))*100;
-                    
+
                  curvaSVM = vertcat(curvaSVM, [erroTreinamentoSVM erroTesteSVM]);
                 
             end
@@ -196,7 +195,7 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
 
             % Naive Bayes - Executar a obtenção das probabilidades e efetuar 
             % avaliação dos dados de treinamento
-            if metodoClassificacao == 0 || metodoClassificacao == 5
+            if metodoClassificacao == 5
                   dadosTreinamentoNB = dadosNaiveBayesParticionados(indicesTreinamento,:,:);
                   dadosTreinamentoNB = reshape(dadosTreinamentoNB, size(dadosTreinamentoNB, 1)*size(dadosTreinamentoNB, 2), size(dadosTreinamentoNB, 3));
 
@@ -227,7 +226,7 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
 
         
          % KNN - Executar o método de avaliação
-            if metodoClassificacao == 0 || metodoClassificacao == 1
+            if metodoClassificacao == 1
                 figure;
                  plot(curvaKNN);
                  axis([1, 9, 0, 30]);
@@ -238,7 +237,7 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
 
             % Regressão Logistica - Executar a obtenção da Hipotese e a
             % avaliação dos dados de treinamento
-            if metodoClassificacao == 0 || metodoClassificacao == 2
+            if metodoClassificacao == 2
                 figure;
                  plot(curvaRL);
                  axis([1, 9, 0, 30]);
@@ -248,7 +247,7 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
 
             % RNA - Executar a obtenção dos Thetas e efetua a 
             % avaliação dos dados de treinamento
-            if metodoClassificacao == 0 || metodoClassificacao == 3
+            if metodoClassificacao == 3
 
                 figure;
                  plot(curvaRNA);
@@ -260,7 +259,7 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
 
             % SVM - Executar a obtenção do Modelo e efetuar a  
             % avaliação dos dados de treinamento
-            if metodoClassificacao == 0 || metodoClassificacao == 4
+            if metodoClassificacao == 4
             
                  figure;
                  plot(curvaSVM);
@@ -271,7 +270,7 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
 
             % Naive Bayes - Executar a obtenção das probabilidades e efetuar 
             % avaliação dos dados de treinamento
-            if metodoClassificacao == 0 || metodoClassificacao == 5
+            if metodoClassificacao == 5
              
                  figure;
                  plot(curvaNaive);
