@@ -123,31 +123,33 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
             % avaliação dos dados de treinamento
             if metodoClassificacao == 0 || metodoClassificacao == 2
 
-                 %Verifica se deseja carregar a hipotese previamente calculada
-                 if (strcmpi(carregarHipotese,'N'))
-                            [ avaliacao, hipotesesRegressao{i}] = ...
-                            regressaoLogistica(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste,...
-                            hipoteseRegressao, utilizarRegularizacao, lambda, i, 0 );   
-                 else
-                     switch hipoteseRegressao
-                            case 1
-                                atributosTesteExpandidos = atributosTeste;
-                            case 2
-                                atributosTesteExpandidos = RL_expandeAtributosPolinomial(atributosTeste, 2);
-                            case 3
-                                atributosTesteExpandidos = RL_expandeAtributosPolinomial(atributosTeste, 3);
-                     end
+                [ ~, hipotesesRegressao] = ...
+                regressaoLogistica(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste,...
+                hipoteseRegressao, utilizarRegularizacao, lambda, i, 0 );   
 
-                        %Efetua a predição para os atributos de teste
-                        valorPrevistoTeste = RL_predicao(melhorHipoteseRegressao, atributosTesteExpandidos);
+                switch hipoteseRegressao
+                    case 1
+                        atributosTesteExpandidos = atributosTeste;
+                        atributosTreinamentoExpandidos = atributosTreinamento;
+                    case 2
+                        atributosTesteExpandidos = RL_expandeAtributosPolinomial(atributosTeste, 2);
+                        atributosTreinamentoExpandidos =  RL_expandeAtributosPolinomial(atributosTreinamento, 2);
+                    case 3
+                        atributosTesteExpandidos = RL_expandeAtributosPolinomial(atributosTeste, 3);
+                        atributosTreinamentoExpandidos =  RL_expandeAtributosPolinomial(atributosTreinamento, 3);
+                end
 
-                        %Chama o método Avaliar que faz todo o processo de
-                        %geração de indices para avaliação do método
-                        avaliacao = avaliar(valorPrevistoTeste,valorPrevistoTeste);
-                 end
-
-                   %Faz a concatenação das avaliações de todas as partições
-                   avaliacoes = vertcat(avaliacoes, avaliacao);
+                %Efetua a predição para os atributos de teste
+                valorPrevistoTreinamento = RL_predicao(hipotesesRegressao, atributosTreinamento);
+                
+                %Efetua a predição para os atributos de teste
+                valorPrevistoTeste = RL_predicao(hipotesesRegressao, atributosTesteExpandidos);
+                
+                erroTreinamentoRL= (sum(valorPrevistoTreinamento ~= rotulosTreinamento)/size(rotulosTreinamento,1))*100;
+                erroTesteRL = (sum(valorPrevistoTeste ~= rotulosTeste)/size(rotulosTeste,1))*100;
+                    
+                 curvaRL = vertcat(curvaRL, [erroTreinamentoRL erroTesteRL]);
+               
             end
 
             % RNA - Executar a obtenção dos Thetas e efetua a 
