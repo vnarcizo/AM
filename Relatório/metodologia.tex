@@ -4,9 +4,9 @@ Particionou-se a base de dados utilizando-se a metodologia de validação cruzad
 
 Para avaliação do poder de classificação de cada método aplicou-se as medidas mais utilizadas, como acurácia, F-medida, precisão e revocação, contabilizando também o tempo de treinamento e teste de cada partição.
 
-A fim de verificar a possibilidade de superajustamento ou subajustamento, gerou-se também os gráficos das curvas de aprendizado, realizando os treinamento com partições incrementais, iniciando com 1 partição e finalizando com 9.
+A fim de verificar a possibilidade de superajustamento ou subajustamento, gerou-se também os gráficos das curvas de aprendizado, realizando os treinamentos com partições incrementais, iniciando com 1 partição e finalizando com 9.
 
-Para este relatório, utilizou-se normalização por padronização para todos os testes.
+Para este relatório, utilizou-se normalização por padronização em todos os testes.
 
 Apresentam-se aqui os parâmetros selecionados, a fim de possibilitar a reprodução dos resultados obtidos em cada método:
 
@@ -14,7 +14,7 @@ Apresentam-se aqui os parâmetros selecionados, a fim de possibilitar a reprodu�
 
 O KNN \emph{(K-vizinhos mais próximos)} é um método baseado em distâncias que consiste em selecionar os K vizinhos do conjunto de treinamento menos distantes da amostra de teste, e por distante entende-se o que apresenta a menor diferença entre os atributos.
 
-O único parâmetro do KNN é o valor K, para o qual testou-se com os valores: 1, 3, 5, 7, 11, 21, 51. Para este relatório, selecionou-se o K = 51.
+O único parâmetro do KNN é o valor K, para o qual testou-se com os valores: 1, 3, 5, 7, 11, 21, 51. Para este relatório, selecionou-se K = 51.
 
 \subsection{Regressão logística}
 
@@ -28,22 +28,21 @@ Implementou-se 3 variações das hipóteses:
 \item[Hipótese Cúbica] \hfill \\ Atributos elevados a primeira, segunda e terceira potência;
 \end{description}
 
-A regressão logística ainda pode utilizar um parâmetro de regularização a fim de evitar os super ajustamento ao conjunto de treinamento, balançeando a complexidade da hipótese.
+A regressão logística ainda pode utilizar um parâmetro de regularização a fim de evitar o superajustamento ao conjunto de treinamento, balançeando a complexidade da hipótese.
 
 Para seleção dos parâmetros testou-se, através de busca em grid, as 3 hipóteses, com parâmetro \(\lambda\) = 0, ou seja, sem regularização, e com a regularização variando de \(10^0\) a \(10^3\) com passo 1 na potência. Para este relatório, selecionou-se a hipótese linear com \(\lambda\) = 100.
 
 \subsection{Redes Neurais Artificiais}
 
-As Redes Neurais Artificias, utilizadas foram os Perceptrons Multi-camadas, que consistituem uma série de camadas massivamente conectadas de regressores logísticos, portanto, o método consiste em ajustar matrizes de coeficientes \(\theta\) a fim de minimizar o erro de classificação das amostras.
+As Redes Neurais Artificias utilizadas foram os Perceptrons Multi-camadas que consistituem uma série de camadas massivamente conectadas de regressores logísticos, portanto, o método consiste em ajustar matrizes de coeficientes \(\theta\) a fim de minimizar o erro de classificação das amostras.
 
-Entre os parâmetros a serem ajustados, existe a taxa de aprendizagem \(\alpha\), o número de camadas o número de neurônios de cada camada.
+Entre os parâmetros a serem ajustados, existe a taxa de aprendizagem \(\alpha\), o número de camadas e o número de neurônios em cada camada.
 
-Para este realatório selecionou-se \(\alpha\) = 0,06 e como topologia da rede, a quantidade de atributos na camada de entrada, uma camada intermediária utilizando o teorema de CYBENKO e um neurônio na camada de saida para representar 1 como renda maior ou igual a 50 mil e 0 para menor que 50 mil.
+Para este realatório selecionou-se \(\alpha\) = 0,06 e, como topologia da rede, a quantidade de atributos na camada de entrada, uma camada intermediária utilizando o teorema de CYBENKO e um neurônio na camada de saida para representar 1 como renda maior ou igual a 50 mil e 0 para menor que 50 mil.
 
-Cybenko mostrou que uma única camada intermediária é suficiente para aproximar uniformemente qualquer função dado a sua caracterista de aproximador universal.\cite{cybenko}, dado a quantidade de atributos x a quantidade de amostras que se efetuou os testes, não foi viável colocar mais uma camada intermediária, pois afetaria muito o tempo de treinamento.
+Cybenko mostrou que uma única camada intermediária é suficiente para aproximar uniformemente qualquer função dado a sua caracterista de aproximador universal\cite{cybenko}. Dada a quantidade de atributos versus a quantidade de amostras usadas nos testes, não foi viável colocar mais de uma camada intermediária, pois isso afetaria muito o tempo de treinamento.
 
-Os parametros de taxa de aprendizagem variou-se de 0,01 até 0,1 com incremento de 0,01 , tendo o melhor desempenho e velocidade de treinamento com 0,06. A quantidade de neurônios na camada intermediária foram ajustadas com 30, 50, 100, 150, 200 e 250 tendo o melhor desempenho utilizando 50 neurônios.
-
+Variou-se os parametros de taxa de aprendizagem de 0,01 até 0,1 com incremento de 0,01. Tendo o melhor desempenho e velocidade de treinamento com 0,06. A quantidade de neurônios na camada intermediária foram ajustadas com 30, 50, 100, 150, 200 e 250, tendo o melhor desempenho utilizando 50 neurônios.
 
 \subsection{SVM - Máquinas de vetores de suporte}
 
