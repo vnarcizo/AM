@@ -103,7 +103,7 @@ while metodoClassificacao ~= 6
     %Para o SVM devemos escolher se desejamos carregar previamente os
     %valores
     if metodoClassificacao == 0 || metodoClassificacao == 4
-         carregarModelo = input('Deseja carregar o modelo do SMV previamente calculado? (S/N)\n', 's');
+         carregarModelo = input('Deseja carregar o modelo do SVM previamente calculado? (S/N)\n', 's');
          melhorModeloSVM = 0;
         if (strcmpi(carregarModelo,'S'))
               load('ModeloSVM.mat');

@@ -50,11 +50,11 @@ O SVM expande os atributos para um espaço de dimensão superior, e encontra o h
 
 Os parâmetros incluem a seleção do kernel, dos coeficientes \emph{C}, que representa o parâmetro de custo (para os kernel linear, radial e polinomial) e \(\gamma\) (para os kernel radial e polinomial).
 
-Testou-se o SVM com kernel linear, com \emph{C} com valores de \(10^{-4}\) a \(10^2\), com passo incremental 1 na potência. Para o kernel radial e polinomial, testou-se através de busca em grid, com \emph{C} variando de \(10^{-4}\) a \(10^2\), e \(\gamma\) variando de \(10^{-2}\) a \(10^2\) ambos com passo incremental 1 na potência.
+Testou-se o SVM com kernel linear, com \emph{C} com valores de \(10^{-4}\) a \(10^2\), com passo incremental 1 na potência. Para o kernel radial testou-se através de busca em grid, com \emph{C} variando de \(10^{-4}\) a \(10^2\), e \(\gamma\) variando de \(10^{-2}\) a \(10^2\) ambos com passo incremental 1 na potência.
 
 Para este relatório selecionou-se, C = 0.01 para o kernel linear e C = 1 e \(\gamma\) = 0.01 para o kernel radial.
 
 \subsection{Naive Bayes}
 
-O método Naive-Bayes se baseia nas probabilidades de ocorrência de cada classe, e de cada atributo individualmente sabendo a classe em que o mesmo se encontra. O métodos Naive-Bayes se baseia apenas nas probabilidades, portanto não possuí parametros a serem ajustados.
+O método Naive-Bayes se baseia nas probabilidades de ocorrência de cada classe, e de cada atributo individualmente sabendo a classe em que o mesmo se encontra. O método Naive-Bayes se baseia apenas nas probabilidades, portanto não possuí parâmetros a serem ajustados. Aplicou-se a suavização de Laplace com o propósito de tratar possíveis cestas de valor zero.
 
