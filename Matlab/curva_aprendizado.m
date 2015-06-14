@@ -148,7 +148,7 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
                 erroTreinamentoRL= (sum(valorPrevistoTreinamento ~= rotulosTreinamento)/size(rotulosTreinamento,1))*100;
                 erroTesteRL = (sum(valorPrevistoTeste ~= rotulosTeste)/size(rotulosTeste,1))*100;
                     
-                 curvaRL = vertcat(curvaRNA, [erroTreinamentoRL erroTesteRL]);
+                 curvaRL = vertcat(curvaRL, [erroTreinamentoRL erroTesteRL]);
                
             end
 
