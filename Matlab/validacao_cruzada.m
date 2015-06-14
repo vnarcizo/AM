@@ -157,7 +157,7 @@ while metodoClassificacao ~= 6
             %Efetua a predição para os atributos de teste
             avaliacaoKnn = knn(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, k, i);
             %Faz a concatenação das avaliações de todas as partições
-            avaliacoesKnn = vertcat(avaliacoesKnn, avaliacaoKnn);
+            avaliacoesKnn = vertcat(avaliacoesKnn, avaliacaoKnn,0);
         end
        
         
@@ -189,7 +189,7 @@ while metodoClassificacao ~= 6
              end
 
                %Faz a concatenação das avaliações de todas as partições
-               avaliacoesRegressao = vertcat(avaliacoesRegressao, avaliacao);
+               avaliacoesRegressao = vertcat(avaliacoesRegressao, avaliacao,0);
         end
         
         % RNA - Executar a obtenção dos Thetas e efetua a 
@@ -210,7 +210,7 @@ while metodoClassificacao ~= 6
 
                     %Chama o método Avaliar que faz todo o processo de
                     %geração de indices para avaliação do método
-                    avaliacao = avaliar(rTesteItem,rotulosTeste);
+                    avaliacao = avaliar(rTesteItem,rotulosTeste,0);
              end
              %Faz a concatenação das avaliações de todas as partições
              avaliacoesRNA = vertcat(avaliacoesRNA, avaliacao);
@@ -221,7 +221,7 @@ while metodoClassificacao ~= 6
         if metodoClassificacao == 0 || metodoClassificacao == 4
             
             [avaliacao, modelosSVM{i}] = svm(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, i,melhorModeloSVM,kernel,custo,gama);
-            avaliacoesSVM = vertcat(avaliacoesSVM, avaliacao);
+            avaliacoesSVM = vertcat(avaliacoesSVM, avaliacao,0);
         end
                 
         
@@ -241,7 +241,7 @@ while metodoClassificacao ~= 6
 
              [avaliacao, pMaior, pMenor, pAtrMaior, pAtrMenor] = naiveBayes(atributosTreinamentoNB, rotulosTreinamentoNB, atributosTesteNB, rotulosTesteNB, i);
             
-              avaliacoesNaiveBayes = vertcat(avaliacoesNaiveBayes, avaliacao);
+              avaliacoesNaiveBayes = vertcat(avaliacoesNaiveBayes, avaliacao,0);
             
         end
 
