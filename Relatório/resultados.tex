@@ -4,7 +4,7 @@ Para os todos métodos, variou-se os parâmetros a fim de encontrar os melhores 
 
 \subsection{KNN}
 
-Visando obter-se as melhores acurácias e tempos de treinamento, selecionou-se o valor K = 51, obtendo-se os resultados apresentados na Tabela \ref{table:resultadosKNN}:
+Visando obter as melhores acurácias e tempos de treinamento, selecionou-se o valor K = 51, obtendo-se os resultados apresentados na Tabela \ref{table:resultadosKNN}.
 
 \begin{table}[h]
 \centering
@@ -32,7 +32,7 @@ Média & 0,75211 & 0,75211 & 0,75211 & 0,75211 & 37,557
 
 \subsection{Regressão logística}
 
-Para efetuar a vizualização do comportamento do método, criou-se o gráfico mostrando a curva de aprendizagem como se pode observar na Figura \ref{fig:RL}.
+Para efetuar a vizualização do comportamento do método, criou-se o gráfico mostrando a curva de aprendizagem, como se pode observar na Figura \ref{fig:RL}.
 
 \begin{figure}[h]
 \centering
@@ -80,11 +80,10 @@ Para efetuar a vizualização do comportamento do método, criou-se o gráfico m
 \label{fig:RNA}
 \end{figure}
 
-Observou-se que o método não esta sofrendo de overfit dado que as curvas estão próximas, e não esta sofrendo de underfit, pois o erro esta baixo, dessa forma o método se demonstra estável com um bom ajuste. Também é observável que já no começo do ajuste os dados já estavam com um bom resultado, aumentar a base não gerou melhora significativa.
+Observou-se que o método não está sofrendo de superajustamento dado que as curvas estão próximas, e não esta sofrendo de subajustamento, pois o erro está baixo, dessa forma o método se demonstra estável com um bom ajuste. Também é possível observar que já no começo do ajuste os dados já estavam com um bom resultado, aumentar a base não gerou melhora significativa.
 
-Visando obter-se as melhores acurácias e tempos de treinamento, selecionou-se como taxa de aprendizagem \(\lambda\) = 0,06 e quantidade de neurônios na camada intermediária com 50 elementos, obtendo-se os resultados apresentados na Tabela \ref{table:resultadosRNA}.
-	
-	
+Visando obter as melhores acurácias e tempos de treinamento, selecionou-se como taxa de aprendizagem \(\alpha\) = 0,06 e quantidade de neurônios na camada intermediária com 50 elementos, obtendo-se os resultados apresentados na Tabela \ref{table:resultadosRNA}.
+
 \begin{table}[h]
 \centering
 \caption{Resultados para RNA}
@@ -110,7 +109,7 @@ Média & 0,86404 & 0,86284 & 0,86731 & 0,86152 & 112,59 \\
 
 \subsection{Máquinas de vetores de suporte}
 	
-Para efetuar a vizualização do comportamento do método, criou-se o gráfico mostrando a curva de aprendizagem como pode-se observar na Figura \ref{fig:SVM}.
+Para efetuar a vizualização do comportamento do método, criou-se o gráfico mostrando a curva de aprendizagem como se pode observar na Figura \ref{fig:SVM}.
 
 \begin{figure}[h]
 	\centering
@@ -119,9 +118,9 @@ Para efetuar a vizualização do comportamento do método, criou-se o gráfico m
 \label{fig:SVM}
 \end{figure}
 
-Observou-se que o método não esta sofrendo de overfit dado que as curvas estão próximas, e não esta sofrendo de underfit, pois o erro esta baixo, dessa forma o método se demonstra estável com um bom ajuste. 
+Observou-se que o método não está sofrendo de superajustamento dado que as curvas estão próximas, e não esta sofrendo de subajustamento, pois o erro está baixo, dessa forma o método se mostra estável e com um bom ajuste. 
 
-Visando obter-se as melhores acurácias e tempos de treinamento, selecinaram-se duas opções para o SVM, uma com kernel linear e parâmetro de custo \emph{C} = 0.01, apresentando-se os resultados na Tabela \ref{table:resultadosSVMLinear} e uma com kernel radial, parâmetros de custo \emph{C} =1 e parâmetro \(\gamma\) = 0.01, apresentando os resultados na Tabela \ref{table:resultadosSVMRadial}
+Visando obter as melhores acurácias e tempos de treinamento, selecionou-se duas opções para o SVM, uma com kernel linear e parâmetro de custo \emph{C} = 0.01, apresentando-se os resultados na Tabela \ref{table:resultadosSVMLinear} e uma com kernel radial, parâmetros de custo \emph{C} =1 e parâmetro \(\gamma\) = 0.01, apresentando os resultados na Tabela \ref{table:resultadosSVMRadial}
 
 \begin{table}[h]
 \centering
@@ -182,8 +181,7 @@ Para efetuar a vizualização do comportamento do método, criou-se o gráfico m
 \label{fig:NaiveBayes}
 \end{figure}
 
-Observou-se que o método não esta sofrendo de overfit dado que as curvas estão próximas, e não esta sofrendo de underfit, pois o erro esta baixo, dessa forma o método se demonstra estável com um bom ajuste. 
-
+Observou-se que o método não está sofrendo de superajustamento, dado que as curvas estão próximas, e não está sofrendo de subajustamento, pois o erro está baixo. Dessa forma o método se mostra estável e com um bom ajuste.
 
 \begin{table}[h]
 \centering
@@ -211,7 +209,7 @@ Média & 0,84785 & 0,84563 & 0,86103 & 0,84514 & 1,5278 \\
 
 \section{Resultados gerais}
 
-O comparativo geral entre os métodos é apresentado na Tabela \ref{table:resultadosGerais} pela média das execuções dos métodos, os melhores resultados para cada parâmetros esta destacado em negrito.
+O comparativo geral entre os métodos é apresentado na Tabela \ref{table:resultadosGerais} pela média das execuções dos métodos, os melhores resultados para cada parâmetros estão destacados em negrito.
 
 \begin{table}[h]
 \centering
