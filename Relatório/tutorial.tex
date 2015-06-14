@@ -8,7 +8,22 @@ Para a execução é necessário executar o arquivo principal projetoRenda.m
 
 A primeira opção solicitada é a visualização dos dados em dimensão reduzida, digite a opção S para visualizar ou N para não visualizar. Em seguida, pode-se executar o cálculo das curvas de aprendizado, digite a opção S para executar as curvas de aprendizado ou N para não executar. Em seguida, pode-se executar os métodos de validação cruzada.
 
-Caso escolha cálculo das curvas os parâmetros adicionais serão solicitados.
+Caso escolha cálculo das curvas um menu solicitará qual método deverá ser executado.
+
+Caso o método solicitado for:
+
+1 - KNN, será solicitado com quantos vizinhos mais próximos desejá executar o método.
+
+2 - Regressão Logistica, será solicitado qual método deseja efetuar a curva, se por Hipótese Linear, Quadratica ou cúbica
+Será solicitado se deseja efetuar o procedimento utilizando a regularização e qual o valor da mesma.
+
+3 - RNA, será solicitado se deseja alterar a quantidade de neurônios padrão utilizado nos testes, caso sim será solicitado a quantidade de neurônios na camada intermediária
+
+4 - SVM
+
+5 - Naive Bayes
+
+Após a mudança dos parametros, será executado o método escolhidoaumentando a base de treinamento e armazenando os dados para a criação da curva de aprendizagem.
 
 Caso escolha a opção de validação cruzada um menu solicitará qual método deverá ser executado. Digite 0 para executar todos os métodos ou 6 para sair.
 
@@ -23,6 +38,4 @@ Caso digite 4, os parâmetros adicionais do método das máquinas de vetores de 
 
 Caso digite 5, o método Naive Bayes será executado.
 
-Após as execução das 10 partições, os resultados para cada partição serão exibidos, assim como as médias dos valores obtidos para o métodos. Após isso, os métodos: Regressão Logística, Redes Neurais Artifciais, Máquinas de Vetores de Suportes e Naive Bayes permite exportar os modelos computados, digite S para exportar (e sobrescrever caso um modelo previamente salvo exista) ou N para não exportar. Por fim, o menu principal será reexibido, caso deseje reexecutado
-
-
+Após as execução das 10 partições, os resultados para cada partição serão exibidos, assim como as médias dos valores obtidos para o métodos. Após isso, os métodos: Regressão Logística, Redes Neurais Artifciais, Máquinas de Vetores de Suportes e Naive Bayes permite exportar os modelos computados, digite S para exportar (e sobrescrever caso um modelo previamente salvo exista) ou N para não exportar. Por fim, o menu principal será reexibido, caso deseje reexecutar as classificações.
