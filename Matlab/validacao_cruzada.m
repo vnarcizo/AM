@@ -74,7 +74,7 @@ while metodoClassificacao ~= 6
         lambda = 0;
 
         if strcmpi(carregarHipotese, 'S')
-            load(strcat('HipoteseRegressao_',hipoteseRegressao,'.mat'));
+            load(strcat('HipoteseRegressao_',num2str(hipoteseRegressao),'.mat'));
         else
             utilizarRegularizacao = input('Utilizar regularização? (S/N)\n', 's');
 
