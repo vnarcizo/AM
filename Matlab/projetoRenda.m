@@ -64,8 +64,8 @@ if strcmpi(plotar, 'S')
     neg = find(rotulosNormalizados == 0);
     figure; hold on;
     namostras = 5000;
-    scatter3(Z(pos(1:namostras), 1), Z(pos(1:namostras), 2), Z(pos(1:namostras), 3), 'b+');
-    scatter3(Z(neg(1:namostras), 1), Z(neg(1:namostras), 2), Z(neg(1:namostras), 3), 'ro');
+    scatter3(Z(pos, 1), Z(pos, 2), Z(pos, 3), 'b+');
+    scatter3(Z(neg, 1), Z(neg, 2), Z(neg, 3), 'ro');
     legend('>=50k','<50k');
 
     %plot(Z(neg(1:10000), 1), Z(neg(1:10000), 2), 'ko', 'MarkerFaceColor', 'r', 'MarkerSize', 7);
