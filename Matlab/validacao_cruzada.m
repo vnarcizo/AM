@@ -185,7 +185,7 @@ while metodoClassificacao ~= 6
                     
                     %Chama o método Avaliar que faz todo o processo de
                     %geração de indices para avaliação do método
-                    avaliacao = avaliar(valorPrevistoTeste,valorPrevistoTeste, 0);
+                    avaliacao = avaliar(valorPrevistoTeste, rotulosTeste, 0);
              end
 
                %Faz a concatenação das avaliações de todas as partições
