@@ -2,7 +2,7 @@
 
 Todos os métodos exibem informações como: número da partição, nome da tarefa executada, tempo de execução, acurácia na partição de treinamento e acurácia na partição de teste e ao final da execução exibe um agregado dos resultados obtidos, bem como medidas de desempenho adicional.
 
-Os métodos Regressão Logística, Redes Neurais Artificiais, Máquinas de vetores de suporte, permitem o carregamento dos modelos previamente computados, a fim de se eliminar o tempo de treinamento. Os modelos que podem ser carregados são os modelos em que se obteve o melhor desempenho e portanto, os que estão documentados nas seções anteriores deste relatório.
+Os métodos Regressão Logística, Redes Neurais Artificiais, Máquinas de Vetores de Suporte, permitem o carregamento dos modelos previamente computados, a fim de se eliminar o tempo de treinamento. Os modelos que podem ser carregados são os modelos em que se obteve o melhor desempenho e portanto, os que estão documentados nas seções anteriores deste relatório.
 
 Para a execução é necessário executar o arquivo principal projetoRenda.m
 
@@ -16,13 +16,13 @@ Caso digite 1, os parâmetros adicionais do método do KNN serão solicitados, n
 
 Caso digite 2, os parâmetros adicionais do método da Regressão Logística serão soliticitados, um submenu solicitará qual a hipótese a ser utilizada, para se reproduzir os dados a selecionada dever ser 1 - Hipótese Linear, o próximo passo é escolher se deve carregar uma hipótese previamente calculada, digite S para carregar a hipótese computada para geração do relatório, ou N para computar novamente. Caso deseje-se computar novamente, deve-se escolher se o fator de regularização será utilizado, digite S para utilizar ou N para não utilizar, para se reproduzir os resultados digite S, se escolhido utilizar o fator de regularização, insira o valor do fator desejado, a fim de reproduzir os resultados, escolha o valor 100. Em seguida o método da Regressão Logística será executado.
 
-Caso digite 3, os parâmetros adicionais do método de Redes Neurais Artificiais serão solicitados, um submenu solicitará se os \(\theta\) previamente computados, digite S para carregar ou N para não carregar. O próximo passo é selecionar se a quantidade de neurônios padrão será alterada. Digite S para alterar ou N para não alterar. Caso a opção escolhida seja S, digite a nova quantidade de neurônios na camada intermediária.
+Caso digite 3, os parâmetros adicionais do método de Redes Neurais Artificiais serão solicitados, um submenu solicitará se os \(\theta\) previamente computados devem ser recarregados, digite S para carregar ou N para não carregar. O próximo passo é selecionar se a quantidade de neurônios padrão será alterada. Digite S para alterar ou N para não alterar. Caso a opção escolhida seja S, digite a nova quantidade de neurônios na camada intermediária.
 Em seguida o método das Redes Neurais Artificias será executado.
 
 Caso digite 4, os parâmetros adicionais do método das máquinas de vetores de suporte serão solicitados, um submenu solicitará, se o modelo previamente computado do SVM deve ser carregado, digite S para carregar ou N para não carregar.
 
 Caso digite 5, o método Naive Bayes será executado.
 
-Após as execução das 10 partições, os resultados para cada partição serão exibidos, assim como as médias dos valores obtidos para o métodos. Após isso, os métodos: Regressão Logística, Redes Neurais Artifciais, Máquinas de Vetores de Suportes e Naive-Bayes permite exportar os modelos computados, digite S para exportar (e sobrescrever caso um modelo previamente salvo exista) ou N para não exportar. Por fim, o menu principal será reexibido, caso deseje reexecutado
+Após as execução das 10 partições, os resultados para cada partição serão exibidos, assim como as médias dos valores obtidos para o métodos. Após isso, os métodos: Regressão Logística, Redes Neurais Artifciais, Máquinas de Vetores de Suportes e Naive Bayes permite exportar os modelos computados, digite S para exportar (e sobrescrever caso um modelo previamente salvo exista) ou N para não exportar. Por fim, o menu principal será reexibido, caso deseje reexecutar as classificaçōes.
 
 
