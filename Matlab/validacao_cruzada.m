@@ -157,7 +157,7 @@ while metodoClassificacao ~= 6
             %Efetua a predição para os atributos de teste
             avaliacaoKnn = knn(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, k, i);
             %Faz a concatenação das avaliações de todas as partições
-            avaliacoesKnn = vertcat(avaliacoesKnn, avaliacaoKnn,0);
+            avaliacoesKnn = vertcat(avaliacoesKnn, avaliacaoKnn);
         end
        
         
@@ -189,7 +189,7 @@ while metodoClassificacao ~= 6
              end
 
                %Faz a concatenação das avaliações de todas as partições
-               avaliacoesRegressao = vertcat(avaliacoesRegressao, avaliacao,0);
+               avaliacoesRegressao = vertcat(avaliacoesRegressao, avaliacao);
         end
         
         % RNA - Executar a obtenção dos Thetas e efetua a 
@@ -221,7 +221,7 @@ while metodoClassificacao ~= 6
         if metodoClassificacao == 0 || metodoClassificacao == 4
             
             [avaliacao, modelosSVM{i}] = svm(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, i,melhorModeloSVM,kernel,custo,gama);
-            avaliacoesSVM = vertcat(avaliacoesSVM, avaliacao,0);
+            avaliacoesSVM = vertcat(avaliacoesSVM, avaliacao);
         end
                 
         
@@ -241,7 +241,7 @@ while metodoClassificacao ~= 6
 
              [avaliacao, pMaior, pMenor, pAtrMaior, pAtrMenor] = naiveBayes(atributosTreinamentoNB, rotulosTreinamentoNB, atributosTesteNB, rotulosTesteNB, i);
             
-              avaliacoesNaiveBayes = vertcat(avaliacoesNaiveBayes, avaliacao,0);
+              avaliacoesNaiveBayes = vertcat(avaliacoesNaiveBayes, avaliacao);
             
         end
 
