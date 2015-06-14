@@ -31,7 +31,7 @@ function [ avaliacao, valorPrevisto ] = knn(atributosTreinamento, rotulosTreinam
     
     fprintf('Encontrando vizinhos...\n');
     
-    %Encontra o valor do k visinhos e mostra o seu rotulo para cada amostra
+    %Encontra o valor do k vizinhos e mostra o seu rotulo para cada amostra
     %da base de treinamento
     valorPrevisto = arrayfun(@(i) mode(rotulosTreinamento(ind(i, 1:k))), 1:m)';
     

@@ -57,6 +57,7 @@ dadosNormalizados(:, colunasAusentes) = [];
 
 plotar = input('Deseja visualizar o espalhamento dos dados (dimensão reduzida)? (S/N)\n', 's');
 
+%Efetua a visualização dos dados utilizando o PCA em 3D
 if strcmpi(plotar, 'S')
     Z = reduzir_atributos(dadosNormalizados, 3);
 
@@ -67,15 +68,15 @@ if strcmpi(plotar, 'S')
     scatter3(Z(pos, 1), Z(pos, 2), Z(pos, 3), 'b+');
     scatter3(Z(neg, 1), Z(neg, 2), Z(neg, 3), 'ro');
     legend('>=50k','<50k');
-
-    %plot(Z(neg(1:10000), 1), Z(neg(1:10000), 2), 'ko', 'MarkerFaceColor', 'r', 'MarkerSize', 7);
-    %plot(Z(pos(1:10000), 1), Z(pos(1:10000), 2), 'b+','LineWidth', 2, 'MarkerSize', 7);
     title('Plot 3D da base de dados');
     hold off;
     pause;
 end
 dadosNaiveBayes(linhasAusentes, :) = [];
 dadosNaiveBayes(:, union(colunasAusentes, indiceNumericos)) = [];
+
+%Verifica se deseja obter as curvas de aprendizado ou efetuar a validação
+%Cruzada
 op = input('Deseja fazer as curvas de aprendizado? (S/N)\n', 's');
 if strcmpi(op, 'S')
     curva_aprendizado(dadosNormalizados, dadosNaiveBayes, rotulosNormalizados);
