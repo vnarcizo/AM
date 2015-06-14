@@ -1,4 +1,4 @@
-function [ avaliacao ] = knn(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, k, numeroParticao)
+function [ avaliacao, valorPrevisto ] = knn(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, k, numeroParticao)
     
     %% Efetua o calculo da distancia de todos os dados para todos os dados
     %

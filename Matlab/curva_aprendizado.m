@@ -112,9 +112,16 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
             if metodoClassificacao == 0 || metodoClassificacao == 1
 
                 %Efetua a predição para os atributos de teste
-                avaliacaoKnn = knn(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, k, i);
+                [avaliacaoKnn, valorPrevistoTeste] = knn(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, k, i);
                 %Faz a concatenação das avaliações de todas as partições
                 avaliacoes = vertcat(avaliacoes, avaliacaoKnn);
+               
+                [~, valorPrevistoTreinamento] = knn(atributosTreinamento, rotulosTreinamento, atributosTreinamento, rotulosTreinamento, k, i);
+                
+                erroTreinamentoKNN = (sum(valorPrevistoTreinamento ~= rotulosTreinamento)/size(rotulosTreinamento,1))*100;
+                erroTesteKNN = (sum(valorPrevistoTeste ~= rotulosTeste)/size(rotulosTeste,1))*100;
+                    
+                curvaKNN = vertcat(curvaRL, [erroTreinamentoKNN erroTesteKNN]);
             end
 
 
