@@ -10,4 +10,3 @@ tamanhoCaracteristica(indiceAtributoAtual) = 1;
 %Atualiza o indice do atributo atual
 indiceAtributoAtual = indiceAtributoAtual + 1;
 end
-
