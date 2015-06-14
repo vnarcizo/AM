@@ -238,7 +238,7 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
                  plot(curvaKNN);
                  axis([1, 9, 0, 30]);
                  
-                 title('Cruva de Aprendizagem - KNN');
+                 title('Curva de Aprendizagem - KNN');
             end
 
 
@@ -249,7 +249,7 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
                  plot(curvaRL);
                  axis([1, 9, 0, 30]);
           
-                 title('Cruva de Aprendizagem - Regressão Logistica');
+                 title('Curva de Aprendizagem - Regressão Logistica');
             end
 
             % RNA - Executar a obtenção dos Thetas e efetua a 
@@ -260,7 +260,7 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
                  plot(curvaRNA);
                  axis([1, 9, 0, 30]);
                  
-                 title('Cruva de Aprendizagem - RNA');
+                 title('Curva de Aprendizagem - RNA');
                 
             end
 
@@ -272,7 +272,7 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
                  plot(curvaSVM);
                  axis([1, 9, 0, 30]);
                 
-                title('Cruva de Aprendizagem - SVM');
+                title('Curva de Aprendizagem - SVM');
             end
 
             % Naive Bayes - Executar a obtenção das probabilidades e efetuar 
@@ -282,7 +282,7 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
                  figure;
                  plot(curvaNaive);
                  axis([1, 9, 0, 30]);
-                 title('Cruva de Aprendizagem - Naive');
+                 title('Curva de Aprendizagem - Naive');
             end
             
             

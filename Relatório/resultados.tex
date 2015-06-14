@@ -32,6 +32,17 @@ Média & 0,75211 & 0,75211 & 0,75211 & 0,75211 & 37,557
 
 \subsection{Regressão logística}
 
+Para efetuar a vizualização do comportamento do método, criou-se o gráfico mostrando a curva de aprendizagem como pode-se observar na \ref{fig:RL}.
+
+\begin{figure}[h]
+	\centering
+\makebox[\columnwidth]{\includegraphics[width=\columnwidth]{RL}}
+\caption{Curva de Aprendizagem - Regressão Logistica}
+\label{fig:RL}
+\end{figure}
+
+Observou-se que o método não esta sofrendo de overfit dado que as curvas estão próximas, e não esta sofrendo de underfit, pois o erro esta baixo, dessa forma o método se demonstra estável com um bom ajuste.
+
 Visando obter-se as melhores acurácias e tempos de treinamento, selecionou-se a hipótese linear com um fator de regularização \(\lambda\) = 100, obtendo-se os resultados apresentados na Tabela \ref{table:resultadosRL}.
 
 \begin{table}[h]
@@ -60,7 +71,18 @@ Média & 0,86522 & 0,86371 & 0,87107 & 0,86216 & 42,934
 
 \subsection{Redes Neurais Artificiais}
 	
-	Visando obter-se as melhores acurácias e tempos de treinamento, selecionou-se como taxa de aprendizagem \(\lambda\) = 0,06 e quantidade de neurônios na camada intermediária com 50 elementos, obtendo-se os resultados apresentados na Tabela \ref{table:resultadosRNA}.
+Para efetuar a vizualização do comportamento do método, criou-se o gráfico mostrando a curva de aprendizagem como pode-se observar na \ref{fig:RNA}.
+
+\begin{figure}[h]
+	\centering
+\makebox[\columnwidth]{\includegraphics[width=\columnwidth]{RNA}}
+\caption{Curva de Aprendizagem - Redes Neurais Artificiais}
+\label{fig:RNA}
+\end{figure}
+
+Observou-se que o método não esta sofrendo de overfit dado que as curvas estão próximas, e não esta sofrendo de underfit, pois o erro esta baixo, dessa forma o método se demonstra estável com um bom ajuste. Também é observável que já no começo do ajuste os dados já estavam com um bom resultado, aumentar a base não gerou melhora significativa.
+
+Visando obter-se as melhores acurácias e tempos de treinamento, selecionou-se como taxa de aprendizagem \(\lambda\) = 0,06 e quantidade de neurônios na camada intermediária com 50 elementos, obtendo-se os resultados apresentados na Tabela \ref{table:resultadosRNA}.
 	
 	
 \begin{table}[h]
@@ -87,6 +109,17 @@ Média & 0,86404 & 0,86284 & 0,86731 & 0,86152 & 112,59 \\
 \end{table}
 
 \subsection{Máquinas de vetores de suporte}
+	
+Para efetuar a vizualização do comportamento do método, criou-se o gráfico mostrando a curva de aprendizagem como pode-se observar na \ref{fig:SVM}.
+
+\begin{figure}[h]
+	\centering
+\makebox[\columnwidth]{\includegraphics[width=\columnwidth]{SVM}}
+\caption{Curva de Aprendizagem - SVM}
+\label{fig:SVM}
+\end{figure}
+
+Observou-se que o método não esta sofrendo de overfit dado que as curvas estão próximas, e não esta sofrendo de underfit, pois o erro esta baixo, dessa forma o método se demonstra estável com um bom ajuste. 
 
 Visando obter-se as melhores acurácias e tempos de treinamento, selecinaram-se duas opções para o SVM, uma com kernel linear e parâmetro de custo \emph{C} = 0.01, apresentando-se os resultados na Tabela \ref{table:resultadosSVMLinear} e uma com kernel radial, parâmetros de custo \emph{C} =1 e parâmetro \(\gamma\) = 0.01, apresentando os resultados na Tabela \ref{table:resultadosSVMRadial}
 
@@ -139,6 +172,18 @@ Média & 0,85732 & 0,85641 & 0,85867 & 0,85548 & 378,37 \\
 \end{table}
 
 \subsection{Naive Bayes}
+	
+Para efetuar a vizualização do comportamento do método, criou-se o gráfico mostrando a curva de aprendizagem como pode-se observar na \ref{fig:NaiveBayes}.
+
+\begin{figure}[h]
+	\centering
+\makebox[\columnwidth]{\includegraphics[width=\columnwidth]{NaiveBayes}}
+\caption{Curva de Aprendizagem - Naive Bayes}
+\label{fig:NaiveBayes}
+\end{figure}
+
+Observou-se que o método não esta sofrendo de overfit dado que as curvas estão próximas, e não esta sofrendo de underfit, pois o erro esta baixo, dessa forma o método se demonstra estável com um bom ajuste. 
+
 
 \begin{table}[h]
 \centering
