@@ -1,0 +1,61 @@
+\section{Metodologia experimental}
+\label{sec:metodologia}
+
+Particionou-se a base de dados utilizando-se a metodologia de validação cruzada \emph{(k-fold cross-validation)}, visto que os dados não são sensíveis ao tempo. Utilizou-se 10 partições, sendo 9 delas para o treinamento e 1 para a validação, dessa forma os \textbf{conjuntos de treinamento contém 40653 amostras e os conjuntos de teste 4517 escolhidas aleatoriamente.} Uma vez selecionadas as amostras aleatórias, as partições são salvas para sempre utilizar os mesmos conjuntos de dados para treinamento e teste.
+
+Para avaliação do poder de classificação de cada método aplicou-se as medidas mais utilizadas, como: \textbf{acurácia, F-medida, precisão e revocação, contabilizando também o tempo de treinamento e teste de cada partição.}
+
+A fim de verificar a possibilidade de superajustamento ou subajustamento, gerou-se também os gráficos das curvas de aprendizado, realizando os treinamentos com partições incrementais, iniciando com 1 partição e finalizando com 9.
+
+Para este relatório, utilizou-se normalização por padronização em todos os testes.
+
+Considerou-se a possibilidade de reduzir a dimensionalidade dos dados a fim de melhorar o desemepenho do RNA e SVM.  No entanto, para manter a varância em 95\% da variância original o número de atributos não sofreu queda significativa, portanto não se aplicou a redução de dimensionalidade.
+
+Apresentam-se aqui os parâmetros selecionados, a fim de possibilitar a reprodução dos resultados obtidos em cada método:
+
+\subsection{KNN}
+
+O KNN \emph{(K-vizinhos mais próximos)} é um método baseado em distâncias que consiste em selecionar os K vizinhos do conjunto de treinamento menos distantes da amostra de teste, e por distante entende-se o que apresenta a menor diferença entre os atributos.
+
+O único parâmetro do KNN é o valor K, para o qual testou-se com os valores: 1, 3, 5, 7, 11, 21, 51. Para este relatório, selecionou-se K = 51.
+
+\subsection{Regressão logística}
+
+O método da regressão logística consiste em encontrar uma função \emph{(hipótese)} que classifique os atributos, minimizando o erro entre as amostras, através do ajuste dos coeficientes do polinômio \(\theta\).
+
+Implementou-se 3 variações das hipóteses:
+
+\begin{description}
+\item[Hipótese Linear] \hfill \\ Atributos elevados a primeira potência;
+\item[Hipótese Quadrática] \hfill \\ Atributos elevados a primeira e segunda potência;
+\item[Hipótese Cúbica] \hfill \\ Atributos elevados a primeira, segunda e terceira potência;
+\end{description}
+
+A regressão logística ainda pode utilizar um parâmetro de regularização a fim de evitar o superajustamento ao conjunto de treinamento, balançeando a complexidade da hipótese.
+
+Para seleção dos parâmetros testou-se, através de busca em grid, as 3 hipóteses, com parâmetro \(\lambda\) = 0, ou seja, sem regularização, e com a regularização variando de \(10^0\) a \(10^3\) com passo 1 na potência. Para este relatório, selecionou-se a hipótese linear com \(\lambda\) = 100.
+
+\subsection{Redes Neurais Artificiais}
+
+As Redes Neurais Artificias utilizadas foram os Perceptrons Multi-camadas que consistituem uma série de camadas massivamente conectadas de regressores logísticos, portanto, o método consiste em ajustar matrizes de coeficientes \(\theta\) a fim de minimizar o erro de classificação das amostras.
+
+Entre os parâmetros a serem ajustados, existe a taxa de aprendizagem \(\alpha\), o número de camadas e o número de neurônios em cada camada.
+
+Para este relatório selecionou-se \(\alpha\) = 0,06 e uma camada intermediária com 50 neurônios. Pode-se observar na literatura que somente uma camada intermediária é sufuciente para a obtenção do classificador, pois através do teorema de Cybenko a RNA tem a característica de aproximador universal.\cite{cybenko}. Dado a quantidade de atributos pela quantidade de amostras, não foi viável colocar mais uma camada intermediária, pois afetaria consideravelmente o tempo de treinamento.
+
+Variou-se os parametros de taxa de aprendizagem de \(10^{-2}\) até \(10^{-1}\) com incremento de \(10^{-2}\). Obtendo-se o melhor desempenho e velocidade de treinamento com 0,06. A quantidade de neurônios na camada intermediária foram ajustadas com 30, 50, 100, 150, 200 e 250. Para este relatório selecinou-se 50 neurônios.
+
+\subsection{SVM - Máquinas de vetores de suporte}
+
+O SVM expande os atributos para um espaço de dimensão superior e encontra o hiperplano que fornece a maior margem entre os representantes de cada classe \cite{praticalSVM}. O SVM foi implementado utilizando-se a biblioteca LIBSVM \cite{libsvm}.
+
+Os parâmetros incluem a seleção do kernel, dos coeficientes \emph{C}, que representa o parâmetro de custo (para os kernels linear, radial e polinomial) e \(\gamma\) (para os kernels radial e polinomial).
+
+Testou-se o SVM com kernel linear, com \emph{C} com valores de \(10^{-4}\) a \(10^2\), com passo incremental 1 na potência. Para o kernel radial testou-se através de busca em grid, com \emph{C} variando de \(10^{-4}\) a \(10^2\), e \(\gamma\) variando de \(10^{-2}\) a \(10^2\) ambos com passo incremental 1 na potência.
+
+Para este relatório selecionou-se, C = 0.01 para o kernel linear e C = 1 e \(\gamma\) = 0.01 para o kernel radial.
+
+\subsection{Naive Bayes}
+
+O método Naive Bayes se baseia nas probabilidades de ocorrência de cada classe, e de cada atributo individualmente sabendo a classe em que o mesmo se encontra. O método Naive Bayes se baseia apenas nas probabilidades, portanto não possuí parâmetros a serem ajustados. Aplicou-se a suavização de Laplace com o propósito de tratar possíveis cestas de valor zero.
+

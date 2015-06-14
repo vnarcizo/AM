@@ -1,0 +1,88 @@
+\documentclass[10pt, conference, compsocconf]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+%\usepackage{hyperref}
+%\hypersetup{colorlinks=false}
+
+% *** CITATION PACKAGES ***
+%
+\usepackage{cite}
+% *** GRAPHICS RELATED PACKAGES ***
+%
+\ifCLASSINFOpdf
+  % \usepackage[pdftex]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+  % \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../eps/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.eps}
+\fi
+% *** MATH PACKAGES ***
+%
+\usepackage[cmex10]{amsmath}
+
+% *** PDF, URL AND HYPERLINK PACKAGES ***
+%
+\usepackage{url}
+
+\usepackage{graphicx}
+
+\usepackage{color}
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor} 
+
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{Predição de Renda Anual}
+
+
+% author names and affiliations
+% use a multiple column layout for up to two different
+% affiliations
+
+\author{\IEEEauthorblockN{Leandro Luciani Tavares, Luiz Benedito Aidar Gavioli, Victor Narcizo de Oliveira Neto}
+\IEEEauthorblockA{Departamento de Computação (DComp)\\
+Universidade Federal de São Carlos (UFSCar) \\
+18052-780, Sorocaba, São Paulo, Brasil\\
+leandro.ltavares@gmail.com, luizbag@gmail.com, vnarcizo@gmail.com}
+}
+
+% make the title area
+\maketitle
+
+\input{resumo}
+
+\input{introducao}
+
+\input{basededados}
+
+\input{metodologia}
+
+\input{resultados}
+
+\input{conclusao}
+
+\nocite{*}
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,biblio}
+
+\newpage
+\input{tutorial}
+
+% that's all folks
+\end{document}
