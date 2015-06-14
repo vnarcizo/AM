@@ -44,6 +44,10 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
         curvaNaive = [];
         curvaRL = [];
         curvaSVM = [];
+        
+        kernel = 2;
+        custo = 1;
+        gama = 0.01;
 
         modelosNB = cell(numeroParticoes);
 
@@ -186,7 +190,7 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
             % avaliação dos dados de treinamento
             if metodoClassificacao == 4
                  melhorModeloSVM = 0;
-                [avaliacao, modeloSVM] = svm(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, i,melhorModeloSVM);
+                [avaliacao, modeloSVM] = svm(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, i,melhorModeloSVM, kernel, custo, gama);
                 
                 [valorPrevisto, ~, ~] = svmpredict(rotulosTreinamento, atributosTreinamento, modeloSVM);
                 

@@ -16,6 +16,7 @@ dadosAparticionarNaiveBayes =  horzcat(dadosNaiveBayes, rotulosNormalizados);
 % size(dadosNaiveBayesParticionados)
 metodoClassificacao = 0;
 
+
 %% ================= Parte 5: Escolha do método a ser aplicado ====================
 % Foi criado um menu para a escolha do método que será realizado o
 % procedimento, 0 para executar todos os métodos de uma unica vez.
@@ -38,7 +39,11 @@ while metodoClassificacao ~= 6
     avaliacoesRNA = [];
     avaliacoesNaiveBayes = [];
     avaliacoesSVM = [];
+    kernel = 0;
+    custo = 1;
+    gama = 0.01;
     avaliacoesKnn = [];
+    
        
     modelosSVM = cell(numeroParticoes);
     hipotesesRegressao = cell(numeroParticoes);
@@ -107,6 +112,19 @@ while metodoClassificacao ~= 6
          melhorModeloSVM = 0;
         if (strcmpi(carregarModelo,'S'))
               load('ModeloSVM.mat');
+        else
+            
+            fprintf('0 - Linear\n')
+            fprintf('1 - Polinomial\n')
+            fprintf('2 - Radial\n')
+            kernel = input('Selecione o Kernel desejado\n');
+            
+            custo = input('Qual o valor do custo a ser aplicado no SVM?\n');
+            
+            if kernel ~= 0
+               gama = input('Qual o valor de Gama a ser aplicado no SVM?\n');
+            end
+            
         end
          
     end
@@ -201,7 +219,8 @@ while metodoClassificacao ~= 6
         % SVM - Executar a obtenção do Modelo e efetuar a  
         % avaliação dos dados de treinamento
         if metodoClassificacao == 0 || metodoClassificacao == 4
-            [avaliacao, modelosSVM{i}] = svm(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, i,melhorModeloSVM);
+            
+            [avaliacao, modelosSVM{i}] = svm(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, i,melhorModeloSVM,kernel,custo,gama);
             avaliacoesSVM = vertcat(avaliacoesSVM, avaliacao);
         end
                 

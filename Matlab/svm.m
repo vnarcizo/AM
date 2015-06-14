@@ -1,4 +1,4 @@
-function [ avaliacao, modeloSVM ] = svm( atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, numeroParticao, modeloCarregadoSVM )
+function [ avaliacao, modeloSVM ] = svm( atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, numeroParticao, modeloCarregadoSVM, kernel, custo, gama )
 
 %SVM Treinamento e Classificação do Método SVM
 %  [ avaliacao, modeloSVM ] = svm( atributosTreinamento, rotulosTreinamento
@@ -13,12 +13,19 @@ function [ avaliacao, modeloSVM ] = svm( atributosTreinamento, rotulosTreinament
        %foi previamente carregado, necessitando assim efetuar o treinamento
 
        tic;
+       parametros = '';
+       
+       if kernel == 0
+           parametros = strcat({'-t '},num2str(kernel),{' -c '},num2str(custo),{' -q'});
+       else
+           parametros = strcat({'-t '},num2str(kernel),{' -c '},num2str(custo),{' -g '},num2str(gama),{' -q'});
+       end
        
 
        if (isnumeric(modeloCarregadoSVM))
             %Melhor linear -t 0 -c 0.01
             %Melhor radial -t 2 -c 0.01 -g 0.01
-            modeloSVM =  svmtrain(rotulosTreinamento, atributosTreinamento, '-t 2 -c 1 -g 0.01 -q');
+            modeloSVM =  svmtrain(rotulosTreinamento, atributosTreinamento, parametros);
        else
            modeloSVM = modeloCarregadoSVM;
        end
