@@ -122,7 +122,7 @@ while metodoClassificacao ~= 6
             custo = input('Qual o valor do custo a ser aplicado no SVM?\n');
             
             if kernel ~= 0
-               gama = input('Qual o valor de Gama a ser aplicado no SVM?\n');
+               gama = input('Qual o valor de Gamma a ser aplicado no SVM?\n');
             end
             
         end
