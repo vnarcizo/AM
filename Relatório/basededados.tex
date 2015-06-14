@@ -6,15 +6,15 @@ A base de dados fornecida estava, inicialmente, separada em 2 arquivos, adult\_t
 \item[Workclass] \hfill \\ Atributo categórico que representa uma das 9 classes de trabalho;
 \item[Fnlwgt] \hfill \\ Atributo contínuo;
 \item[Education] \hfill \\ Atributo categórico que representa um dos 16 graus de escolaridade;
-\item[Education-num] \hfill \\ Atributo continuo relacionado ao grau de escolaridade;
+\item[Education-num] \hfill \\ Atributo contínuo relacionado ao grau de escolaridade;
 \item[Marital-status] \hfill \\ Atributo categórico que representa um dos 7 estados civis;
 \item[Occupation] \hfill \\ Atributo categórico que representa uma das 14 áreas de trabalho;
 \item[Relationship] \hfill \\ Atributo categórico que representa um dos 6 parentescos;
 \item[Race] \hfill \\ Atributo categórico que representa uma das 5 etnias;
-\item[Sex] \hfill \\ Atributo categórico que representa um dos 2 sexos possíveis;
+\item[Sex] \hfill \\ Atributo categórico que representa um dos 2 gêneros possíveis;
 \item[Capital-gain] \hfill \\ Atributo contínuo que representa o ganho de capital;
 \item[Capital-loss] \hfill \\ Atributo contínuo que representa a perda de capital;
-\item[Hours-per-week] \hfill \\ Atributo continuo que representa as horas trabalhadas por semana;
+\item[Hours-per-week] \hfill \\ Atributo contínuo que representa as horas trabalhadas por semana;
 \item[Native-country] \hfill \\ Atributo categórico que representa um das 41 nacionalidades.
 \end{description}
 
@@ -28,7 +28,7 @@ Os atributos categóricos foram convertidos em colunas, sendo que cada coluna re
 
 Devido a expansão dos atributos categóricos, 3 colunas representavam atributos ausentes para 3 atributos originais. Devido à remoção das amostras com atributos ausentes, tornou-se irrelevante manter essas colunas, portanto as mesmas foram removidas. Após essas transformações os 14 atributos originais tornaram-se 105. Para o método Naive-Bayes os 14 atributos originais tornaram-se 160.
 
-O atributo-alvo foi convertido em um atributo binário, 1 para representar a classe positiva (renda igual ou superior a 50 mil dolares anuais) e 0 para representar a classe negativa (renda inferior a 50 mil dolares anuais). 11197 amostras (24,79\%) representam a classe positiva e 33973 amostras representam a classe negativa (75,21\%).
+O atributo-alvo foi convertido em um atributo binário, 1 para representar a classe positiva (renda igual ou superior a 50 mil dólares anuais) e 0 para representar a classe negativa (renda inferior a 50 mil dólares anuais). \textbf{11197 amostras (24,79\%) representam a classe positiva e 33973 amostras representam a classe negativa (75,21\%).}
 
 Implementou-se 2 tipos de normalização para todos os atributos, exceto o atributo-alvo:
 
@@ -37,7 +37,7 @@ Implementou-se 2 tipos de normalização para todos os atributos, exceto o atrib
 \item[Normalização por padronização] \hfill \\ Garante que os valores tenham média igual a 0 e desvio-padrão igual a 1.
 \end{description}
 
-Para se permitir a visualizção dos dados, implementou-se a Análise de componentes principais (PCA), para redução dos 105 atributos para 3, resultando na imagem disposta na Figura \ref{fig:dados3d}, na qual a classe positiva, renda igual ou superior a 50 mil dólares anuais, é representada por \textcolor{blue}{+} e a classe negativa, renda inferior a 50 mil dólares anuais, é representada por \textcolor{red}{o}.
+Para se permitir a visualizção dos dados, implementou-se a Análise de Componentes Principais (PCA), para redução dos 105 atributos para 3, resultando na imagem disposta na Figura \ref{fig:dados3d}, na qual a classe positiva, renda igual ou superior a 50 mil dólares anuais, é representada por \textcolor{blue}{+} e a classe negativa, renda inferior a 50 mil dólares anuais, é representada por \textcolor{red}{o}.
 
 \begin{figure}[h]
 \centering

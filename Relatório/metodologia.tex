@@ -1,9 +1,9 @@
 \section{Metodologia experimental}
 \label{sec:metodologia}
 
-Particionou-se a base de dados utilizando-se a metodologia de validação cruzada \emph{(k-fold cross-validation)}, visto que os dados não são sensíveis ao tempo. Utilizou-se 10 partições, sendo 9 delas para o treinamento e 1 para a validação, dessa forma os conjuntos de treinamento contém 40653 amostras e os conjuntos de teste 4517 escolhidas aleatoriamente.
+Particionou-se a base de dados utilizando-se a metodologia de validação cruzada \emph{(k-fold cross-validation)}, visto que os dados não são sensíveis ao tempo. Utilizou-se 10 partições, sendo 9 delas para o treinamento e 1 para a validação, dessa forma os \textbf{conjuntos de treinamento contém 40653 amostras e os conjuntos de teste 4517 escolhidas aleatoriamente.} Uma vez selecionadas as amostras aleatórias, as partições são salvas para sempre utilizar os mesmos conjuntos de dados para treinamento e teste.
 
-Para avaliação do poder de classificação de cada método aplicou-se as medidas mais utilizadas, como acurácia, F-medida, precisão e revocação, contabilizando também o tempo de treinamento e teste de cada partição.
+Para avaliação do poder de classificação de cada método aplicou-se as medidas mais utilizadas, como: \textbf{acurácia, F-medida, precisão e revocação, contabilizando também o tempo de treinamento e teste de cada partição.}
 
 A fim de verificar a possibilidade de superajustamento ou subajustamento, gerou-se também os gráficos das curvas de aprendizado, realizando os treinamentos com partições incrementais, iniciando com 1 partição e finalizando com 9.
 
