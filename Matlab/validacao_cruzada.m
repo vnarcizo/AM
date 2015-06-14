@@ -220,7 +220,7 @@ while metodoClassificacao ~= 6
               rotulosTesteNB = dadosTesteNB(:, end);
               atributosTesteNB = dadosTesteNB(:, 1:end-1);
 
-             [avaliacao, modelosNB{i}] = naiveBayes(atributosTreinamentoNB, rotulosTreinamentoNB, atributosTesteNB, rotulosTesteNB, i);
+             [avaliacao, pMaior, pMenor, pAtrMaior, pAtrMenor] = naiveBayes(atributosTreinamentoNB, rotulosTreinamentoNB, atributosTesteNB, rotulosTesteNB, i);
             
               avaliacoesNaiveBayes = vertcat(avaliacoesNaiveBayes, avaliacao);
             

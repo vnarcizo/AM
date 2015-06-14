@@ -40,6 +40,11 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
         modelosSVM = cell(numeroParticoes);
         hipotesesRegressao = cell(numeroParticoes);
         hipoteseCarregada = [];
+        curvaRNA = [];
+        curvaKNN = [];
+        curvaNaive = [];
+        curvaRL = [];
+        curvaSVM = [];
 
         modelosNB = cell(numeroParticoes);
 
@@ -102,6 +107,8 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
             rotulosTeste = dadosTeste(:, end);
             atributosTeste = dadosTeste(:, 1:end-1);
 
+            fprintf('\nInício Partição #%d - BaseTreinamento: #%d\n', i,size(dadosTreinamento,1));
+            
             % KNN - Executar o método de avaliação
             if metodoClassificacao == 0 || metodoClassificacao == 1
 
@@ -147,31 +154,41 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
             % avaliação dos dados de treinamento
             if metodoClassificacao == 0 || metodoClassificacao == 3
 
-                %Verifica se deseja obter os Thetas previamente calculados
-                 if (strcmpi(carregarThetas,'N'))
-                   %Efetua o Treinamento da RNA
-                   [mTheta1, mTheta2, avaliacao] = RNA_treinamento(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste,i,qtdNeuronios,100);
-                 else
-                     rTesteItem = zeros(size(atributosTeste,1),1);
-
-                      %Para cada amostra de teste é obtido a sua predição
-                      for item = 1:size(atributosTeste,1)
-                          rTesteItem(item) =  RNA_forward(atributosTeste(item,:),mTheta1, mTheta2);
-                      end
-
-                        %Chama o método Avaliar que faz todo o processo de
-                        %geração de indices para avaliação do método
-                        avaliacao = avaliar(rTesteItem,rotulosTeste);
-                 end
-                 %Faz a concatenação das avaliações de todas as partições
-                 avaliacoes = vertcat(avaliacoes, avaliacao);
+                 [mTheta1, mTheta2, avaliacao] = RNA_treinamento(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste,i,qtdNeuronios,100);
+             
+                  %Obtendo os rótulos da base de treinamento para comparar com os rótulos
+                    %reais
+         
+                    for k = 1 : size(atributosTreinamento,1)
+                          predicaoTreinamentoRNA(k) =  RNA_forward(atributosTreinamento(k,:),mTheta1, mTheta2);
+                    end
+                    
+                    for k = 1 : size(atributosTeste,1)
+                        predicaoTesteRNA(k) =  RNA_forward(atributosTeste(k,:),mTheta1, mTheta2);
+                    end
+                    
+                    erroTreinamentoRNA = (sum(predicaoTreinamentoRNA' ~= rotulosTreinamento)/size(rotulosTreinamento,1))*100;
+                    erroTesteRNA = (sum(predicaoTesteRNA' ~= rotulosTeste)/size(rotulosTeste,1))*100;
+                    
+                   curvaRNA = vertcat(curvaRNA, [erroTreinamentoRNA erroTesteRNA]);
+                 
             end
 
             % SVM - Executar a obtenção do Modelo e efetuar a  
             % avaliação dos dados de treinamento
             if metodoClassificacao == 0 || metodoClassificacao == 4
-                [avaliacao, modelosSVM{i}] = svm(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, i,melhorModeloSVM);
-                avaliacoes = vertcat(avaliacoes, avaliacao);
+                 melhorModeloSVM = 0;
+                [avaliacao, modeloSVM] = svm(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, i,melhorModeloSVM);
+                
+                [valorPrevisto, ~, ~] = svmpredict(rotulosTreinamento, atributosTreinamento, modeloSVM);
+                
+                [valorPrevistoTeste, ~, ~] = svmpredict(rotulosTeste, atributosTeste, modeloSVM);
+                
+                 erroTreinamentoSVM = (sum(valorPrevisto ~= rotulosTreinamento)/size(rotulosTreinamento,1))*100;
+                 erroTesteSVM = (sum(valorPrevistoTeste ~= rotulosTeste)/size(rotulosTeste,1))*100;
+                    
+                 curvaSVM = vertcat(curvaSVM, [erroTreinamentoSVM erroTesteSVM]);
+                
             end
 
 
@@ -189,20 +206,81 @@ function [ ] = curva_aprendizado( dadosNormalizados, dadosNaiveBayes, rotulosNor
                   rotulosTesteNB = dadosTesteNB(:, end);
                   atributosTesteNB = dadosTesteNB(:, 1:end-1);
 
-                 [avaliacao, modelosNB{i}] = naiveBayes(atributosTreinamentoNB, rotulosTreinamentoNB, atributosTesteNB, rotulosTesteNB, i);
-
-                  avaliacoes = vertcat(avaliacoes, avaliacao);
-
+                 [avaliacao, pMaior, pMenor, pAtrMaior, pAtrMenor] = naiveBayes(atributosTreinamentoNB, rotulosTreinamentoNB, atributosTesteNB, rotulosTesteNB, i);
+  
+                 predicaoTreinamentoNaive = arrayfun(@(i) NB_classificacao(atributosTreinamentoNB(i,:), pMaior, pMenor, pAtrMaior, pAtrMenor), 1:size(atributosTreinamentoNB, 1))';
+                 predicaoTesteNaive = arrayfun(@(i) NB_classificacao(atributosTesteNB(i,:), pMaior, pMenor, pAtrMaior, pAtrMenor), 1:size(atributosTesteNB, 1))';
+                 
+                 erroTreinamentoNaive = (sum(predicaoTreinamentoNaive ~= rotulosTreinamentoNB)/size(rotulosTreinamentoNB,1))*100;
+                 erroTesteNaive = (sum(predicaoTesteNaive ~= rotulosTesteNB)/size(rotulosTesteNB,1))*100;
+                    
+                 curvaNaive = vertcat(curvaNaive, [erroTreinamentoNaive erroTesteNaive]);
+        
             end
 
         end
 
      %% ================= Parte 7: Resultados ====================
-        % Aqui mostrará os resultados obtidos pelos métodos selecionados no
-        % menu
+        % Aqui mostrará as curvas obtidas pelos métodos selecioinados
 
-        %Resultado - KNN
-        fprintf('Resultados\n');
-        avaliarFinal(avaliacoes);
+        
+         % KNN - Executar o método de avaliação
+            if metodoClassificacao == 0 || metodoClassificacao == 1
+                figure;
+                 plot(curvaKNN);
+                 axis([1, 9, 0, 30]);
+                 
+                 title('Cruva de Aprendizagem - KNN');
+            end
+
+
+            % Regressão Logistica - Executar a obtenção da Hipotese e a
+            % avaliação dos dados de treinamento
+            if metodoClassificacao == 0 || metodoClassificacao == 2
+                figure;
+                 plot(curvaRL);
+                 axis([1, 9, 0, 30]);
+          
+                 title('Cruva de Aprendizagem - Regressão Logistica');
+            end
+
+            % RNA - Executar a obtenção dos Thetas e efetua a 
+            % avaliação dos dados de treinamento
+            if metodoClassificacao == 0 || metodoClassificacao == 3
+
+                figure;
+                 plot(curvaRNA);
+                 axis([1, 9, 0, 30]);
+                 
+                 title('Cruva de Aprendizagem - RNA');
+                
+            end
+
+            % SVM - Executar a obtenção do Modelo e efetuar a  
+            % avaliação dos dados de treinamento
+            if metodoClassificacao == 0 || metodoClassificacao == 4
+            
+                 figure;
+                 plot(curvaSVM);
+                 axis([1, 9, 0, 30]);
+                
+                title('Cruva de Aprendizagem - SVM');
+            end
+
+            % Naive Bayes - Executar a obtenção das probabilidades e efetuar 
+            % avaliação dos dados de treinamento
+            if metodoClassificacao == 0 || metodoClassificacao == 5
+             
+                 figure;
+                 plot(curvaNaive);
+                 axis([1, 9, 0, 30]);
+                 title('Cruva de Aprendizagem - Naive');
+            end
+            
+            
+            legend('Base de Treinamento','Base de Teste');
+            xlabel('Quantidade de partições utilizadas no treinamento');
+            ylabel('Porcentagem de Erro na Predição');
+       
     end
 end

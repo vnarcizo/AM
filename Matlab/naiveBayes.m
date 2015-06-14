@@ -1,4 +1,4 @@
-function [avaliacao, modeloNB] = naiveBayes(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, numeroParticao)
+function [avaliacao, pMaior, pMenor, pAtrMaior, pAtrMenor] = naiveBayes(atributosTreinamento, rotulosTreinamento, atributosTeste, rotulosTeste, numeroParticao)
 
 %% Efetua o calculo das probabilidades de todos os dados para todos os dados de treinamento
     %
@@ -37,7 +37,7 @@ fprintf('Fim Partição #%d\n\n', numeroParticao);
 
 %Efetua a avaliação
 avaliacao = avaliar(valorPrevistoTeste, rotulosTeste, tempo);
-modeloNB = 0;
+
 
 end
 
